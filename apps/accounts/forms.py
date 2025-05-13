@@ -151,6 +151,10 @@ class ProfileEditForm(forms.ModelForm):
     Formulaire pour modifier les informations de base du profil
     """
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = User
         fields = ["first_name", "last_name", "email"]

@@ -11,6 +11,9 @@ import uuid
 from django.utils.translation import gettext_lazy as _
 import logging
 from django.core.paginator import Paginator
+from django.contrib.auth import update_session_auth_hash
+import os
+from supabase import create_client, Client
 
 from .models import Notification
 from apps.affiliate.models import (
@@ -623,9 +626,6 @@ def dashboard_settings(request):
 
     if request.method == "POST":
         # Traitement des paramètres
-        # Dans une vraie implémentation, vous utiliseriez un formulaire Django
-
-        # Paramètres de notification
         email_notifications = request.POST.get("email_notifications") == "on"
         sms_notifications = request.POST.get("sms_notifications") == "on"
         newsletter_subscribed = request.POST.get("newsletter_subscribed") == "on"
@@ -1802,26 +1802,99 @@ def user_profile(request, username):
 @login_required
 def user_settings(request):
     """Vue pour gérer les paramètres utilisateur."""
+    # Initialize Supabase client
+    supabase_url = os.environ.get("SUPABASE_URL")
+    supabase_key = os.environ.get("SUPABASE_KEY")
+    
+    # Vérifier si les informations de connexion Supabase sont disponibles
+    supabase = None
+    if supabase_url and supabase_key:
+        supabase = create_client(supabase_url, supabase_key)
+    else:
+        messages.warning(request, "Supabase configuration is missing. Password change functionality is disabled.")
+    
     if request.method == "POST":
-        # Traitement des paramètres
-        language = request.POST.get("language", "fr")
-        theme = request.POST.get("theme", "light")
-        email_notifications = request.POST.get("email_notifications", "off") == "on"
-        display_mode = request.POST.get("display_mode", "light")
+        # Check the form type
+        form_type = request.POST.get("form_type", "")
+        
+        # Password change form
+        if form_type == "password_change":
+            # Vérifier si Supabase est configuré
+            if not supabase:
+                messages.error(request, "Password change is not available at the moment. Please contact support.")
+            else:
+                current_password = request.POST.get("current_password")
+                new_password = request.POST.get("new_password")
+                confirm_password = request.POST.get("confirm_password")
+                
+                # Validate passwords
+                if not current_password or not new_password or not confirm_password:
+                    messages.error(request, "Please fill in all password fields.")
+                elif new_password != confirm_password:
+                    messages.error(request, "New passwords do not match.")
+                elif len(new_password) < 8:
+                    messages.error(request, "Password must be at least 8 characters long.")
+                else:
+                    try:
+                        # Get user email
+                        user_email = request.user.email
+                        
+                        if not user_email:
+                            messages.error(request, "User email not found. Password change requires a valid email address.")
+                            return redirect("dashboard:settings")
+                        
+                        # Méthode standard Supabase: d'abord authentifier puis mettre à jour
+                        try:
+                            # 1. Authentifier avec les identifiants actuels
+                            auth_response = supabase.auth.sign_in_with_password({
+                                "email": user_email,
+                                "password": current_password
+                            })
+                            
+                            # 2. Si l'authentification réussit, mettre à jour le mot de passe
+                            # Cette méthode est plus sécurisée car elle vérifie d'abord le mot de passe actuel
+                            update_response = supabase.auth.update_user({
+                                "password": new_password
+                            })
+                            
+                            messages.success(request, "Your password has been updated successfully.")
+                            return redirect("dashboard:settings")
+                            
+                        except Exception as auth_error:
+                            # Erreur plus détaillée pour aider au débogage
+                            error_message = str(auth_error)
+                            print(f"Supabase auth error: {error_message}")
+                            
+                            if "invalid login credentials" in error_message.lower():
+                                messages.error(request, "Current password is incorrect.")
+                            else:
+                                messages.error(request, f"Authentication error: {error_message}")
+                    
+                    except Exception as e:
+                        print(f"Password update error: {str(e)}")
+                        messages.error(request, f"Password update failed: {str(e)}")
+        
+        # Regular settings form
+        else:
+            # Traitement des paramètres
+            preferred_language = request.POST.get("language", "fr")
+            theme = request.POST.get("theme", "light")
+            email_notifications = request.POST.get("email_notifications", "off") == "on"
+            display_mode = request.POST.get("display_mode", "light")
 
-        # Mise à jour des préférences utilisateur
-        user_profile = request.user.settings_profile
-        user_profile.language = language
-        user_profile.theme = theme
-        user_profile.email_notifications = email_notifications
-        user_profile.display_mode = display_mode
-        user_profile.save()
+            # Mise à jour des préférences utilisateur
+            user_profile = request.user.account_profile
+            user_profile.preferred_language = preferred_language
+            user_profile.theme_color = theme  # Notez que le champ est theme_color et non theme
+            user_profile.email_notifications = email_notifications
+            user_profile.display_mode = display_mode
+            user_profile.save()
 
-        messages.success(request, "Vos paramètres ont été mis à jour avec succès.")
-        return redirect("dashboard:settings")
+            messages.success(request, "Your settings have been updated successfully.")
+            return redirect("dashboard:settings")
 
     context = {
-        "user_profile": request.user.settings_profile,
+        "user_profile": request.user.account_profile,
         "available_languages": [
             ("fr", "Français"),
             ("en", "English"),
@@ -1829,9 +1902,10 @@ def user_settings(request):
             ("de", "Deutsch"),
         ],
         "available_themes": [
-            ("light", "Clair"),
-            ("dark", "Sombre"),
-            ("system", "Système"),
+            ("light", "Light"),
+            ("dark", "Dark"),
+            ("system", "System"),
         ],
+        "supabase_enabled": supabase is not None,
     }
     return render(request, "dashboard/settings.html", context)

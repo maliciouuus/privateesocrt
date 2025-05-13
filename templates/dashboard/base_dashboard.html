@@ -669,6 +669,13 @@
             </li>
             
             <li class="sidebar-item">
+                <a href="{% url 'dashboard:settings' %}" class="sidebar-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                    <i class="fas fa-cog sidebar-icon"></i>
+                    <span class="sidebar-text">Settings</span>
+                </a>
+            </li>
+            
+            <li class="sidebar-item">
                 <a href="{% url 'dashboard:notifications' %}" class="sidebar-link {% if request.resolver_match.url_name == 'notifications' %}active{% endif %}">
                     <i class="fas fa-bell sidebar-icon"></i>
                     <span class="sidebar-text">Notifications</span>

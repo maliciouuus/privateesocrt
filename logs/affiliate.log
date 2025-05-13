@@ -37474,3 +37474,930 @@ WARNING 2025-05-13 20:19:17,036 basehttp 564033 140547838703168 "GET /static/ima
 INFO 2025-05-13 20:20:03,110 basehttp 564033 140547838703168 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62418
 WARNING 2025-05-13 20:20:03,243 basehttp 564033 140547838703168 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
 WARNING 2025-05-13 20:20:03,254 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:21:33,932 basehttp 564033 140547805132352 "GET /affiliate/commission-list/ HTTP/1.1" 200 53895
+INFO 2025-05-13 20:21:35,292 basehttp 564033 140547805132352 "GET /affiliate/payment-methods/ HTTP/1.1" 200 51980
+INFO 2025-05-13 20:21:36,792 basehttp 564033 140547805132352 "GET /affiliate/commission-list/ HTTP/1.1" 200 53895
+INFO 2025-05-13 20:21:37,500 basehttp 564033 140547805132352 "GET /accounts/profile/ HTTP/1.1" 200 55364
+WARNING 2025-05-13 20:21:37,559 basehttp 564033 140547805132352 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:21:48,110 basehttp 564033 140547805132352 "GET /affiliate/payment-methods/ HTTP/1.1" 200 51980
+INFO 2025-05-13 20:21:50,349 basehttp 564033 140547805132352 "GET /affiliate/commission-list/ HTTP/1.1" 200 53895
+INFO 2025-05-13 20:21:54,885 basehttp 564033 140547805132352 "GET /dashboard/stats/ HTTP/1.1" 200 73062
+WARNING 2025-05-13 20:21:56,582 log 564033 140547813525056 Not Found: /api/escorts/
+WARNING 2025-05-13 20:21:56,586 log 564033 140547838703168 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:21:56,591 log 564033 140547805132352 Not Found: /api/stats/
+WARNING 2025-05-13 20:21:56,592 basehttp 564033 140547813525056 "GET /api/escorts/ HTTP/1.1" 404 17340
+WARNING 2025-05-13 20:21:56,592 basehttp 564033 140547838703168 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:21:56,592 basehttp 564033 140547805132352 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+INFO 2025-05-13 20:22:00,103 basehttp 564033 140547805132352 "GET /dashboard/ HTTP/1.1" 200 53144
+INFO 2025-05-13 20:23:08,425 basehttp 564033 140547805132352 "GET /dashboard/stats/ HTTP/1.1" 200 73062
+INFO 2025-05-13 20:23:08,469 basehttp 564033 140547805132352 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 20:23:08,668 log 564033 140547838703168 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:23:08,673 log 564033 140547813525056 Not Found: /api/escorts/
+WARNING 2025-05-13 20:23:08,677 log 564033 140547805132352 Not Found: /api/stats/
+WARNING 2025-05-13 20:23:08,677 basehttp 564033 140547838703168 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:23:08,678 basehttp 564033 140547813525056 "GET /api/escorts/ HTTP/1.1" 404 17340
+WARNING 2025-05-13 20:23:08,678 basehttp 564033 140547805132352 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+INFO 2025-05-13 20:23:09,993 basehttp 564033 140547805132352 "GET /whitelabel/sites/ HTTP/1.1" 200 46272
+INFO 2025-05-13 20:23:56,134 basehttp 564033 140547805132352 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+ERROR 2025-05-13 20:23:57,760 log 564033 140547805132352 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1824, in user_settings
+    "user_profile": request.user.settings_profile,
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+AttributeError: 'User' object has no attribute 'settings_profile'
+ERROR 2025-05-13 20:23:57,761 basehttp 564033 140547805132352 "GET /dashboard/settings/ HTTP/1.1" 500 86594
+WARNING 2025-05-13 20:23:57,890 log 564033 140547805132352 Not Found: /favicon.ico
+WARNING 2025-05-13 20:23:57,892 basehttp 564033 140547805132352 "GET /favicon.ico HTTP/1.1" 404 5441
+INFO 2025-05-13 20:25:07,954 autoreload 564033 140548356691776 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 20:25:09,170 autoreload 570698 140515282245440 Watching for file changes with StatReloader
+INFO 2025-05-13 20:25:13,021 basehttp 570698 140514841065024 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 20:25:14,049 basehttp 570698 140514841065024 "GET /dashboard/settings/ HTTP/1.1" 200 49827
+INFO 2025-05-13 20:25:31,836 basehttp 570698 140514841065024 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:25:31,872 basehttp 570698 140514841065024 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:25:32,880 basehttp 570698 140514841065024 "GET /dashboard/settings/ HTTP/1.1" 200 49827
+INFO 2025-05-13 20:25:33,612 basehttp 570698 140514841065024 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:25:33,662 basehttp 570698 140514841065024 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:25:34,758 basehttp 570698 140514841065024 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 20:25:35,458 basehttp 570698 140514841065024 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:25:36,086 basehttp 570698 140514841065024 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:25:36,108 basehttp 570698 140514841065024 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:25:36,132 basehttp 570698 140514841065024 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:25:38,347 basehttp 570698 140514841065024 "GET /dashboard/settings/ HTTP/1.1" 200 49827
+INFO 2025-05-13 20:25:59,013 autoreload 570698 140515282245440 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 20:25:59,905 autoreload 570887 139992640489280 Watching for file changes with StatReloader
+INFO 2025-05-13 20:26:32,298 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 49835
+INFO 2025-05-13 20:27:48,801 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44827
+INFO 2025-05-13 20:27:48,858 basehttp 570887 139992199329344 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:27:51,749 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44827
+INFO 2025-05-13 20:27:57,721 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44827
+INFO 2025-05-13 20:28:00,262 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:28:00,309 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:28:01,130 basehttp 570887 139992199329344 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:28:01,154 basehttp 570887 139992199329344 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:28:05,003 basehttp 570887 139992199329344 "GET /dashboard/notifications/telegram/ HTTP/1.1" 200 49671
+INFO 2025-05-13 20:28:06,795 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:28:06,843 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:28:07,356 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44827
+INFO 2025-05-13 20:28:07,930 basehttp 570887 139992199329344 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:28:07,965 basehttp 570887 139992199329344 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:28:11,167 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44827
+INFO 2025-05-13 20:28:11,721 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:28:11,787 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:28:12,540 basehttp 570887 139992199329344 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 20:28:13,180 basehttp 570887 139992199329344 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:28:14,064 basehttp 570887 139992199329344 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:28:14,088 basehttp 570887 139992199329344 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:28:14,111 basehttp 570887 139992199329344 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:28:14,852 basehttp 570887 139992199329344 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 20:28:16,639 basehttp 570887 139992187790912 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 20:28:20,328 basehttp 570887 139992187790912 "GET /dashboard/settings/ HTTP/1.1" 200 44827
+INFO 2025-05-13 20:28:47,356 basehttp 570887 139992187790912 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:28:48,735 basehttp 570887 139992187790912 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 20:28:50,619 basehttp 570887 139992187790912 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:28:50,642 basehttp 570887 139992187790912 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:28:50,666 basehttp 570887 139992187790912 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:28:51,375 basehttp 570887 139992187790912 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 20:28:52,488 basehttp 570887 139992199329344 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 20:30:09,277 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 48285
+INFO 2025-05-13 20:30:28,339 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:30:28,487 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:30:58,301 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 48285
+INFO 2025-05-13 20:31:00,998 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 48285
+INFO 2025-05-13 20:31:04,492 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:31:04,542 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:31:07,315 basehttp 570887 139992199329344 "GET /accounts/profile/change-password/ HTTP/1.1" 200 47443
+INFO 2025-05-13 20:31:57,482 basehttp 570887 139992199329344 "GET /accounts/profile/change-password/ HTTP/1.1" 200 47443
+INFO 2025-05-13 20:31:57,514 basehttp 570887 139992199329344 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:33:05,945 basehttp 570887 139992199329344 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:33:06,961 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 48285
+INFO 2025-05-13 20:33:08,774 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:33:08,836 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:33:09,696 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44891
+INFO 2025-05-13 20:33:10,503 basehttp 570887 139992199329344 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:33:10,520 basehttp 570887 139992199329344 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:33:11,133 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44891
+INFO 2025-05-13 20:33:15,659 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 44891
+INFO 2025-05-13 20:33:23,747 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:33:23,798 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:33:43,228 basehttp 570887 139992199329344 "GET /accounts/profile/ HTTP/1.1" 200 55647
+WARNING 2025-05-13 20:33:43,285 basehttp 570887 139992199329344 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:33:56,190 basehttp 570887 139992199329344 "GET /dashboard/settings/ HTTP/1.1" 200 48285
+INFO 2025-05-13 20:34:01,790 basehttp 570887 139992199329344 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:34:01,958 basehttp 570887 139992199329344 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:34:01,959 basehttp 570887 139992187790912 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:34:05,758 basehttp 570887 139992187790912 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 20:34:09,959 basehttp 570887 139992199329344 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+WARNING 2025-05-13 20:34:10,066 log 570887 139992107050560 Not Found: /api/escorts/
+WARNING 2025-05-13 20:34:10,071 log 570887 139992187790912 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:34:10,075 log 570887 139992199329344 Not Found: /api/stats/
+WARNING 2025-05-13 20:34:10,076 basehttp 570887 139992187790912 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:34:10,076 basehttp 570887 139992107050560 "GET /api/escorts/ HTTP/1.1" 404 17340
+WARNING 2025-05-13 20:34:10,076 basehttp 570887 139992199329344 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+INFO 2025-05-13 20:34:11,519 basehttp 570887 139992199329344 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 20:34:13,106 basehttp 570887 139992199329344 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:34:13,131 basehttp 570887 139992199329344 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:34:13,132 basehttp 570887 139992187790912 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:36:52,928 autoreload 570887 139992640489280 /home/sacha/Public/openclassroom/privateesocrt/apps/accounts/urls.py changed, reloading.
+INFO 2025-05-13 20:36:53,848 autoreload 572693 140258515793728 Watching for file changes with StatReloader
+ERROR 2025-05-13 20:37:03,339 log 572693 140258075211328 Internal Server Error: /accounts/profile/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/accounts/views.py", line 766, in profile_view
+    return render(
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'change_password' not found. 'change_password' is not a valid view function or pattern name.
+ERROR 2025-05-13 20:37:03,342 basehttp 572693 140258075211328 "GET /accounts/profile/ HTTP/1.1" 500 239263
+INFO 2025-05-13 20:37:13,761 basehttp 572693 140258075211328 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+INFO 2025-05-13 20:37:13,778 basehttp 572693 140258075211328 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 20:37:13,869 log 572693 140258075211328 Not Found: /api/stats/
+WARNING 2025-05-13 20:37:13,874 log 572693 140257994470976 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:37:13,874 basehttp 572693 140258075211328 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 20:37:13,878 log 572693 140257986078272 Not Found: /api/escorts/
+WARNING 2025-05-13 20:37:13,878 basehttp 572693 140257994470976 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:37:13,879 basehttp 572693 140257986078272 "GET /api/escorts/ HTTP/1.1" 404 17340
+INFO 2025-05-13 20:37:14,930 basehttp 572693 140258075211328 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 20:37:15,984 basehttp 572693 140258075211328 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:37:16,040 basehttp 572693 140258075211328 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 20:37:16,677 log 572693 140257986078272 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1834, in user_settings
+    return render(request, "dashboard/settings.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'change_password' not found. 'change_password' is not a valid view function or pattern name.
+ERROR 2025-05-13 20:37:16,679 basehttp 572693 140257986078272 "GET /dashboard/settings/ HTTP/1.1" 500 230263
+INFO 2025-05-13 20:37:24,361 basehttp 572693 140257986078272 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:37:24,418 basehttp 572693 140257986078272 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 20:37:25,084 log 572693 140257994470976 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1834, in user_settings
+    return render(request, "dashboard/settings.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'change_password' not found. 'change_password' is not a valid view function or pattern name.
+ERROR 2025-05-13 20:37:25,086 basehttp 572693 140257994470976 "GET /dashboard/settings/ HTTP/1.1" 500 230263
+ERROR 2025-05-13 20:37:28,279 log 572693 140257994470976 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1834, in user_settings
+    return render(request, "dashboard/settings.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'change_password' not found. 'change_password' is not a valid view function or pattern name.
+ERROR 2025-05-13 20:37:28,280 basehttp 572693 140257994470976 "GET /dashboard/settings/ HTTP/1.1" 500 230263
+INFO 2025-05-13 20:37:48,712 basehttp 572693 140257994470976 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:37:48,740 basehttp 572693 140257994470976 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:37:48,759 basehttp 572693 140257994470976 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:37:52,044 basehttp 572693 140257994470976 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 20:37:55,002 basehttp 572693 140257994470976 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+WARNING 2025-05-13 20:37:55,112 log 572693 140257994470976 Not Found: /api/stats/
+WARNING 2025-05-13 20:37:55,118 log 572693 140257986078272 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:37:55,123 log 572693 140258075211328 Not Found: /api/escorts/
+WARNING 2025-05-13 20:37:55,123 basehttp 572693 140257994470976 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 20:37:55,123 basehttp 572693 140257986078272 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:37:55,124 basehttp 572693 140258075211328 "GET /api/escorts/ HTTP/1.1" 404 17340
+INFO 2025-05-13 20:37:58,945 basehttp 572693 140258075211328 "GET /dashboard/ HTTP/1.1" 200 53427
+ERROR 2025-05-13 20:39:03,004 log 572693 140258075211328 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1834, in user_settings
+    return render(request, "dashboard/settings.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'change_password' not found. 'change_password' is not a valid view function or pattern name.
+ERROR 2025-05-13 20:39:03,005 basehttp 572693 140258075211328 "GET /dashboard/settings/ HTTP/1.1" 500 230256
+INFO 2025-05-13 20:39:12,035 basehttp 572693 140258075211328 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:39:13,911 basehttp 572693 140258075211328 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:39:13,970 basehttp 572693 140258075211328 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 20:39:17,016 log 572693 140257986078272 Internal Server Error: /accounts/profile/edit/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/accounts/views.py", line 785, in edit_profile
+    form = ProfileEditForm(instance=user_profile, user=request.user)
+TypeError: BaseModelForm.__init__() got an unexpected keyword argument 'user'
+ERROR 2025-05-13 20:39:17,016 basehttp 572693 140257986078272 "GET /accounts/profile/edit/ HTTP/1.1" 500 82859
+INFO 2025-05-13 20:39:23,012 basehttp 572693 140257986078272 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:39:24,320 basehttp 572693 140257986078272 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:39:24,445 basehttp 572693 140257986078272 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 20:39:26,596 log 572693 140257994470976 Internal Server Error: /accounts/profile/edit/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/accounts/views.py", line 785, in edit_profile
+    form = ProfileEditForm(instance=user_profile, user=request.user)
+TypeError: BaseModelForm.__init__() got an unexpected keyword argument 'user'
+ERROR 2025-05-13 20:39:26,597 basehttp 572693 140257994470976 "GET /accounts/profile/edit/ HTTP/1.1" 500 82859
+INFO 2025-05-13 20:39:39,717 basehttp 572693 140257994470976 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:39:40,434 basehttp 572693 140257994470976 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 20:39:42,562 basehttp 572693 140257994470976 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:39:43,682 basehttp 572693 140257994470976 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:39:43,734 basehttp 572693 140257994470976 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 20:39:47,471 log 572693 140257994470976 Internal Server Error: /accounts/profile/edit/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/accounts/views.py", line 785, in edit_profile
+    form = ProfileEditForm(instance=user_profile, user=request.user)
+TypeError: BaseModelForm.__init__() got an unexpected keyword argument 'user'
+ERROR 2025-05-13 20:39:47,472 basehttp 572693 140257994470976 "GET /accounts/profile/edit/ HTTP/1.1" 500 82859
+INFO 2025-05-13 20:39:51,917 basehttp 572693 140257994470976 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:39:53,585 basehttp 572693 140257994470976 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:39:53,633 basehttp 572693 140257994470976 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:39:53,639 basehttp 572693 140257986078272 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:39:57,883 autoreload 572693 140258515793728 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 20:39:58,729 autoreload 573143 139721563010880 Watching for file changes with StatReloader
+INFO 2025-05-13 20:40:00,863 autoreload 573143 139721563010880 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 20:40:01,734 autoreload 573145 139657295140672 Watching for file changes with StatReloader
+INFO 2025-05-13 20:40:42,747 basehttp 573145 139656853190208 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:40:42,873 basehttp 573145 139656853190208 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:40:42,883 basehttp 573145 139656767206976 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:40:44,320 basehttp 573145 139656767206976 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:40:44,390 basehttp 573145 139656767206976 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:40:45,151 basehttp 573145 139656767206976 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:40:46,777 basehttp 573145 139656767206976 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 20:40:47,448 basehttp 573145 139656767206976 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:40:48,828 basehttp 573145 139656767206976 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:40:50,580 basehttp 573145 139656767206976 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:40:50,602 basehttp 573145 139656767206976 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:40:51,226 basehttp 573145 139656767206976 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:40:53,277 autoreload 573145 139657295140672 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 20:40:54,275 autoreload 573319 140015277799232 Watching for file changes with StatReloader
+INFO 2025-05-13 20:40:56,980 basehttp 573319 140014827595328 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:40:57,030 basehttp 573319 140014827595328 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:40:57,728 autoreload 573319 140015277799232 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 20:40:58,643 autoreload 573339 139728345126720 Watching for file changes with StatReloader
+ERROR 2025-05-13 20:41:10,632 log 573339 139727902602816 Internal Server Error: /accounts/profile/edit/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/accounts/views.py", line 785, in edit_profile
+    form = ProfileEditForm(instance=user_profile, user=request.user)
+TypeError: BaseModelForm.__init__() got an unexpected keyword argument 'user'
+ERROR 2025-05-13 20:41:10,633 basehttp 573339 139727902602816 "GET /accounts/profile/edit/ HTTP/1.1" 500 82865
+INFO 2025-05-13 20:42:55,538 basehttp 573339 139727902602816 "GET /accounts/profile/ HTTP/1.1" 200 55478
+INFO 2025-05-13 20:42:55,584 basehttp 573339 139727902602816 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 20:42:55,673 basehttp 573339 139727902602816 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 20:42:57,340 log 573339 139727902602816 Internal Server Error: /accounts/profile/edit/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/accounts/views.py", line 785, in edit_profile
+    form = ProfileEditForm(instance=user_profile, user=request.user)
+TypeError: BaseModelForm.__init__() got an unexpected keyword argument 'user'
+ERROR 2025-05-13 20:42:57,341 basehttp 573339 139727902602816 "GET /accounts/profile/edit/ HTTP/1.1" 500 82859
+INFO 2025-05-13 20:43:14,263 autoreload 573339 139728345126720 /home/sacha/Public/openclassroom/privateesocrt/apps/accounts/forms.py changed, reloading.
+INFO 2025-05-13 20:43:15,039 autoreload 573600 139743540442944 Watching for file changes with StatReloader
+INFO 2025-05-13 20:44:37,563 basehttp 573600 139743097517632 "GET /accounts/profile/edit/ HTTP/1.1" 200 52452
+WARNING 2025-05-13 20:44:37,699 basehttp 573600 139743097517632 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:44:51,731 basehttp 573600 139743097517632 "POST /accounts/profile/edit/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:44:51,844 basehttp 573600 139743097517632 "GET /accounts/profile/ HTTP/1.1" 200 55854
+WARNING 2025-05-13 20:44:52,003 basehttp 573600 139743097517632 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:44:55,356 basehttp 573600 139743097517632 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:44:57,036 basehttp 573600 139743097517632 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:44:57,064 basehttp 573600 139743097517632 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:44:57,083 basehttp 573600 139743097517632 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:45:41,662 basehttp 573600 139743097517632 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 20:45:42,669 basehttp 573600 139743097517632 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 20:45:44,346 basehttp 573600 139743097517632 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:45:44,404 basehttp 573600 139743097517632 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:45:45,489 basehttp 573600 139743097517632 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:45:51,672 basehttp 573600 139743097517632 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:45:51,696 basehttp 573600 139743097517632 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:45:53,412 basehttp 573600 139743097517632 "GET /dashboard/notifications/ HTTP/1.1" 200 50201
+WARNING 2025-05-13 20:45:53,457 basehttp 573600 139743097517632 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:45:53,916 basehttp 573600 139743097517632 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 20:45:54,618 basehttp 573600 139743097517632 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 20:45:54,670 basehttp 573600 139743097517632 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:45:56,653 basehttp 573600 139743097517632 "GET / HTTP/1.1" 200 86559
+INFO 2025-05-13 20:46:44,550 basehttp 573600 139743097517632 "GET /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:46:44,650 basehttp 573600 139743097517632 "GET /dashboard/simple/ HTTP/1.1" 302 0
+INFO 2025-05-13 20:46:44,835 basehttp 573600 139743097517632 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 20:46:49,137 basehttp 573600 139743097517632 "GET /about/ HTTP/1.1" 200 28998
+WARNING 2025-05-13 20:46:49,159 basehttp 573600 139743097517632 "GET /static/images/about-team.jpg HTTP/1.1" 404 1923
+INFO 2025-05-13 20:50:30,202 basehttp 573600 139743097517632 "GET / HTTP/1.1" 200 86201
+INFO 2025-05-13 20:50:30,255 basehttp 573600 139743097517632 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:50:38,166 autoreload 573600 139743540442944 /home/sacha/Public/openclassroom/privateesocrt/core/urls.py changed, reloading.
+INFO 2025-05-13 20:50:39,363 autoreload 574682 139679252334400 Watching for file changes with StatReloader
+INFO 2025-05-13 20:50:50,626 basehttp 574682 139678809323072 "GET / HTTP/1.1" 200 86201
+INFO 2025-05-13 20:51:03,438 autoreload 574682 139679252334400 /home/sacha/Public/openclassroom/privateesocrt/core/urls.py changed, reloading.
+INFO 2025-05-13 20:51:04,383 autoreload 574784 140284834785088 Watching for file changes with StatReloader
+INFO 2025-05-13 20:55:44,704 basehttp 574784 140284393420352 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 20:55:44,811 basehttp 574784 140284393420352 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:55:44,812 basehttp 574784 140284381881920 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:55:46,057 basehttp 574784 140284381881920 "GET / HTTP/1.1" 200 88947
+INFO 2025-05-13 20:59:22,310 basehttp 574784 140284381881920 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 20:59:22,346 basehttp 574784 140284381881920 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:59:22,420 basehttp 574784 140284381881920 "GET /static/images/review4.webp HTTP/1.1" 200 396976
+INFO 2025-05-13 21:12:30,689 basehttp 574784 140284381881920 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 21:12:30,721 basehttp 574784 140284381881920 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 21:12:30,793 basehttp 574784 140284381881920 "GET /static/images/review4.webp HTTP/1.1" 304 0
+INFO 2025-05-13 21:12:38,134 basehttp 574784 140284381881920 "GET /terms/ HTTP/1.1" 200 29321
+INFO 2025-05-13 21:12:43,188 basehttp 574784 140284381881920 "GET /privacy/ HTTP/1.1" 200 31101
+INFO 2025-05-13 21:12:49,179 basehttp 574784 140284381881920 "GET /terms/ HTTP/1.1" 200 29321
+INFO 2025-05-13 21:12:50,540 basehttp 574784 140284381881920 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 21:13:00,959 basehttp 574784 140284381881920 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 21:24:18,410 basehttp 574784 140284381881920 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 21:24:18,454 basehttp 574784 140284381881920 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 21:24:18,511 basehttp 574784 140284381881920 "GET /static/images/review4.webp HTTP/1.1" 304 0
+INFO 2025-05-13 21:24:28,242 basehttp 574784 140284381881920 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 21:24:30,209 basehttp 574784 140284381881920 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 21:24:30,238 basehttp 574784 140284381881920 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 21:24:30,240 basehttp 574784 140284393420352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 21:24:47,241 basehttp 574784 140284393420352 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 21:58:19,028 basehttp 574784 140284393420352 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 21:58:19,074 basehttp 574784 140284393420352 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 21:58:25,710 basehttp 574784 140284393420352 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+WARNING 2025-05-13 21:58:25,912 log 574784 140284381881920 Not Found: /api/ambassadors/
+WARNING 2025-05-13 21:58:25,918 log 574784 140284393420352 Not Found: /api/stats/
+WARNING 2025-05-13 21:58:25,918 basehttp 574784 140284381881920 "GET /api/ambassadors/ HTTP/1.1" 404 17116
+WARNING 2025-05-13 21:58:25,924 log 574784 140284302194240 Not Found: /api/escorts/
+WARNING 2025-05-13 21:58:25,924 basehttp 574784 140284393420352 "GET /api/stats/?period=7 HTTP/1.1" 404 17107
+WARNING 2025-05-13 21:58:25,924 basehttp 574784 140284302194240 "GET /api/escorts/ HTTP/1.1" 404 17104
+INFO 2025-05-13 21:58:31,763 basehttp 574784 140284302194240 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 21:58:34,881 basehttp 574784 140284302194240 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 21:58:34,911 basehttp 574784 140284302194240 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 21:58:34,982 basehttp 574784 140284393420352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 21:58:43,263 basehttp 574784 140284381881920 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 21:58:47,461 basehttp 574784 140284381881920 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 21:58:54,206 basehttp 574784 140284381881920 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 21:58:54,332 basehttp 574784 140284381881920 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 21:58:59,684 basehttp 574784 140284381881920 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 21:59:07,368 basehttp 574784 140284381881920 "GET /dashboard/notifications/ HTTP/1.1" 200 50934
+WARNING 2025-05-13 21:59:07,390 basehttp 574784 140284381881920 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 21:59:10,399 basehttp 574784 140284381881920 "GET /dashboard/notifications/telegram/ HTTP/1.1" 200 50131
+INFO 2025-05-13 21:59:12,872 basehttp 574784 140284381881920 "POST /dashboard/notifications/telegram/ HTTP/1.1" 200 50836
+INFO 2025-05-13 21:59:15,752 basehttp 574784 140284381881920 "POST /dashboard/notifications/telegram/test/ HTTP/1.1" 302 0
+INFO 2025-05-13 21:59:15,858 basehttp 574784 140284381881920 "GET /dashboard/notifications/telegram/ HTTP/1.1" 200 50550
+INFO 2025-05-13 21:59:26,550 basehttp 574784 140284381881920 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 21:59:26,643 basehttp 574784 140284381881920 "GET /static/images/review4.webp HTTP/1.1" 304 0
+INFO 2025-05-13 22:02:55,042 basehttp 574784 140284381881920 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 22:02:56,349 basehttp 574784 140284381881920 "GET /dashboard/settings/ HTTP/1.1" 200 48350
+INFO 2025-05-13 22:04:22,412 basehttp 574784 140284381881920 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 22:04:25,166 basehttp 574784 140284381881920 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+WARNING 2025-05-13 22:04:25,285 log 574784 140284393420352 Not Found: /api/ambassadors/
+WARNING 2025-05-13 22:04:25,289 log 574784 140284302194240 Not Found: /api/escorts/
+WARNING 2025-05-13 22:04:25,290 basehttp 574784 140284393420352 "GET /api/ambassadors/ HTTP/1.1" 404 17116
+WARNING 2025-05-13 22:04:25,293 log 574784 140284381881920 Not Found: /api/stats/
+WARNING 2025-05-13 22:04:25,294 basehttp 574784 140284302194240 "GET /api/escorts/ HTTP/1.1" 404 17104
+WARNING 2025-05-13 22:04:25,294 basehttp 574784 140284381881920 "GET /api/stats/?period=7 HTTP/1.1" 404 17107
+INFO 2025-05-13 22:04:26,917 basehttp 574784 140284381881920 "GET /whitelabel/sites/ HTTP/1.1" 200 46555
+INFO 2025-05-13 22:04:31,923 basehttp 574784 140284302194240 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+WARNING 2025-05-13 22:04:31,989 log 574784 140284302194240 Not Found: /api/stats/
+WARNING 2025-05-13 22:04:31,996 log 574784 140284393420352 Not Found: /api/ambassadors/
+WARNING 2025-05-13 22:04:31,997 basehttp 574784 140284302194240 "GET /api/stats/?period=7 HTTP/1.1" 404 17107
+WARNING 2025-05-13 22:04:32,002 log 574784 140284381881920 Not Found: /api/escorts/
+WARNING 2025-05-13 22:04:32,003 basehttp 574784 140284393420352 "GET /api/ambassadors/ HTTP/1.1" 404 17116
+WARNING 2025-05-13 22:04:32,003 basehttp 574784 140284381881920 "GET /api/escorts/ HTTP/1.1" 404 17104
+INFO 2025-05-13 22:04:35,151 basehttp 574784 140284381881920 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62701
+WARNING 2025-05-13 22:04:35,175 basehttp 574784 140284381881920 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 22:04:35,194 basehttp 574784 140284393420352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 22:04:37,132 basehttp 574784 140284302194240 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 22:04:38,121 basehttp 574784 140284302194240 "GET /affiliate/payment-methods/ HTTP/1.1" 200 52263
+INFO 2025-05-13 22:04:41,599 basehttp 574784 140284302194240 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 22:04:41,650 basehttp 574784 140284302194240 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 22:04:42,555 basehttp 574784 140284302194240 "GET /dashboard/settings/ HTTP/1.1" 200 46673
+INFO 2025-05-13 22:04:43,700 basehttp 574784 140284302194240 "GET /dashboard/notifications/ HTTP/1.1" 200 50934
+WARNING 2025-05-13 22:04:43,721 basehttp 574784 140284302194240 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 22:04:45,564 basehttp 574784 140284302194240 "GET /affiliate/commission-list/ HTTP/1.1" 200 54178
+INFO 2025-05-13 22:04:48,597 basehttp 574784 140284393420352 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 22:06:53,212 basehttp 574784 140284302194240 "GET /dashboard/stats/ HTTP/1.1" 200 73345
+WARNING 2025-05-13 22:06:53,496 log 574784 140284302194240 Not Found: /api/stats/
+WARNING 2025-05-13 22:06:53,509 basehttp 574784 140284302194240 "GET /api/stats/?period=7 HTTP/1.1" 404 17107
+WARNING 2025-05-13 22:06:53,536 log 574784 140284393420352 Not Found: /api/ambassadors/
+WARNING 2025-05-13 22:06:53,546 basehttp 574784 140284393420352 "GET /api/ambassadors/ HTTP/1.1" 404 17116
+WARNING 2025-05-13 22:06:53,549 log 574784 140284381881920 Not Found: /api/escorts/
+WARNING 2025-05-13 22:06:53,549 basehttp 574784 140284381881920 "GET /api/escorts/ HTTP/1.1" 404 17104
+INFO 2025-05-13 22:07:33,483 basehttp 574784 140284381881920 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 22:07:33,638 basehttp 574784 140284381881920 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 22:08:10,369 autoreload 574784 140284834785088 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:08:11,721 autoreload 583414 140569082427200 Watching for file changes with StatReloader
+INFO 2025-05-13 22:08:17,467 autoreload 583414 140569082427200 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:08:18,568 autoreload 583437 140213966174016 Watching for file changes with StatReloader
+INFO 2025-05-13 22:09:31,917 autoreload 583437 140213966174016 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:09:33,102 autoreload 583631 140108212324160 Watching for file changes with StatReloader
+INFO 2025-05-13 22:09:35,593 autoreload 583631 140108212324160 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:09:36,786 autoreload 583654 140612455589696 Watching for file changes with StatReloader
+INFO 2025-05-13 22:10:53,966 basehttp 583654 140612010505792 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 22:10:54,060 basehttp 583654 140612010505792 "GET /static/images/logo.png HTTP/1.1" 200 11215
+INFO 2025-05-13 22:10:54,062 basehttp 583654 140611927668288 "GET /static/images/review4.webp HTTP/1.1" 200 396976
+INFO 2025-05-13 22:10:57,640 basehttp 583654 140611927668288 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 22:10:59,460 basehttp 583654 140611927668288 "GET /accounts/profile/ HTTP/1.1" 200 55478
+WARNING 2025-05-13 22:10:59,546 basehttp 583654 140611927668288 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 22:11:00,349 log 583654 140612010505792 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1806, in user_settings
+    supabase_service = SupabaseService()
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/affiliate/services/supabase_service.py", line 9, in __init__
+    self.supabase = get_supabase_client()
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/affiliate/supabase_client.py", line 9, in get_supabase_client
+    raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
+RuntimeError: SUPABASE_URL and SUPABASE_KEY must be set in environment variables
+ERROR 2025-05-13 22:11:00,350 basehttp 583654 140612010505792 "GET /dashboard/settings/ HTTP/1.1" 500 88773
+WARNING 2025-05-13 22:11:00,503 log 583654 140612010505792 Not Found: /favicon.ico
+ERROR 2025-05-13 22:11:11,372 log 583654 140612010505792 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1806, in user_settings
+    supabase_service = SupabaseService()
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/affiliate/services/supabase_service.py", line 9, in __init__
+    self.supabase = get_supabase_client()
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/affiliate/supabase_client.py", line 9, in get_supabase_client
+    raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
+RuntimeError: SUPABASE_URL and SUPABASE_KEY must be set in environment variables
+ERROR 2025-05-13 22:11:11,374 basehttp 583654 140612010505792 "GET /dashboard/settings/ HTTP/1.1" 500 88605
+ERROR 2025-05-13 22:11:32,571 log 583654 140612010505792 Internal Server Error: /dashboard/settings/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 1806, in user_settings
+    email_notifications = request.POST.get("email_notifications", "off") == "on"
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/affiliate/services/supabase_service.py", line 9, in __init__
+    self.supabase = get_supabase_client()
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/affiliate/supabase_client.py", line 9, in get_supabase_client
+    raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
+RuntimeError: SUPABASE_URL and SUPABASE_KEY must be set in environment variables
+ERROR 2025-05-13 22:11:32,572 basehttp 583654 140612010505792 "GET /dashboard/settings/ HTTP/1.1" 500 89023
+INFO 2025-05-13 22:11:33,437 autoreload 583654 140612455589696 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:11:34,530 autoreload 584326 140327062869824 Watching for file changes with StatReloader
+INFO 2025-05-13 22:13:50,930 basehttp 584326 140326619575872 "GET /accounts/profile/ HTTP/1.1" 200 55478
+INFO 2025-05-13 22:13:50,957 basehttp 584326 140326619575872 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 22:13:51,051 basehttp 584326 140326619575872 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 22:14:01,019 basehttp 584326 140326619575872 "GET / HTTP/1.1" 200 89194
+INFO 2025-05-13 22:14:01,063 basehttp 584326 140326619575872 "GET /static/images/review4.webp HTTP/1.1" 304 0
+INFO 2025-05-13 22:14:28,703 basehttp 584326 140326619575872 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 22:14:30,402 basehttp 584326 140326619575872 "GET /dashboard/settings/ HTTP/1.1" 200 46673
+INFO 2025-05-13 22:14:41,690 basehttp 584326 140326619575872 "POST /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:14:41,797 basehttp 584326 140326619575872 "GET /dashboard/settings/ HTTP/1.1" 200 47054
+INFO 2025-05-13 22:14:46,664 basehttp 584326 140326619575872 "GET /accounts/logout/ HTTP/1.1" 200 26629
+INFO 2025-05-13 22:14:48,246 basehttp 584326 140326619575872 "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:14:48,255 basehttp 584326 140326619575872 "GET / HTTP/1.1" 200 88887
+INFO 2025-05-13 22:14:49,857 basehttp 584326 140326619575872 "GET /accounts/login/ HTTP/1.1" 200 24192
+INFO 2025-05-13 22:14:58,805 basehttp 584326 140326619575872 "POST /accounts/login/ HTTP/1.1" 200 24365
+INFO 2025-05-13 22:15:04,630 basehttp 584326 140326619575872 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:15:04,730 basehttp 584326 140326619575872 "GET /dashboard/simple/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:15:04,936 basehttp 584326 140326619575872 "GET /dashboard/ HTTP/1.1" 200 53792
+INFO 2025-05-13 22:15:06,811 basehttp 584326 140326619575872 "GET /dashboard/settings/ HTTP/1.1" 200 46673
+INFO 2025-05-13 22:16:13,403 autoreload 584326 140327062869824 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:16:14,698 autoreload 585049 139774133659456 Watching for file changes with StatReloader
+INFO 2025-05-13 22:16:17,173 autoreload 585049 139774133659456 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:16:18,294 autoreload 585055 140514780616512 Watching for file changes with StatReloader
+INFO 2025-05-13 22:24:20,589 autoreload 585055 140514780616512 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:24:21,752 autoreload 585653 140696117929792 Watching for file changes with StatReloader
+INFO 2025-05-13 22:24:31,861 basehttp 585653 140695674287680 "GET /dashboard/settings/ HTTP/1.1" 200 46673
+INFO 2025-05-13 22:25:37,308 autoreload 585653 140696117929792 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:25:38,622 autoreload 585738 139791139866432 Watching for file changes with StatReloader
+INFO 2025-05-13 22:42:44,731 autoreload 585738 139791139866432 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:42:46,196 autoreload 586749 140523305555776 Watching for file changes with StatReloader
+INFO 2025-05-13 22:49:28,605 autoreload 586749 140523305555776 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:49:29,914 autoreload 587779 140025375053632 Watching for file changes with StatReloader
+INFO 2025-05-13 22:49:32,434 autoreload 587779 140025375053632 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 22:49:33,731 autoreload 587797 139879746701120 Watching for file changes with StatReloader
+INFO 2025-05-13 22:54:14,155 basehttp 587797 139879300200000 "GET /dashboard/ HTTP/1.1" 200 53427
+INFO 2025-05-13 22:54:14,185 basehttp 587797 139879300200000 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 22:54:23,008 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,106 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,256 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,392 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,530 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,679 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,811 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:23,956 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,089 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,235 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,370 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,524 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,658 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,788 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:24,918 basehttp 587797 139879300200000 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,095 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,199 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,385 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,525 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,657 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,803 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:25,948 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,094 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,221 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,353 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,498 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,644 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,784 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:26,944 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:27,084 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:27,223 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:27,355 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:27,509 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:27,637 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:27,783 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:28,978 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,064 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,198 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,345 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,494 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,634 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,776 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:29,908 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:30,101 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:30,231 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:30,360 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:30,496 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:30,630 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:30,883 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:31,013 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:31,149 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:31,279 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:31,423 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:31,558 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:31,689 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:36,851 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:36,951 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,109 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,247 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,388 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,525 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,670 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,810 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:37,954 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,097 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,230 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,371 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,502 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,650 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,782 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:38,947 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:39,126 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:39,264 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:39,408 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:54:39,549 basehttp 587797 139879291807296 "GET /dashboard/settings/ HTTP/1.1" 302 0
+INFO 2025-05-13 22:56:36,266 autoreload 588805 140591912056640 Watching for file changes with StatReloader
+INFO 2025-05-13 22:56:44,669 basehttp 588805 140591466804800 "GET /dashboard/settings/ HTTP/1.1" 200 68171
+INFO 2025-05-13 22:57:26,406 basehttp 588805 140591466804800 "GET /dashboard/settings/ HTTP/1.1" 200 44621
+INFO 2025-05-13 23:03:33,137 autoreload 589885 140590554904384 Watching for file changes with StatReloader
+INFO 2025-05-13 23:03:36,393 basehttp 589885 140590109947456 "GET /dashboard/settings/ HTTP/1.1" 200 46772
+INFO 2025-05-13 23:03:47,112 basehttp 589885 140590109947456 "POST /dashboard/settings/ HTTP/1.1" 200 47130
+INFO 2025-05-13 23:04:00,055 basehttp 589885 140590109947456 "POST /dashboard/settings/ HTTP/1.1" 200 47130
+INFO 2025-05-13 23:05:43,761 autoreload 589885 140590554904384 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 23:05:44,839 autoreload 590216 140049426978624 Watching for file changes with StatReloader
+INFO 2025-05-13 23:05:47,299 autoreload 590216 140049426978624 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 23:05:48,320 autoreload 590222 140665683502912 Watching for file changes with StatReloader
+INFO 2025-05-13 23:05:54,468 basehttp 590222 140665239369280 "GET /dashboard/settings/ HTTP/1.1" 200 46772
+INFO 2025-05-13 23:06:03,783 basehttp 590222 140665239369280 "POST /dashboard/settings/ HTTP/1.1" 200 47209
+INFO 2025-05-13 23:09:59,183 autoreload 590222 140665683502912 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 23:10:00,243 autoreload 591156 140151442966336 Watching for file changes with StatReloader
+INFO 2025-05-13 23:10:23,119 autoreload 591156 140151442966336 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 23:10:24,088 autoreload 591191 139946899224384 Watching for file changes with StatReloader
+INFO 2025-05-13 23:10:37,659 autoreload 591191 139946899224384 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 23:10:38,628 autoreload 591198 140063627454272 Watching for file changes with StatReloader
+INFO 2025-05-13 23:12:17,312 autoreload 591198 140063627454272 /home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py changed, reloading.
+INFO 2025-05-13 23:12:18,399 autoreload 591600 139970248898368 Watching for file changes with StatReloader

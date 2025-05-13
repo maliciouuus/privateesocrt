@@ -102,6 +102,16 @@
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
+    .login-logo {
+        margin-bottom: 2rem;
+    }
+
+    .login-logo img {
+        height: 60px;
+        width: auto;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+
     .signup-subtitle {
         color: rgba(255, 255, 255, 0.8);
         font-size: 1.1rem;
@@ -278,7 +288,9 @@
 <div class="signup-container">
     <div class="signup-card">
         <div class="signup-header">
-            <h1 class="signup-logo">EscortDollars</h1>
+            <div class="login-logo">
+                <img src="{% static 'images/logo.png' %}" alt="EscortDollars Logo">
+            </div>
             <p class="signup-subtitle">Join the most powerful affiliate platform for escorts and ambassadors.</p>
         </div>
 

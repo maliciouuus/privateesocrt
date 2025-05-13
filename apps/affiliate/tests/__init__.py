@@ -1,1 +1,0 @@
-# Tests pour l'application affiliate 

@@ -497,6 +497,7 @@
 {% endblock %}
 
 {% block extra_js %}
+{{ block.super }}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Animation des cartes au chargement
@@ -506,6 +507,30 @@
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
             }, index * 100);
+        });
+        
+        // Corriger les problèmes d'interaction sur mobiles
+        const phoneElements = document.querySelectorAll('.profile-contact-item, .info-value');
+        phoneElements.forEach(element => {
+            if (element.textContent.includes('{{ user.phone_number }}')) {
+                // Empêcher la propagation des événements indésirables
+                element.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+                
+                // S'assurer que les éléments cliquables fonctionnent correctement sur mobile
+                const phoneLink = document.createElement('a');
+                phoneLink.href = 'tel:{{ user.phone_number }}';
+                phoneLink.textContent = element.textContent.trim();
+                phoneLink.style.color = 'inherit';
+                phoneLink.style.textDecoration = 'none';
+                phoneLink.style.display = 'inline-block';
+                phoneLink.style.width = '100%';
+                
+                // Remplacer le contenu de l'élément actuel
+                element.textContent = '';
+                element.appendChild(phoneLink);
+            }
         });
     });
 </script>

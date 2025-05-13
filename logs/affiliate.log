@@ -36877,3 +36877,600 @@ Traceback (most recent call last):
   File "/home/sacha/Public/openclassroom/escortdollars/apps/affiliate/supabase_client.py", line 8, in get_supabase_client
     raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
 RuntimeError: SUPABASE_URL and SUPABASE_KEY must be set in environment variables
+INFO 2025-05-13 19:11:32,793 autoreload 560461 139682033395520 Watching for file changes with StatReloader
+INFO 2025-05-13 19:12:18,496 autoreload 560507 139734699501376 Watching for file changes with StatReloader
+INFO 2025-05-13 19:12:32,024 basehttp 560507 139734256973376 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:12:32,109 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+ERROR 2025-05-13 19:12:34,724 log 560507 139734247532096 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 79, in dashboard_home
+    return render(request, "dashboard/home.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'index' not found. 'index' is not a valid view function or pattern name.
+ERROR 2025-05-13 19:12:34,725 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 500 212336
+WARNING 2025-05-13 19:12:34,956 log 560507 139734247532096 Not Found: /favicon.ico
+WARNING 2025-05-13 19:12:34,957 basehttp 560507 139734247532096 "GET /favicon.ico HTTP/1.1" 404 5441
+ERROR 2025-05-13 19:12:48,988 log 560507 139734247532096 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 79, in dashboard_home
+    return render(request, "dashboard/home.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'index' not found. 'index' is not a valid view function or pattern name.
+ERROR 2025-05-13 19:12:48,989 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 500 212185
+ERROR 2025-05-13 19:13:21,956 log 560507 139734247532096 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 79, in dashboard_home
+    return render(request, "dashboard/home.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+ERROR 2025-05-13 19:13:21,957 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 500 213441
+ERROR 2025-05-13 19:13:35,674 log 560507 139734247532096 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/sacha/Public/openclassroom/privateesocrt/apps/dashboard/views.py", line 79, in dashboard_home
+    return render(request, "dashboard/home.html", context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/sacha/.local/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+ERROR 2025-05-13 19:13:35,675 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 500 213441
+INFO 2025-05-13 19:14:19,136 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 55472
+WARNING 2025-05-13 19:14:19,178 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:15:29,825 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 44484
+WARNING 2025-05-13 19:15:29,877 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:26:07,691 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:26:07,764 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:26:41,487 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:26:41,527 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:26:47,255 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:26:47,333 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:26:52,126 basehttp 560507 139734247532096 "GET /dashboard/stats/ HTTP/1.1" 200 69974
+WARNING 2025-05-13 19:26:52,212 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:26:52,438 log 560507 139734256973376 Not Found: /api/ambassadors/
+WARNING 2025-05-13 19:26:52,444 basehttp 560507 139734256973376 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 19:26:52,455 log 560507 139734237042240 Not Found: /api/escorts/
+WARNING 2025-05-13 19:26:52,460 log 560507 139734247532096 Not Found: /api/stats/
+WARNING 2025-05-13 19:26:52,461 basehttp 560507 139734237042240 "GET /api/escorts/ HTTP/1.1" 404 17340
+WARNING 2025-05-13 19:26:52,462 basehttp 560507 139734247532096 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+INFO 2025-05-13 19:26:53,509 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:26:53,641 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:27:17,966 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:27:18,022 basehttp 560507 139734237042240 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:28:26,454 basehttp 560507 139734237042240 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:28:26,591 basehttp 560507 139734237042240 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 22919
+WARNING 2025-05-13 19:28:26,720 basehttp 560507 139734256973376 "GET /static/img/logo.png HTTP/1.1" 404 1896
+WARNING 2025-05-13 19:28:26,724 basehttp 560507 139734237042240 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:28:28,597 basehttp 560507 139734237042240 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+WARNING 2025-05-13 19:28:28,983 basehttp 560507 139734237042240 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:28:41,842 basehttp 560507 139734237042240 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:28:41,990 basehttp 560507 139734237042240 "GET /dashboard/ HTTP/1.1" 200 50421
+WARNING 2025-05-13 19:28:42,019 basehttp 560507 139734237042240 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:28:43,445 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:29:33,513 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:29:33,606 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:29:35,385 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:30:03,119 basehttp 560507 139734256973376 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:30:03,145 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:30:04,602 basehttp 560507 139734247532096 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:30:20,046 basehttp 560507 139734247532096 "GET /whitelabel/sites/ HTTP/1.1" 200 43184
+WARNING 2025-05-13 19:30:20,085 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:30:21,611 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:34:09,682 basehttp 560507 139734247532096 "GET /dashboard/ HTTP/1.1" 200 40085
+WARNING 2025-05-13 19:34:09,757 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:34:11,535 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:34:19,180 basehttp 560507 139734256973376 "GET /whitelabel/sites/ HTTP/1.1" 200 33213
+WARNING 2025-05-13 19:34:19,211 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:34:20,873 basehttp 560507 139734247532096 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:34:31,290 basehttp 560507 139734247532096 "GET /whitelabel/sites/ HTTP/1.1" 200 43184
+WARNING 2025-05-13 19:34:31,320 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:34:32,938 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:34:38,116 basehttp 560507 139734256973376 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:34:38,138 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:34:39,769 basehttp 560507 139734247532096 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:34:50,839 basehttp 560507 139734247532096 "GET /affiliate/commission-list/ HTTP/1.1" 200 50807
+WARNING 2025-05-13 19:34:50,864 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:34:52,577 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:35:23,849 basehttp 560507 139734256973376 "GET /affiliate/commission-list/ HTTP/1.1" 200 50807
+WARNING 2025-05-13 19:35:23,916 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:35:25,766 basehttp 560507 139734247532096 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:35:32,792 basehttp 560507 139734247532096 "GET /affiliate/commission-list/ HTTP/1.1" 200 50807
+WARNING 2025-05-13 19:35:32,820 basehttp 560507 139734247532096 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:35:34,291 basehttp 560507 139734256973376 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:35:46,372 basehttp 560507 139734256973376 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:35:46,407 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:35:46,410 basehttp 560507 139734247532096 "GET /static/images/bhwlogo-dark-transparent.webp HTTP/1.1" 200 15030
+INFO 2025-05-13 19:35:47,931 basehttp 560507 139734247532096 "GET /static/images/review1.png HTTP/1.1" 200 36862
+INFO 2025-05-13 19:35:47,936 basehttp 560507 139734256973376 "GET /static/images/review2.png HTTP/1.1" 200 32459
+INFO 2025-05-13 19:35:47,936 basehttp 560507 139734237042240 "GET /static/images/review3.png HTTP/1.1" 200 33146
+WARNING 2025-05-13 19:35:48,082 basehttp 560507 139734247532096 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:35:51,495 basehttp 560507 139734256973376 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:35:51,665 basehttp 560507 139734256973376 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:35:53,406 basehttp 560507 139734237042240 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:35:56,616 basehttp 560507 139734237042240 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 53328
+WARNING 2025-05-13 19:35:56,642 basehttp 560507 139734237042240 "GET /static/images/logo.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:35:56,649 basehttp 560507 139734256973376 "GET /static/images/banner2/300X70.png HTTP/1.1" 200 32509
+INFO 2025-05-13 19:35:58,220 basehttp 560507 139734228649536 "GET /static/images/banner/120X60.jpg HTTP/1.1" 200 15424
+WARNING 2025-05-13 19:35:58,222 basehttp 560507 139734256973376 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+INFO 2025-05-13 19:35:58,229 basehttp 560507 139734220256832 "GET /static/images/banner/240X60.jpg HTTP/1.1" 200 25087
+INFO 2025-05-13 19:35:58,230 basehttp 560507 139734228649536 "GET /static/images/banner/468X60.jpg HTTP/1.1" 200 37944
+INFO 2025-05-13 19:35:58,230 basehttp 560507 139734247532096 "GET /static/images/banner/120X200.jpg HTTP/1.1" 200 38911
+INFO 2025-05-13 19:35:58,231 basehttp 560507 139733875291712 "GET /static/images/banner/300X100.jpg HTTP/1.1" 200 45086
+WARNING 2025-05-13 19:35:58,233 basehttp 560507 139734237042240 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 19:35:58,234 basehttp 560507 139733866899008 "GET /static/images/banner/728X90.jpg HTTP/1.1" 200 72226
+WARNING 2025-05-13 19:35:58,313 basehttp 560507 139733866899008 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:36:07,736 basehttp 560507 139734228649536 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 53328
+WARNING 2025-05-13 19:36:07,783 basehttp 560507 139734247532096 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 19:36:07,785 basehttp 560507 139734228649536 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:36:07,796 basehttp 560507 139733875291712 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+WARNING 2025-05-13 19:36:09,472 basehttp 560507 139734220256832 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:36:17,872 basehttp 560507 139734220256832 "GET /whitelabel/sites/ HTTP/1.1" 200 43184
+WARNING 2025-05-13 19:36:17,902 basehttp 560507 139734220256832 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:36:19,400 basehttp 560507 139733875291712 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:36:42,951 basehttp 560507 139733875291712 "GET /affiliate/payment-methods/ HTTP/1.1" 200 48892
+WARNING 2025-05-13 19:36:42,986 basehttp 560507 139733875291712 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:36:44,722 basehttp 560507 139734220256832 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:36:48,528 basehttp 560507 139734220256832 "GET /affiliate/commission-list/ HTTP/1.1" 200 50807
+WARNING 2025-05-13 19:36:48,559 basehttp 560507 139734220256832 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:36:50,349 basehttp 560507 139733875291712 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:36:58,052 basehttp 560507 139733875291712 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:36:58,081 basehttp 560507 139733875291712 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:36:59,740 basehttp 560507 139734220256832 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:37:02,689 basehttp 560507 139734220256832 "GET /accounts/profile/ HTTP/1.1" 200 47248
+WARNING 2025-05-13 19:37:02,714 basehttp 560507 139734220256832 "GET /static/images/logo.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:37:04,309 basehttp 560507 139733875291712 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+WARNING 2025-05-13 19:37:04,409 basehttp 560507 139733875291712 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:37:29,481 basehttp 560507 139733875291712 "GET / HTTP/1.1" 200 85229
+WARNING 2025-05-13 19:37:31,189 basehttp 560507 139733875291712 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:37:39,368 basehttp 560507 139734220256832 "GET / HTTP/1.1" 200 85229
+WARNING 2025-05-13 19:37:41,147 basehttp 560507 139734220256832 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:37:45,838 basehttp 560507 139733875291712 "GET /dashboard/ HTTP/1.1" 200 50077
+WARNING 2025-05-13 19:37:47,423 basehttp 560507 139733875291712 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:37:49,237 basehttp 560507 139734220256832 "GET / HTTP/1.1" 200 85229
+WARNING 2025-05-13 19:37:49,677 basehttp 560507 139734220256832 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:38:16,615 basehttp 560507 139733875291712 "GET / HTTP/1.1" 200 85229
+WARNING 2025-05-13 19:38:17,135 basehttp 560507 139733875291712 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:38:25,112 basehttp 560507 139734220256832 "GET / HTTP/1.1" 200 85229
+WARNING 2025-05-13 19:38:25,659 basehttp 560507 139734220256832 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:39:50,624 autoreload 560507 139734699501376 /home/sacha/Public/openclassroom/privateesocrt/core/urls.py changed, reloading.
+INFO 2025-05-13 19:39:51,792 autoreload 564033 140548356691776 Watching for file changes with StatReloader
+INFO 2025-05-13 19:40:37,084 basehttp 564033 140547919443520 "GET / HTTP/1.1" 200 85208
+INFO 2025-05-13 19:40:37,118 basehttp 564033 140547919443520 "GET /static/images/logo.png HTTP/1.1" 200 15030
+WARNING 2025-05-13 19:40:37,714 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:40:38,958 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:40:39,474 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:40:41,376 basehttp 564033 140547919443520 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:40:41,875 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:41:10,106 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 85208
+INFO 2025-05-13 19:41:10,124 basehttp 564033 140547838703168 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:41:10,624 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:41:12,852 basehttp 564033 140547919443520 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:41:13,359 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:41:15,537 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:41:16,087 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:41:17,156 basehttp 564033 140547919443520 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:41:17,797 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:41:50,873 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 85208
+INFO 2025-05-13 19:41:50,947 basehttp 564033 140547838703168 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:41:51,735 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:42:09,613 basehttp 564033 140547919443520 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:42:10,275 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:43:01,945 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 85208
+INFO 2025-05-13 19:43:02,071 basehttp 564033 140547838703168 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:43:02,749 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:43:03,797 basehttp 564033 140547919443520 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:43:04,492 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:43:29,353 basehttp 564033 140547838703168 "GET /dashboard/ HTTP/1.1" 200 50056
+WARNING 2025-05-13 19:43:29,841 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:43:39,313 basehttp 564033 140547919443520 "GET /dashboard/ HTTP/1.1" 200 50056
+INFO 2025-05-13 19:43:39,338 basehttp 564033 140547919443520 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:43:39,775 basehttp 564033 140547919443520 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:43:40,464 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 85208
+WARNING 2025-05-13 19:43:40,911 basehttp 564033 140547838703168 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:44:14,019 basehttp 564033 140547838703168 "GET / HTTP/1.1" 200 84544
+INFO 2025-05-13 19:44:14,038 basehttp 564033 140547838703168 "GET /static/images/logo.png HTTP/1.1" 200 5308
+INFO 2025-05-13 19:44:14,039 basehttp 564033 140547830310464 "GET /static/images/bhwlogo-dark-transparent.webp HTTP/1.1" 200 15030
+INFO 2025-05-13 19:44:14,134 basehttp 564033 140547838703168 "GET /static/images/review1.png HTTP/1.1" 200 36862
+INFO 2025-05-13 19:44:14,137 basehttp 564033 140547830310464 "GET /static/images/review2.png HTTP/1.1" 200 32459
+INFO 2025-05-13 19:44:14,138 basehttp 564033 140547821917760 "GET /static/images/review3.png HTTP/1.1" 200 33146
+INFO 2025-05-13 19:44:15,662 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84544
+INFO 2025-05-13 19:44:15,696 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:44:40,266 basehttp 564033 140547830310464 "GET /accounts/login/ HTTP/1.1" 200 22838
+INFO 2025-05-13 19:44:40,286 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:44:40,302 basehttp 564033 140547821917760 "GET /static/img/logo.png HTTP/1.1" 404 1896
+INFO 2025-05-13 19:44:43,836 basehttp 564033 140547830310464 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:44:43,933 basehttp 564033 140547830310464 "GET /dashboard/simple/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:44:44,130 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 50421
+INFO 2025-05-13 19:44:44,143 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:45:24,599 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 50077
+INFO 2025-05-13 19:45:26,698 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 50077
+INFO 2025-05-13 19:45:37,530 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 50077
+INFO 2025-05-13 19:45:42,845 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 85229
+WARNING 2025-05-13 19:45:44,737 basehttp 564033 140547830310464 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-05-13 19:45:47,161 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:45:47,172 basehttp 564033 140547830310464 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 22940
+INFO 2025-05-13 19:45:47,235 basehttp 564033 140547830310464 "GET /static/images/bhwlogo-dark-transparent.webp HTTP/1.1" 200 15030
+WARNING 2025-05-13 19:45:47,243 basehttp 564033 140547919443520 "GET /static/img/logo.png HTTP/1.1" 404 1896
+INFO 2025-05-13 19:45:49,900 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84565
+INFO 2025-05-13 19:45:49,917 basehttp 564033 140547830310464 "GET /static/images/review1.png HTTP/1.1" 200 36862
+INFO 2025-05-13 19:45:49,922 basehttp 564033 140547919443520 "GET /static/images/review2.png HTTP/1.1" 200 32459
+INFO 2025-05-13 19:45:49,947 basehttp 564033 140547919443520 "GET /static/images/review3.png HTTP/1.1" 200 33146
+INFO 2025-05-13 19:45:55,205 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84565
+INFO 2025-05-13 19:46:11,783 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84565
+INFO 2025-05-13 19:46:35,527 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84565
+INFO 2025-05-13 19:46:45,468 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84912
+INFO 2025-05-13 19:46:46,823 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 84912
+INFO 2025-05-13 19:47:09,045 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 85916
+INFO 2025-05-13 19:47:22,253 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 85895
+INFO 2025-05-13 19:47:22,274 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 200 11215
+INFO 2025-05-13 19:47:34,756 basehttp 564033 140547830310464 "GET /accounts/login/ HTTP/1.1" 200 24189
+INFO 2025-05-13 19:47:34,782 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:47:34,790 basehttp 564033 140547919443520 "GET /static/img/logo.png HTTP/1.1" 404 1896
+INFO 2025-05-13 19:47:55,000 basehttp 564033 140547830310464 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:47:55,105 basehttp 564033 140547830310464 "GET /dashboard/simple/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:47:55,292 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 51772
+INFO 2025-05-13 19:47:55,353 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:48:10,645 basehttp 564033 140547830310464 "GET /dashboard/stats/ HTTP/1.1" 200 71325
+INFO 2025-05-13 19:48:10,667 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:48:10,971 log 564033 140547830310464 Not Found: /api/stats/
+WARNING 2025-05-13 19:48:10,979 log 564033 140547821917760 Not Found: /api/escorts/
+WARNING 2025-05-13 19:48:10,983 log 564033 140547919443520 Not Found: /api/ambassadors/
+WARNING 2025-05-13 19:48:10,984 basehttp 564033 140547830310464 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 19:48:10,984 basehttp 564033 140547821917760 "GET /api/escorts/ HTTP/1.1" 404 17340
+WARNING 2025-05-13 19:48:10,985 basehttp 564033 140547919443520 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+INFO 2025-05-13 19:48:16,944 basehttp 564033 140547919443520 "GET /dashboard/ HTTP/1.1" 200 51407
+INFO 2025-05-13 19:48:20,922 basehttp 564033 140547919443520 "GET /affiliate/payment-methods/ HTTP/1.1" 200 50243
+INFO 2025-05-13 19:48:20,940 basehttp 564033 140547919443520 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:48:27,515 basehttp 564033 140547919443520 "GET /accounts/profile/ HTTP/1.1" 200 48599
+WARNING 2025-05-13 19:48:27,812 basehttp 564033 140547919443520 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:48:33,340 basehttp 564033 140547821917760 "GET /accounts/profile/ HTTP/1.1" 200 48599
+INFO 2025-05-13 19:48:33,357 basehttp 564033 140547821917760 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:48:33,493 basehttp 564033 140547821917760 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:48:38,456 basehttp 564033 140547830310464 "GET /accounts/profile/ HTTP/1.1" 200 48599
+WARNING 2025-05-13 19:48:38,620 basehttp 564033 140547830310464 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:49:35,521 basehttp 564033 140547830310464 "GET /accounts/profile/ HTTP/1.1" 200 48599
+INFO 2025-05-13 19:49:35,588 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 19:49:35,715 basehttp 564033 140547830310464 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:49:37,520 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 51407
+INFO 2025-05-13 19:49:39,332 basehttp 564033 140547821917760 "GET /whitelabel/sites/ HTTP/1.1" 200 44535
+INFO 2025-05-13 19:49:40,290 basehttp 564033 140547821917760 "GET /whitelabel/sites/ HTTP/1.1" 200 44535
+INFO 2025-05-13 19:49:41,324 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 51407
+INFO 2025-05-13 19:49:44,022 basehttp 564033 140547830310464 "GET /accounts/profile/ HTTP/1.1" 200 48599
+WARNING 2025-05-13 19:49:44,081 basehttp 564033 140547830310464 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 19:49:45,535 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 51407
+INFO 2025-05-13 19:49:46,390 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 86559
+INFO 2025-05-13 19:50:22,921 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 86559
+INFO 2025-05-13 19:50:22,965 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:50:43,921 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 86559
+INFO 2025-05-13 19:50:46,918 basehttp 564033 140547830310464 "GET /accounts/logout/ HTTP/1.1" 200 26629
+INFO 2025-05-13 19:50:46,935 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:50:49,025 basehttp 564033 140547830310464 "POST /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:50:49,035 basehttp 564033 140547830310464 "GET / HTTP/1.1" 200 86252
+INFO 2025-05-13 19:50:51,729 basehttp 564033 140547830310464 "GET /accounts/login/ HTTP/1.1" 200 24189
+WARNING 2025-05-13 19:50:51,752 basehttp 564033 140547830310464 "GET /static/img/logo.png HTTP/1.1" 404 1896
+INFO 2025-05-13 19:51:12,881 basehttp 564033 140547830310464 "GET /accounts/login/ HTTP/1.1" 200 24192
+INFO 2025-05-13 19:51:12,904 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:51:32,548 basehttp 564033 140547830310464 "GET /accounts/signup/ HTTP/1.1" 200 25616
+INFO 2025-05-13 19:51:45,228 basehttp 564033 140547830310464 "GET /accounts/signup/ HTTP/1.1" 200 25805
+INFO 2025-05-13 19:51:45,254 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 19:51:54,946 basehttp 564033 140547830310464 "GET /accounts/login/ HTTP/1.1" 200 24192
+INFO 2025-05-13 19:51:58,102 basehttp 564033 140547830310464 "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:51:58,205 basehttp 564033 140547830310464 "GET /dashboard/simple/ HTTP/1.1" 302 0
+INFO 2025-05-13 19:51:58,404 basehttp 564033 140547830310464 "GET /dashboard/ HTTP/1.1" 200 51772
+INFO 2025-05-13 19:52:09,469 basehttp 564033 140547830310464 "GET /dashboard/stats/ HTTP/1.1" 200 71325
+WARNING 2025-05-13 19:52:09,669 log 564033 140547830310464 Not Found: /api/stats/
+WARNING 2025-05-13 19:52:09,674 basehttp 564033 140547830310464 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 19:52:09,678 log 564033 140547821917760 Not Found: /api/ambassadors/
+WARNING 2025-05-13 19:52:09,681 log 564033 140547919443520 Not Found: /api/escorts/
+WARNING 2025-05-13 19:52:09,682 basehttp 564033 140547821917760 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 19:52:09,683 basehttp 564033 140547919443520 "GET /api/escorts/ HTTP/1.1" 404 17340
+INFO 2025-05-13 20:00:41,250 basehttp 564033 140547830310464 "GET /dashboard/stats/ HTTP/1.1" 200 73062
+INFO 2025-05-13 20:00:41,297 basehttp 564033 140547830310464 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 20:00:41,509 log 564033 140547830310464 Not Found: /api/stats/
+WARNING 2025-05-13 20:00:41,517 basehttp 564033 140547830310464 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 20:00:41,522 log 564033 140547919443520 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:00:41,526 log 564033 140547821917760 Not Found: /api/escorts/
+WARNING 2025-05-13 20:00:41,528 basehttp 564033 140547821917760 "GET /api/escorts/ HTTP/1.1" 404 17340
+WARNING 2025-05-13 20:00:41,528 basehttp 564033 140547919443520 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+INFO 2025-05-13 20:00:46,680 basehttp 564033 140547821917760 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 56390
+INFO 2025-05-13 20:00:46,701 basehttp 564033 140547821917760 "GET /static/images/banner2/300X70.png HTTP/1.1" 200 32509
+INFO 2025-05-13 20:00:46,815 basehttp 564033 140547838703168 "GET /static/images/banner/120X60.jpg HTTP/1.1" 200 15424
+WARNING 2025-05-13 20:00:46,816 basehttp 564033 140547821917760 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+INFO 2025-05-13 20:00:46,820 basehttp 564033 140547830310464 "GET /static/images/banner/120X200.jpg HTTP/1.1" 200 38911
+INFO 2025-05-13 20:00:46,825 basehttp 564033 140547813525056 "GET /static/images/banner/240X60.jpg HTTP/1.1" 200 25087
+INFO 2025-05-13 20:00:46,825 basehttp 564033 140547805132352 "GET /static/images/banner/300X100.jpg HTTP/1.1" 200 45086
+WARNING 2025-05-13 20:00:46,827 basehttp 564033 140547919443520 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:00:46,828 basehttp 564033 140547838703168 "GET /static/images/banner/468X60.jpg HTTP/1.1" 200 37944
+INFO 2025-05-13 20:00:46,828 basehttp 564033 140547821917760 "GET /static/images/banner/728X90.jpg HTTP/1.1" 200 72226
+INFO 2025-05-13 20:00:52,791 basehttp 564033 140547821917760 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 56390
+WARNING 2025-05-13 20:00:52,822 basehttp 564033 140547821917760 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:00:52,823 basehttp 564033 140547830310464 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:00:58,341 basehttp 564033 140547838703168 "GET /dashboard/ HTTP/1.1" 200 53144
+INFO 2025-05-13 20:01:00,971 basehttp 564033 140547838703168 "GET /accounts/profile/ HTTP/1.1" 200 50310
+WARNING 2025-05-13 20:01:01,107 basehttp 564033 140547838703168 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:02:05,456 basehttp 564033 140547805132352 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 56390
+WARNING 2025-05-13 20:02:05,625 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:02:05,626 basehttp 564033 140547813525056 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:12:31,416 basehttp 564033 140547813525056 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 57216
+INFO 2025-05-13 20:12:31,473 basehttp 564033 140547813525056 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 20:12:31,575 basehttp 564033 140547813525056 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:12:31,586 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:12:43,491 basehttp 564033 140547805132352 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 57216
+WARNING 2025-05-13 20:12:43,594 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:12:43,603 basehttp 564033 140547813525056 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:12:45,067 basehttp 564033 140547813525056 "GET /affiliate/commission-list/ HTTP/1.1" 200 55418
+INFO 2025-05-13 20:12:56,450 basehttp 564033 140547813525056 "GET /affiliate/payment-methods/ HTTP/1.1" 200 53503
+INFO 2025-05-13 20:12:57,712 basehttp 564033 140547813525056 "GET /dashboard/ HTTP/1.1" 200 54667
+INFO 2025-05-13 20:12:59,514 basehttp 564033 140547805132352 "GET /whitelabel/sites/ HTTP/1.1" 200 47795
+INFO 2025-05-13 20:13:02,337 basehttp 564033 140547805132352 "GET /dashboard/stats/ HTTP/1.1" 200 74585
+WARNING 2025-05-13 20:13:02,449 log 564033 140547805132352 Not Found: /api/stats/
+WARNING 2025-05-13 20:13:02,453 log 564033 140547813525056 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:13:02,454 basehttp 564033 140547805132352 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 20:13:02,458 log 564033 140547838703168 Not Found: /api/escorts/
+WARNING 2025-05-13 20:13:02,458 basehttp 564033 140547813525056 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:13:02,459 basehttp 564033 140547838703168 "GET /api/escorts/ HTTP/1.1" 404 17340
+INFO 2025-05-13 20:13:09,991 basehttp 564033 140547838703168 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 57216
+WARNING 2025-05-13 20:13:10,094 basehttp 564033 140547838703168 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:13:10,095 basehttp 564033 140547813525056 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:13:19,636 basehttp 564033 140547805132352 "GET / HTTP/1.1" 200 86559
+INFO 2025-05-13 20:13:22,620 basehttp 564033 140547805132352 "GET /dashboard/ HTTP/1.1" 200 54667
+INFO 2025-05-13 20:13:25,115 basehttp 564033 140547805132352 "GET /accounts/profile/ HTTP/1.1" 200 51136
+WARNING 2025-05-13 20:13:25,252 basehttp 564033 140547805132352 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:15:57,001 basehttp 564033 140547805132352 "GET /dashboard/ HTTP/1.1" 200 53144
+INFO 2025-05-13 20:15:57,051 basehttp 564033 140547805132352 "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-05-13 20:15:58,793 basehttp 564033 140547805132352 "GET /accounts/profile/ HTTP/1.1" 200 50310
+WARNING 2025-05-13 20:15:58,851 basehttp 564033 140547805132352 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:16:56,769 basehttp 564033 140547805132352 "GET /dashboard/notifications/ HTTP/1.1" 200 49918
+WARNING 2025-05-13 20:16:56,836 basehttp 564033 140547805132352 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:17:01,226 basehttp 564033 140547805132352 "GET /accounts/profile/ HTTP/1.1" 200 50310
+WARNING 2025-05-13 20:17:01,291 basehttp 564033 140547805132352 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:17:02,722 basehttp 564033 140547805132352 "GET /affiliate/payment-methods/ HTTP/1.1" 200 51980
+INFO 2025-05-13 20:17:03,759 basehttp 564033 140547805132352 "GET /affiliate/commission-list/ HTTP/1.1" 200 53895
+INFO 2025-05-13 20:17:05,137 basehttp 564033 140547805132352 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 56390
+WARNING 2025-05-13 20:17:05,164 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:17:05,188 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:17:06,028 basehttp 564033 140547805132352 "GET /whitelabel/sites/ HTTP/1.1" 200 46272
+INFO 2025-05-13 20:17:08,082 basehttp 564033 140547838703168 "GET /dashboard/ HTTP/1.1" 200 53144
+INFO 2025-05-13 20:17:41,578 basehttp 564033 140547838703168 "GET /dashboard/stats/ HTTP/1.1" 200 73062
+WARNING 2025-05-13 20:17:41,826 log 564033 140547805132352 Not Found: /api/ambassadors/
+WARNING 2025-05-13 20:17:41,835 log 564033 140547838703168 Not Found: /api/stats/
+WARNING 2025-05-13 20:17:41,842 log 564033 140547813525056 Not Found: /api/escorts/
+WARNING 2025-05-13 20:17:41,842 basehttp 564033 140547838703168 "GET /api/stats/?period=7 HTTP/1.1" 404 17343
+WARNING 2025-05-13 20:17:41,842 basehttp 564033 140547805132352 "GET /api/ambassadors/ HTTP/1.1" 404 17352
+WARNING 2025-05-13 20:17:41,843 basehttp 564033 140547813525056 "GET /api/escorts/ HTTP/1.1" 404 17340
+INFO 2025-05-13 20:17:43,559 basehttp 564033 140547813525056 "GET /whitelabel/sites/ HTTP/1.1" 200 46272
+INFO 2025-05-13 20:17:45,236 basehttp 564033 140547813525056 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 56390
+WARNING 2025-05-13 20:17:45,257 basehttp 564033 140547813525056 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:17:45,283 basehttp 564033 140547838703168 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:17:49,928 basehttp 564033 140547805132352 "GET /affiliate/commission-list/ HTTP/1.1" 200 53895
+INFO 2025-05-13 20:17:50,902 basehttp 564033 140547805132352 "GET /affiliate/payment-methods/ HTTP/1.1" 200 51980
+INFO 2025-05-13 20:17:52,321 basehttp 564033 140547805132352 "GET /accounts/profile/ HTTP/1.1" 200 50310
+WARNING 2025-05-13 20:17:52,378 basehttp 564033 140547805132352 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:17:52,976 basehttp 564033 140547805132352 "GET /dashboard/notifications/ HTTP/1.1" 200 49918
+WARNING 2025-05-13 20:17:52,998 basehttp 564033 140547805132352 "GET /static/images/telegram-notifications.svg HTTP/1.1" 404 1959
+INFO 2025-05-13 20:19:10,262 basehttp 564033 140547805132352 "GET /accounts/profile/ HTTP/1.1" 200 55364
+INFO 2025-05-13 20:19:10,314 basehttp 564033 140547805132352 "GET /static/images/logo.png HTTP/1.1" 304 0
+WARNING 2025-05-13 20:19:10,450 basehttp 564033 140547805132352 "GET /static/img/pattern.png HTTP/1.1" 404 1905
+INFO 2025-05-13 20:19:13,053 basehttp 564033 140547805132352 "GET /affiliate/payment-methods/ HTTP/1.1" 200 51980
+INFO 2025-05-13 20:19:17,006 basehttp 564033 140547805132352 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 56390
+WARNING 2025-05-13 20:19:17,029 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:19:17,036 basehttp 564033 140547838703168 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968
+INFO 2025-05-13 20:20:03,110 basehttp 564033 140547838703168 "GET /affiliate/marketing-materials/ HTTP/1.1" 200 62418
+WARNING 2025-05-13 20:20:03,243 basehttp 564033 140547838703168 "GET /static/images/banners/ambassador-300x250.jpg HTTP/1.1" 404 1971
+WARNING 2025-05-13 20:20:03,254 basehttp 564033 140547805132352 "GET /static/images/banners/ambassador-728x90.jpg HTTP/1.1" 404 1968

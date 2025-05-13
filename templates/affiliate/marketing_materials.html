@@ -345,6 +345,7 @@
 {% endblock %}
 
 {% block extra_js %}
+{{ block.super }}
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -382,6 +383,47 @@
                 document.querySelector(tabTriggerEl.getAttribute('data-bs-target')).classList.add('show', 'active');
             });
         });
+        
+        // Fix for mobile sidebar toggle
+        const fixMobileSidebar = () => {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+            
+            if (mobileSidebarToggle && sidebar && sidebarOverlay) {
+                // Réinitialiser les écouteurs d'événements existants
+                const newToggle = mobileSidebarToggle.cloneNode(true);
+                mobileSidebarToggle.parentNode.replaceChild(newToggle, mobileSidebarToggle);
+                
+                const newOverlay = sidebarOverlay.cloneNode(true);
+                sidebarOverlay.parentNode.replaceChild(newOverlay, sidebarOverlay);
+                
+                // Appliquer de nouveaux écouteurs
+                newToggle.addEventListener('click', function() {
+                    if (sidebar.classList.contains('collapsed')) {
+                        sidebar.classList.remove('collapsed');
+                        newOverlay.classList.remove('show');
+                        this.querySelector('i').classList.remove('fa-times');
+                        this.querySelector('i').classList.add('fa-bars');
+                    } else {
+                        sidebar.classList.add('collapsed');
+                        newOverlay.classList.add('show');
+                        this.querySelector('i').classList.remove('fa-bars');
+                        this.querySelector('i').classList.add('fa-times');
+                    }
+                });
+                
+                newOverlay.addEventListener('click', function() {
+                    sidebar.classList.remove('collapsed');
+                    this.classList.remove('show');
+                    newToggle.querySelector('i').classList.remove('fa-times');
+                    newToggle.querySelector('i').classList.add('fa-bars');
+                });
+            }
+        };
+        
+        // Exécuter la correction après un court délai
+        setTimeout(fixMobileSidebar, 500);
     });
 </script>
 {% endblock %} 

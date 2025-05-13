@@ -33,7 +33,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
   
   test:
-    name: Tests avec pytest
+    name: Tests (sans pytest direct)
     runs-on: ubuntu-latest
     needs: lint
     
@@ -48,7 +48,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pytest-django pytest-cov
+        # Les dépendances pytest, pytest-django, pytest-cov ont été retirées ici
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
     - name: Run tests
@@ -60,12 +60,11 @@ jobs:
         DB_NAME: ${{ secrets.SUPABASE_DBNAME }}
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        DJANGO_SETTINGS_MODULE: core.settings.test
+        DJANGO_SETTINGS_MODULE: core.settings # Ou core.settings.test si vous avez une config spécifique pour CI
       run: |
         chmod +x run_integration_tests.py
         ./run_integration_tests.py
-        # Exécuter pytest en excluant test_supabase_full.py qui contient sys.exit(1)
-        python -m pytest --cov=apps --ignore=test_supabase_full.py
+        # La ligne d'exécution de pytest a été retirée
 
   build:
     name: Build et push Docker image

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms of Service - EscortDollars{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-body p-lg-5" style="color: white;">
+                    <h1 class="mb-4 text-center" style="color: white;">Terms of Service</h1>
+                    <div class="alert alert-warning mb-4">
+                        <h5 class="alert-heading mb-2" style="color: black;"><i class="fas fa-exclamation-triangle me-2"></i> IMPORTANT WARNING</h5>
+                        <p class="mb-1" style="color: black;">This site is strictly reserved for adults over 18 years of age.</p>
+                        <p class="mb-0" style="color: black;">Any use by minors or involving minors is strictly prohibited and illegal.</p>
+                    </div>
+                    
+                    <p class="text-muted small mb-5 text-center" style="color: white !important;">Last updated: {% now "d F Y" %}</p>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">1. Preamble</h2>
+                        <p style="color: white;">These Terms of Service (hereinafter "TOS") constitute a legally binding agreement between you (hereinafter the "User") and EscortDollars (hereinafter "we," "our," or "the Service"), regarding access to and use of our affiliate platform.</p>
+                        <p style="color: white;">By registering or using our Service, you acknowledge that you have read these TOS and agree to comply with them without reservation.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">2. Access and Usage Conditions</h2>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">2.1 Age and Eligibility Requirements</h3>
+                        <p style="color: white;">Access to and use of the Service is strictly reserved for individuals who are at least 18 years of age (or the age of legal majority in your jurisdiction if it is higher than 18 years).</p>
+                        <p class="fw-bold" style="color: white;">By using our Service, you declare and guarantee that you:</p>
+                        <ul style="color: white;">
+                            <li>Are at least 18 years old and have the full legal capacity to consent to these TOS;</li>
+                            <li>Are not subject to any ban from accessing affiliate services;</li>
+                            <li>Will not use our platform for illegal purposes or to promote illegal activities.</li>
+                        </ul>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">2.2 Age Verification</h3>
+                        <p style="color: white;">We reserve the right to implement age verification procedures to ensure compliance with this condition. Any attempt to circumvent these verification measures constitutes a violation of these TOS.</p>
+                        <p class="bg-danger text-white p-3 rounded" style="color: white !important;">Creating an account on behalf of a minor or using our Service by minors is strictly prohibited. Any violation of this rule will be reported to the relevant authorities.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">3. Strictly Prohibited Content</h2>
+                        <p style="color: white;">The following types of content are strictly prohibited on our platform and constitute serious violations of our terms of service:</p>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">3.1 Content Involving Minors</h3>
+                        <p class="bg-danger text-white p-3 rounded mb-3" style="color: white !important;">Any content, text, image, link, or promotion involving minors (under 18 years of age) in any way is absolutely prohibited and illegal. This includes, but is not limited to:</p>
+                        <ul style="color: white;">
+                            <li>Child pornography in any form;</li>
+                            <li>Content suggesting or evoking sexual activities involving minors;</li>
+                            <li>Images or descriptions of minors in a sexually suggestive context;</li>
+                            <li>Promotion or facilitation of sexual exploitation of minors;</li>
+                            <li>Links to sites containing such content;</li>
+                            <li>Content promoting or glorifying abuse toward minors.</li>
+                        </ul>
+                        <p style="color: white;">Any violation of this policy will be immediately reported to the relevant authorities and will result in the permanent suspension of the account without notice.</p>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">3.2 Illegal Content</h3>
+                        <p style="color: white;">The following are also prohibited:</p>
+                        <ul style="color: white;">
+                            <li>Content promoting human trafficking;</li>
+                            <li>Content encouraging or facilitating criminal activities;</li>
+                            <li>Content glorifying terrorism;</li>
+                            <li>Content inciting hatred, violence, or discrimination;</li>
+                            <li>Any form of non-consensual content.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">4. User Responsibilities and Obligations</h2>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">4.1 Third-Party Verification</h3>
+                        <p style="color: white;">As a user or affiliate, you have the obligation to ensure that any content you publish or promote through our platform exclusively involves adults. You must rigorously verify the age of individuals appearing in any shared or promoted content.</p>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">4.2 Mandatory Reporting</h3>
+                        <p style="color: white;">If you discover content that violates these TOS, particularly concerning minors, you have the obligation to report it immediately through our reporting procedure available on the platform.</p>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">4.3 Traffic Sources</h3>
+                        <p style="color: white;">Our affiliates are required to:</p>
+                        <ul style="color: white;">
+                            <li>Promote our services only on platforms explicitly reserved for adults;</li>
+                            <li>Implement appropriate age verification measures on their own platforms;</li>
+                            <li>Ensure that their traffic comes exclusively from adult and consenting users.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">5. Security and Protection Measures</h2>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">5.1 Account Verification</h3>
+                        <p style="color: white;">To ensure the security of our platform, we implement rigorous verification procedures for affiliate accounts. These verifications may include:</p>
+                        <ul style="color: white;">
+                            <li>Identity verification using official identification documents;</li>
+                            <li>Verification of traffic sources;</li>
+                            <li>Regular auditing of promoted content.</li>
+                        </ul>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">5.2 Reporting and Moderation</h3>
+                        <p style="color: white;">Our platform has a proactive moderation system to detect and remove any content that violates our TOS. We actively collaborate with authorities to combat illegal content.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">6. Sanctions for Non-Compliance</h2>
+                        
+                        <p style="color: white;">Non-compliance with these TOS, particularly prohibitions concerning minors and illegal content, may result in, without limitation:</p>
+                        <ul style="color: white;">
+                            <li>Immediate and permanent suspension or termination of the account;</li>
+                            <li>Withholding of any ongoing payments or commissions;</li>
+                            <li>Transmission of information to the relevant authorities;</li>
+                            <li>Legal proceedings.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">7. Modification of the TOS</h2>
+                        <p style="color: white;">We reserve the right to modify these TOS at any time. Modifications take effect upon their publication on our site. It is your responsibility to regularly consult this page to stay informed of changes.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h2 class="h4 mb-3" style="color: white;">8. Legal Provisions</h2>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">8.1 Applicable Law</h3>
+                        <p style="color: white;">These TOS are governed by French law, regardless of principles of conflicts of law.</p>
+                        
+                        <h3 class="h5 mb-2" style="color: white;">8.2 Competent Jurisdiction</h3>
+                        <p style="color: white;">Any dispute relating to the interpretation, execution, or breach of these TOS will be subject to the exclusive jurisdiction of the French courts.</p>
+                    </div>
+                    
+                    <div class="alert alert-secondary mt-5">
+                        <p class="mb-1" style="color: black;"><strong style="color: black;">By using our Service, you acknowledge that you have read, understood, and accepted these TOS in their entirety.</strong></p>
+                        <p class="mb-0" style="color: black;">If you do not accept these conditions, you must immediately cease using our platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

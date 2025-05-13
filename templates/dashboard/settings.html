@@ -1,0 +1,204 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Paramètres - Dashboard{% endblock %}
+
+{% block dashboard_content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Paramètres</h5>
+                    <div class="list-group list-group-flush">
+                        <a href="#general" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                            <i class="fas fa-cog me-2"></i> Général
+                        </a>
+                        <a href="#notifications" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="fas fa-bell me-2"></i> Notifications
+                        </a>
+                        <a href="#security" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="fas fa-shield-alt me-2"></i> Sécurité
+                        </a>
+                        <a href="#appearance" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="fas fa-paint-brush me-2"></i> Apparence
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="tab-content">
+                <!-- Paramètres généraux -->
+                <div class="tab-pane fade show active" id="general">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Paramètres généraux</h5>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="language" class="form-label">Langue</label>
+                                    <select class="form-select" id="language" name="language">
+                                        {% for code, name in available_languages %}
+                                        <option value="{{ code }}" {% if user_profile.language == code %}selected{% endif %}>
+                                            {{ name }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="theme" class="form-label">Thème</label>
+                                    <select class="form-select" id="theme" name="theme">
+                                        {% for code, name in available_themes %}
+                                        <option value="{{ code }}" {% if user_profile.theme == code %}selected{% endif %}>
+                                            {{ name }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i> Enregistrer les modifications
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Paramètres de notifications -->
+                <div class="tab-pane fade" id="notifications">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Paramètres de notifications</h5>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="email_notifications" 
+                                               name="email_notifications" {% if user_profile.email_notifications %}checked{% endif %}>
+                                        <label class="form-check-label" for="email_notifications">
+                                            Notifications par email
+                                        </label>
+                                    </div>
+                                    <small class="text-muted">
+                                        Recevez des notifications par email pour les nouvelles commissions et les mises à jour importantes.
+                                    </small>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i> Enregistrer les modifications
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Paramètres de sécurité -->
+                <div class="tab-pane fade" id="security">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Sécurité</h5>
+                            <div class="mb-4">
+                                <h6>Changer le mot de passe</h6>
+                                <form method="post" action="{% url 'accounts:change_password' %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="current_password" class="form-label">Mot de passe actuel</label>
+                                        <input type="password" class="form-control" id="current_password" name="current_password" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="new_password" class="form-label">Nouveau mot de passe</label>
+                                        <input type="password" class="form-control" id="new_password" name="new_password" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirm_password" class="form-label">Confirmer le mot de passe</label>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-key me-2"></i> Changer le mot de passe
+                                    </button>
+                                </form>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h6>Authentification à deux facteurs</h6>
+                                <p class="text-muted">
+                                    Renforcez la sécurité de votre compte en activant l'authentification à deux facteurs.
+                                </p>
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="fas fa-shield-alt me-2"></i> Configurer la 2FA
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Paramètres d'apparence -->
+                <div class="tab-pane fade" id="appearance">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Apparence</h5>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label">Mode d'affichage</label>
+                                    <div class="d-flex gap-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="display_mode" id="light_mode" value="light" checked>
+                                            <label class="form-check-label" for="light_mode">
+                                                <i class="fas fa-sun me-2"></i> Clair
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="display_mode" id="dark_mode" value="dark">
+                                            <label class="form-check-label" for="dark_mode">
+                                                <i class="fas fa-moon me-2"></i> Sombre
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="display_mode" id="system_mode" value="system">
+                                            <label class="form-check-label" for="system_mode">
+                                                <i class="fas fa-desktop me-2"></i> Système
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i> Enregistrer les modifications
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestion du changement de thème
+    const themeSelect = document.getElementById('theme');
+    if (themeSelect) {
+        themeSelect.addEventListener('change', function() {
+            const theme = this.value;
+            document.documentElement.setAttribute('data-theme', theme);
+        });
+    }
+    
+    // Gestion du mode d'affichage
+    const displayModeRadios = document.querySelectorAll('input[name="display_mode"]');
+    displayModeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const mode = this.value;
+            document.documentElement.setAttribute('data-display-mode', mode);
+        });
+    });
+});
+</script>
+{% endblock %} 

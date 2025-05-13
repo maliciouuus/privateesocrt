@@ -1,0 +1,158 @@
+{% extends 'affiliate/base.html' %}
+
+{% block title %}Dashboard - EscortDollars{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mb-4">Dashboard</h1>
+
+    <!-- Statistics -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h3>Total Commissions</h3>
+                <h2>{{ total_commissions }} €</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h3>Pending Commissions</h3>
+                <h2>{{ pending_commissions }} €</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h3>Paid Commissions</h3>
+                <h2>{{ paid_commissions }} €</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase Statistics -->
+    {% if stats %}
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Click Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="clicksChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Conversion Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="conversionsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent Commissions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Commissions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for commission in recent_commissions %}
+                                <tr>
+                                    <td>{{ commission.id }}</td>
+                                    <td>{{ commission.amount }} €</td>
+                                    <td>
+                                        <span class="badge {% if commission.status == 'paid' %}bg-success{% elif commission.status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                            {{ commission.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ commission.created_at|date:"d/m/Y H:i" }}</td>
+                                    <td>
+                                        <a href="{% url 'commission_detail' commission.pk %}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No commissions</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    {% if stats %}
+    // Clicks chart
+    const clicksCtx = document.getElementById('clicksChart').getContext('2d');
+    new Chart(clicksCtx, {
+        type: 'line',
+        data: {
+            labels: {{ stats.clicks.labels|safe }},
+            datasets: [{
+                label: 'Clicks',
+                data: {{ stats.clicks.data|safe }},
+                borderColor: '#0d6efd',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Conversions chart
+    const conversionsCtx = document.getElementById('conversionsChart').getContext('2d');
+    new Chart(conversionsCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ stats.conversions.labels|safe }},
+            datasets: [{
+                label: 'Conversions',
+                data: {{ stats.conversions.data|safe }},
+                backgroundColor: '#198754'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    {% endif %}
+</script>
+{% endblock %} 

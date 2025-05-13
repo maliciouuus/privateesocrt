@@ -1,0 +1,415 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Programme d'Affiliation - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 120px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('{% static "images/pattern.png" %}');
+        background-size: cover;
+        opacity: 0.1;
+    }
+    
+    .hero-section h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+    
+    .tagline {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+    }
+    
+    .step-box {
+        position: relative;
+        padding-top: 30px;
+    }
+    
+    .step-number {
+        background-color: var(--primary-color);
+        color: white;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        font-weight: 600;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+    }
+    
+    .step-label {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+    
+    .feature-card {
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .stat-card {
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 10px;
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .how-it-works-section {
+        position: relative;
+    }
+    
+    .how-it-works-section::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        background-color: var(--primary-color);
+        left: 30px;
+        top: 0;
+    }
+    
+    .commission-card {
+        border-left: 4px solid var(--primary-color);
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .commission-card:hover {
+        background-color: rgba(58, 12, 163, 0.05);
+    }
+    
+    .testimonial-card {
+        position: relative;
+        padding: 2rem;
+    }
+    
+    .testimonial-card::before {
+        content: "\201C";
+        font-size: 8rem;
+        color: rgba(58, 12, 163, 0.1);
+        position: absolute;
+        top: -1rem;
+        left: 1rem;
+        font-family: Georgia, serif;
+        z-index: -1;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <h1 class="display-3 fw-bold mb-4">Bienvenue dans le Programme d'Affiliation EscortDollars</h1>
+                <p class="tagline mb-4">Invitez. Partagez. Gagnez.</p>
+                <p class="lead mb-5">Rejoignez notre communauté gratuite et commencez à gagner des revenus réguliers. Entièrement mesurable et avec les sources les plus fiables !</p>
+                <a href="{% url 'accounts:register_ambassador' %}" class="btn btn-light btn-lg">S'inscrire maintenant</a>
+            </div>
+            <div class="col-lg-5">
+                <img src="{% static 'images/affiliate-hero.png' %}" alt="Affiliation EscortDollars" class="img-fluid rounded shadow-lg" onerror="this.src='https://placehold.co/600x400?text=EscortDollars+Affiliation'">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistiques -->
+<section class="stats-section py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <i class="fas fa-users mb-4 fa-3x"></i>
+                    <div class="stat-number">10,000+</div>
+                    <p class="lead mb-0">Affiliés actifs</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <i class="fas fa-euro-sign mb-4 fa-3x"></i>
+                    <div class="stat-number">1M€+</div>
+                    <p class="lead mb-0">Commissions versées</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <i class="fas fa-percentage mb-4 fa-3x"></i>
+                    <div class="stat-number">Jusqu'à 50%</div>
+                    <p class="lead mb-0">De commission</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Qu'est-ce que le programme d'affiliation -->
+<section class="what-is-section py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="{% static 'images/affiliate-what-is.png' %}" alt="Programme d'affiliation" class="img-fluid rounded shadow-lg" onerror="this.src='https://placehold.co/600x400?text=Programme+d%27affiliation'">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="mb-4">Qu'est-ce que le Programme d'Affiliation EscortDollars ?</h2>
+                <p class="lead mb-4">Le Programme d'Affiliation est une collaboration passionnante proposée par EscortDollars. C'est une invitation aux personnes talentueuses, passionnées et entreprenantes dans le marketing et la publicité.</p>
+                <p>En promouvant EscortDollars sur votre plateforme, blog, réseaux sociaux et plus encore, en tant que Partenaire Affilié, vous pouvez nous référer des clients et gagner des commissions sur chaque référence réussie.</p>
+                <a href="{% url 'accounts:register_ambassador' %}" class="btn btn-primary btn-lg mt-3">S'inscrire</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ce que vous gagnez -->
+<section class="what-you-earn-section py-5 mb-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                <img src="{% static 'images/affiliate-earnings.png' %}" alt="Gains d'affiliation" class="img-fluid rounded shadow-lg" onerror="this.src='https://placehold.co/600x400?text=Gains+d%27affiliation'">
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <h2 class="mb-4">Ce que vous gagnez avec l'Affiliation</h2>
+                <h4 class="mb-3">Marketing efficace</h4>
+                <p class="mb-4">En tant que Partenaires Affiliés, vous avez la chance de profiter du trafic important d'EscortDollars avec vos stratégies marketing créatives. Vous pouvez atteindre des clients potentiels et les attirer vers EscortDollars avec du contenu, des bannières et des liens efficaces.</p>
+                <h4 class="mb-3">Commissions lucratives</h4>
+                <p>Vous recevez des commissions lucratives pour chaque référence réussie. Vos commissions augmentent en fonction des transactions du client et du montant dépensé. Au fur et à mesure que vos clients nous recommandent, vos gains augmenteront de façon exponentielle.</p>
+                <a href="{% url 'accounts:register_ambassador' %}" class="btn btn-primary btn-lg mt-3">S'inscrire</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pourquoi nous rejoindre -->
+<section class="why-join-section py-5 mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Pourquoi rejoindre notre Programme de Partenariat Affilié ?</h2>
+            <p class="lead">Des avantages exclusifs vous attendent</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="commission-card h-100 bg-white shadow-sm rounded">
+                    <h3 class="mb-4">Commissions lucratives et équitables</h3>
+                    <p>Le Programme d'Affiliation d'EscortDollars vous récompense pour vos réalisations de manière équitable et rentable. Des commissions qui augmentent proportionnellement à votre succès garantissent que vos efforts sont récompensés.</p>
+                    <p>Depuis le panneau utilisateur préparé pour vous, vous verrez combien vous avez gagné à chaque seconde.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="commission-card h-100 bg-white shadow-sm rounded">
+                    <h3 class="mb-4">Support et orientation</h3>
+                    <p>Nos membres Affiliés sont constamment soutenus et guidés par notre équipe de support. Nous vous aidons à devenir un partenaire affilié prospère en vous guidant à travers les stratégies marketing, le contenu et plus encore.</p>
+                    <p>Notre équipe dédiée est disponible 7j/7 pour répondre à toutes vos questions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Fonctionnalités -->
+<section class="features-section py-5 mb-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Pourquoi les Partenaires Affiliés nous choisissent</h2>
+            <p class="lead">Des avantages uniques qui font la différence</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card h-100 bg-white shadow-sm rounded">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h4>Plateforme centralisée</h4>
+                    <p>Un tableau de bord complet pour suivre vos performances, gérer vos liens et accéder à tous vos outils marketing en un seul endroit.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100 bg-white shadow-sm rounded">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4>Opportunités d'emploi</h4>
+                    <p>Les meilleurs affiliés peuvent se voir offrir des postes permanents dans notre équipe marketing avec des avantages exclusifs.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100 bg-white shadow-sm rounded">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Communauté</h4>
+                    <p>Rejoignez une communauté dynamique d'affiliés pour partager des conseils, des stratégies et développer votre réseau professionnel.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100 bg-white shadow-sm rounded">
+                    <div class="feature-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h4>Interface épurée</h4>
+                    <p>Une plateforme intuitive et facile à utiliser, conçue pour vous aider à maximiser vos performances sans complexité inutile.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100 bg-white shadow-sm rounded">
+                    <div class="feature-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <h4>Gratuit</h4>
+                    <p>Rejoindre notre programme d'affiliation est totalement gratuit, sans frais cachés ni investissement initial requis.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100 bg-white shadow-sm rounded">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4>Design primé</h4>
+                    <p>Notre site et nos bannières publicitaires sont conçus par des professionnels pour garantir des taux de conversion optimaux.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Témoignages -->
+<section class="testimonials-section py-5 mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Ce que disent nos Affiliés</h2>
+            <p class="lead">Des partenaires satisfaits partagent leur expérience</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card h-100 bg-white shadow-sm rounded">
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jean Dupont" class="rounded-circle me-3" width="60">
+                        <div>
+                            <h5 class="mb-0">Jean Dupont</h5>
+                            <p class="text-muted mb-0">Paris, France</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"J'ai rejoint le programme d'affiliation EscortDollars il y a 6 mois et je gagne maintenant plus de 3000€ par mois. Le support est excellent et les paiements sont toujours à l'heure."</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card h-100 bg-white shadow-sm rounded">
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie Leroy" class="rounded-circle me-3" width="60">
+                        <div>
+                            <h5 class="mb-0">Marie Leroy</h5>
+                            <p class="text-muted mb-0">Lyon, France</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"La plateforme d'affiliation est vraiment intuitive et les outils marketing fournis sont de grande qualité. Mes conversions ont augmenté de 40% depuis que j'utilise leurs bannières."</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card h-100 bg-white shadow-sm rounded">
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Pierre Martin" class="rounded-circle me-3" width="60">
+                        <div>
+                            <h5 class="mb-0">Pierre Martin</h5>
+                            <p class="text-muted mb-0">Bruxelles, Belgique</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"J'ai essayé plusieurs programmes d'affiliation dans le secteur, mais EscortDollars offre de loin les meilleures commissions et le meilleur support. Je recommande vivement !"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comment ça marche -->
+<section class="how-it-works-section py-5 mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Comment démarrer ?</h2>
+            <p class="lead">Trois étapes simples pour commencer à gagner</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="step-box text-center">
+                    <div class="step-number mx-auto">01</div>
+                    <p class="step-label">Étape 01</p>
+                    <h4 class="mb-3">Rejoignez le Programme d'Affiliation</h4>
+                    <p>Entrepreneurs et utilisateurs orientés vers le profit, transformez maintenant vos passions en argent !</p>
+                    <a href="{% url 'accounts:register_ambassador' %}" class="btn btn-outline-primary mt-3">S'inscrire</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-box text-center">
+                    <div class="step-number mx-auto">02</div>
+                    <p class="step-label">Étape 02</p>
+                    <h4 class="mb-3">Créez vos liens et partagez</h4>
+                    <p>Utilisez nos outils pour générer vos liens personnalisés et commencez à les partager sur vos plateformes.</p>
+                    <a href="{% url 'affiliate:links' %}" class="btn btn-outline-primary mt-3">Nos outils</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-box text-center">
+                    <div class="step-number mx-auto">03</div>
+                    <p class="step-label">Étape 03</p>
+                    <h4 class="mb-3">Suivez et encaissez</h4>
+                    <p>Suivez vos performances en temps réel et recevez vos commissions directement sur votre compte bancaire.</p>
+                    <a href="{% url 'affiliate:payouts' %}" class="btn btn-outline-primary mt-3">Options de paiement</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Final -->
+<section class="cta-section py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <h2 class="mb-3">Prêt à rejoindre notre programme d'affiliation ?</h2>
+                <p class="lead mb-0">Inscrivez-vous dès aujourd'hui et commencez à gagner des commissions attractives !</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{% url 'accounts:register_ambassador' %}" class="btn btn-light btn-lg">S'inscrire maintenant</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

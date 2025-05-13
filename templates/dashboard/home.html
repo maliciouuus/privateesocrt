@@ -1,0 +1,399 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Dashboard - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    /* Font and spacing optimization */
+    .dashboard-content {
+        --card-border-radius: 16px;
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --hover-transform: translateY(-6px);
+        --text-light: #F5F5F5; /* Variable for light text */
+        --text-dark: #333333; /* Variable for dark text */
+    }
+    
+    /* Main quote and styles */
+    .motivational-quote {
+        background: radial-gradient(circle at top right, var(--primary-dark) 10%, var(--primary-color) 100%);
+        border-radius: var(--card-border-radius);
+        padding: 3.5rem;
+        margin-bottom: 2.5rem;
+        color: var(--text-light); /* Replaced white with --text-light */
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transform: perspective(1000px) rotateX(0deg);
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background-size: 200% 200%;
+        animation: gradientShift 8s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .motivational-quote:hover {
+        transform: perspective(1000px) rotateX(2deg) scale(1.02);
+        box-shadow: 0 15px 40px rgba(var(--primary-rgb), 0.4);
+    }
+    
+    .motivational-quote::before {
+        content: """;
+        position: absolute;
+        top: -30px;
+        left: 20px;
+        font-size: 180px;
+        opacity: 0.08;
+        font-family: serif;
+    }
+    
+    .motivational-quote::after {
+        content: """;
+        position: absolute;
+        bottom: -140px;
+        right: 20px;
+        font-size: 180px;
+        opacity: 0.08;
+        font-family: serif;
+    }
+    
+    .quote-text {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.4;
+        margin-bottom: 1.8rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .quote-author {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+        padding-left: 2rem;
+        border-left: 4px solid rgba(245, 245, 245, 0.3); /* Updated with #F5F5F5 */
+    }
+    
+    /* Action cards */
+    .action-card {
+        border-radius: var(--card-border-radius);
+        border: none;
+        background: white;
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        margin-bottom: 2rem;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .action-card:hover {
+        transform: var(--hover-transform);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .action-card:hover .action-icon {
+        transform: rotate(10deg) scale(1.1);
+    }
+    
+    .action-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: var(--card-border-radius);
+        pointer-events: none;
+    }
+    
+    .action-card:hover::after {
+        opacity: 1;
+    }
+    
+    .action-card-header {
+        background: rgba(var(--primary-rgb), 0.03);
+        padding: 1.8rem;
+        border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
+        position: relative;
+    }
+    
+    .action-card-header h3 {
+        color: #000; /* Title in black */
+    }
+    
+    .action-card-body {
+        padding: 2rem;
+    }
+    
+    .action-card-body p {
+        color: var(--text-dark);  /* Text in dark gray */
+    }
+    
+    .action-card-body .lead {
+        font-weight: 500;  /* Slightly thicker for introductions */
+        color: var(--text-dark);
+    }
+    
+    .action-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light); /* Replaced white with --text-light */
+        font-size: 28px;
+        margin-right: 1.8rem;
+        box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.4);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .btn-primary {
+        padding: 0.8rem 1.6rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: var(--text-light); /* Added to ensure button text is readable */
+    }
+    
+    .btn-primary::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150%;
+        height: 150%;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: transform 0.5s ease-out, opacity 0.4s ease;
+    }
+    
+    .btn-primary:hover::after {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    /* Additional quote */
+    .bottom-quote {
+        border-radius: var(--card-border-radius);
+        position: relative;
+        border-left: 5px solid var(--primary-color);
+        overflow: hidden;
+        color: #000; /* Text in black */
+    }
+    
+    .bottom-quote::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.05), rgba(var(--primary-rgb), 0.01));
+        pointer-events: none;
+    }
+    
+    /* Animations */
+    .fade-in {
+        animation: fadeIn 0.5s ease forwards;
+        opacity: 0;
+    }
+    
+    .fade-in-up {
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .delay-1 {
+        animation-delay: 0.1s;
+    }
+    
+    .delay-2 {
+        animation-delay: 0.2s;
+    }
+    
+    .delay-3 {
+        animation-delay: 0.3s;
+    }
+    
+    .delay-4 {
+        animation-delay: 0.4s;
+    }
+    
+    @media (max-width: 767px) {
+        .quote-text {
+            font-size: 1.5rem;
+        }
+        
+        .motivational-quote {
+            padding: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-content">
+    <div class="page-header fade-in">
+        <div>
+            <h2 class="fw-bold">Dashboard</h2>
+            <p class="text-muted">Welcome, {{ user.username }}! Discover what awaits you.</p>
+        </div>
+    </div>
+
+    <!-- Motivational quote Andrew Tate style -->
+    <div class="motivational-quote fade-in delay-1">
+        <p class="quote-text">Ordinary people work to survive. Winners work to dominate. It's time to choose your side and act like a CHAMPION.</p>
+        <p class="mb-0 quote-author">The Mindset of Hustlers</p>
+    </div>
+
+    <!-- Action blocks -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="action-card fade-in-up delay-3">
+                <div class="action-card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="action-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <h3 class="mb-0 fw-bold">CRUSH YOUR GOALS</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-card-body">
+                    <p class="lead mb-4">While others sleep, champions work. Don't be like those ordinary people who dream of success without taking action.</p>
+                    <p class="mb-4">Losers watch Netflix. WINNERS build their empire. Start generating revenue with your affiliate links now.</p>
+                    <div class="d-grid">
+                        <a href="{% url 'affiliate:marketing_materials' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-link me-2"></i> GET MY LINKS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="action-card fade-in-up delay-4">
+                <div class="action-card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="action-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <h3 class="mb-0 fw-bold">BECOME EXCEPTIONAL</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-card-body">
+                    <p class="lead mb-4">Wealth is a choice. Most choose mediocrity and ease. Be different.</p>
+                    <p class="mb-4">Create your own white-label site to multiply your income by 10. This is how the top 1% dominate the market.</p>
+                    <div class="d-grid">
+                        <a href="{% url 'affiliate:links' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-rocket me-2"></i>Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional quote -->
+    <div class="action-card mt-4 bottom-quote fade-in-up">
+        <div class="action-card-body">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h4 class="fw-bold mb-3">WHAT YOU DO TODAY DETERMINES WHERE YOU'LL BE TOMORROW</h4>
+                    <p class="mb-0">Discipline beats talent when talent lacks discipline. Ordinary people seek comfort. Champions seek progress. What will you choose today?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Reveal elements with animation on loading
+        const fadeElements = document.querySelectorAll('.fade-in, .fade-in-up');
+        fadeElements.forEach(el => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+            }, 100);
+        });
+        
+        // Add 3D hover effect to cards
+        const actionCards = document.querySelectorAll('.action-card');
+        
+        actionCards.forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;
+                
+                const xPercent = x / rect.width;
+                const yPercent = y / rect.height;
+                
+                const xRotation = (yPercent - 0.5) * -4; // Inverse rotation on X-axis
+                const yRotation = (xPercent - 0.5) * 4; // Rotation on Y-axis
+                
+                this.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                setTimeout(() => {
+                    this.style.transition = 'all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                }, 100);
+            });
+        });
+    });
+</script>
+{% endblock %} 

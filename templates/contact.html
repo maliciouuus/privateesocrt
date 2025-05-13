@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact - Support pour affiliés - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .contact-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('{% static "images/pattern.png" %}');
+        background-size: cover;
+        opacity: 0.1;
+    }
+    
+    .contact-info-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .contact-info-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+        color: var(--primary-color);
+    }
+    
+    .form-control {
+        border-radius: 8px;
+        padding: 12px 15px;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+    }
+    
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-form-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+    
+    .contact-form-header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 20px 30px;
+    }
+    
+    .contact-help {
+        background-color: rgba(var(--primary-rgb), 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .social-media-icon {
+        display: inline-flex;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .social-media-icon:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .icon-telegram {
+        background-color: #0088cc;
+    }
+    
+    .icon-twitter {
+        background-color: #1da1f2;
+    }
+    
+    .icon-instagram {
+        background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+    
+    .icon-facebook {
+        background-color: #3b5998;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Contact Header -->
+<section class="contact-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">Contactez-nous</h1>
+                <p class="lead mb-0">Notre équipe d'experts en affiliation est à votre disposition pour répondre à toutes vos questions</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Info -->
+<section class="py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            <div class="col">
+                <div class="card contact-info-card text-center p-4">
+                    <div class="card-body">
+                        <span class="contact-info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <h3 class="h5 card-title">Email</h3>
+                        <p class="card-text">Notre équipe répond généralement en moins de 24 heures ouvrées.</p>
+                        <a href="mailto:affiliates@escortdollars.com" class="btn btn-outline-primary">affiliates@escortdollars.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card contact-info-card text-center p-4">
+                    <div class="card-body">
+                        <span class="contact-info-icon">
+                            <i class="fas fa-comments"></i>
+                        </span>
+                        <h3 class="h5 card-title">Chat en direct</h3>
+                        <p class="card-text">Disponible du lundi au vendredi de 9h à 18h (CET).</p>
+                        <button class="btn btn-outline-primary" onclick="openLiveChat()">Démarrer le chat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card contact-info-card text-center p-4">
+                    <div class="card-body">
+                        <span class="contact-info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                        <h3 class="h5 card-title">Siège social</h3>
+                        <p class="card-text">42 Boulevard International<br>75008 Paris, France</p>
+                        <a href="#" class="btn btn-outline-primary">Voir sur la carte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="card contact-form-card">
+                    <div class="contact-form-header">
+                        <h2 class="h4 mb-0">Envoyez-nous un message</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="contact-help mb-4">
+                            <h5><i class="fas fa-info-circle me-2"></i>Comment pouvons-nous vous aider ?</h5>
+                            <p class="mb-0">Si vous avez des questions sur le programme d'affiliation, les paiements, ou des problèmes techniques, veuillez remplir le formulaire ci-dessous et notre équipe vous répondra dans les plus brefs délais.</p>
+                        </div>
+                        
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">Prénom</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="affiliateId" class="form-label">ID d'affilié (si applicable)</label>
+                                    <input type="text" class="form-control" id="affiliateId">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Sujet</label>
+                                <select class="form-select" id="subject" required>
+                                    <option value="" selected disabled>Sélectionnez un sujet</option>
+                                    <option value="account">Question sur mon compte</option>
+                                    <option value="payments">Paiements et commissions</option>
+                                    <option value="technical">Problème technique</option>
+                                    <option value="whitelabel">Configuration marque blanche</option>
+                                    <option value="partnership">Partenariat spécial</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">J'accepte que mes données soient traitées conformément à la <a href="#">politique de confidentialité</a></label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg">Envoyer le message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h5 mb-3">Assistance prioritaire</h3>
+                        <p>Les affiliés Premium et Elite bénéficient d'une assistance prioritaire et d'un accès direct à notre équipe d'experts.</p>
+                        <a href="{% url 'affiliate:home' %}" class="btn btn-outline-primary btn-sm">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="h5 mb-0">FAQ</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Consultez notre FAQ pour trouver rapidement des réponses aux questions fréquentes.</p>
+                        <a href="{% url 'faq' %}" class="btn btn-primary btn-sm">Voir la FAQ</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h3 class="h5 mb-0">Suivez-nous</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Restez connecté avec notre équipe et rejoignez notre communauté d'affiliés.</p>
+                        <div class="social-media-links mb-3">
+                            <a href="#" class="social-media-icon icon-telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                            </a>
+                            <a href="#" class="social-media-icon icon-twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-media-icon icon-instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-media-icon icon-facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                        <p class="mb-0"><small class="text-muted">Notre communauté Telegram compte plus de 500 affiliés actifs dans le monde entier.</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2 class="h3">Notre emplacement</h2>
+                <p class="text-muted">Rendez-nous visite à notre siège social à Paris</p>
+            </div>
+            <div class="col-12">
+                <div class="ratio ratio-21x9" style="max-height: 400px;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047342335!2d2.3002659999999997!3d48.8737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc49f495ddf%3A0x2fa2e8c7e54cfa4!2sParis%2C%20France!5e0!3m2!1sen!2sus!4v1597326854449!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form validation
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Simple validation check (would be replaced with actual form submission)
+                const firstName = document.getElementById('firstName').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (firstName && email && message) {
+                    // Simulate form submission
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Envoi en cours...';
+                    
+                    // Simulating server response delay
+                    setTimeout(() => {
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Show success message
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'alert alert-success mt-3';
+                        successMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i> Votre message a été envoyé avec succès. Notre équipe vous contactera sous peu.';
+                        contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
+                        
+                        // Reset button
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = 'Envoyer le message';
+                        
+                        // Remove success message after 5 seconds
+                        setTimeout(() => {
+                            successMessage.remove();
+                        }, 5000);
+                    }, 1500);
+                }
+            });
+        }
+    });
+    
+    // Live chat function (would be replaced with actual live chat implementation)
+    function openLiveChat() {
+        alert('Le système de chat en direct sera bientôt disponible. Veuillez nous contacter par email en attendant.');
+    }
+</script>
+{% endblock %} 

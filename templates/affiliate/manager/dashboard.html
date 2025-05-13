@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Affiliate Manager - EscortDollars{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Dashboard Affiliate Manager</h1>
+        <div class="btn-group">
+            <a href="{% url 'affiliate_list' %}" class="btn btn-primary">
+                <i class="fas fa-users"></i> Gérer les affiliés
+            </a>
+            <a href="{% url 'commission_management' %}" class="btn btn-success">
+                <i class="fas fa-money-bill"></i> Gérer les commissions
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistiques globales -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Affiliés</h5>
+                    <h2 class="card-text">{{ total_affiliates }}</h2>
+                    <p class="card-text">
+                        <small>{{ active_affiliates }} actifs</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Commissions</h5>
+                    <h2 class="card-text">{{ total_commissions|floatformat:2 }}€</h2>
+                    <p class="card-text">
+                        <small>{{ pending_commissions|floatformat:2 }}€ en attente</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Nouveaux Affiliés (30j)</h5>
+                    <h2 class="card-text">{{ new_affiliates }}</h2>
+                    <p class="card-text">
+                        <small>{{ recent_commissions|floatformat:2 }}€ de commissions</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Taux de Conversion</h5>
+                    <h2 class="card-text">{{ conversion_rate|floatformat:1 }}%</h2>
+                    <p class="card-text">
+                        <small>{{ successful_referrals }}/{{ total_referrals }} parrainages réussis</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Top Affiliés -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Top Affiliés</h5>
+                    <a href="{% url 'affiliate_list' %}" class="btn btn-sm btn-primary">Voir tout</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Affilié</th>
+                                    <th>Gains</th>
+                                    <th>Parrainages</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for affiliate in top_affiliates %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar me-2">
+                                                <i class="fas fa-user-circle fa-2x text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'affiliate_detail' affiliate.id %}" class="text-decoration-none">
+                                                    {{ affiliate.username }}
+                                                </a>
+                                                <div class="small text-muted">{{ affiliate.email }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ affiliate.total_earnings|floatformat:2 }}€</td>
+                                    <td>{{ affiliate.total_referrals }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center py-4">
+                                        <div class="text-muted">
+                                            <i class="fas fa-users fa-3x mb-3"></i>
+                                            <p>Aucun affilié trouvé</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dernières Commissions -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Dernières Commissions</h5>
+                    <a href="{% url 'commission_management' %}" class="btn btn-sm btn-primary">Voir tout</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Affilié</th>
+                                    <th>Montant</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for commission in recent_commissions_list %}
+                                <tr>
+                                    <td>#{{ commission.id }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar me-2">
+                                                <i class="fas fa-user-circle fa-2x text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'affiliate_detail' commission.user.id %}" class="text-decoration-none">
+                                                    {{ commission.user.username }}
+                                                </a>
+                                                <div class="small text-muted">{{ commission.user.email }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ commission.amount|floatformat:2 }}€</td>
+                                    <td>
+                                        <span class="badge {% if commission.status == 'paid' %}bg-success{% elif commission.status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                            {% if commission.status == 'paid' %}Payée{% elif commission.status == 'pending' %}En attente{% else %}Annulée{% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        <div class="text-muted">
+                                            <i class="fas fa-money-bill fa-3x mb-3"></i>
+                                            <p>Aucune commission trouvée</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions rapides -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Actions Rapides</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a href="{% url 'affiliate_list' %}?status=pending" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-user-clock"></i>
+                                <div class="mt-2">Affiliés en attente</div>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'commission_management' %}?status=pending" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div class="mt-2">Commissions en attente</div>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'affiliate_list' %}?status=active" class="btn btn-outline-success w-100">
+                                <i class="fas fa-user-check"></i>
+                                <div class="mt-2">Affiliés actifs</div>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'commission_management' %}?status=paid" class="btn btn-outline-info w-100">
+                                <i class="fas fa-check-circle"></i>
+                                <div class="mt-2">Commissions payées</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,149 @@
+/* Styles généraux */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --danger-color: #e74c3c;
+    --light-gray: #f5f6fa;
+    --border-color: #dcdde1;
+}
+
+/* En-tête */
+#header {
+    background: var(--primary-color);
+    color: white;
+}
+
+#branding h1 {
+    font-weight: 600;
+}
+
+/* Navigation */
+.module h2, .module caption {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 500;
+}
+
+/* Tableaux */
+#changelist table thead th {
+    background: var(--light-gray);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+#changelist table tbody tr:hover {
+    background: var(--light-gray);
+}
+
+/* Formulaires */
+.form-row {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-row:last-child {
+    border-bottom: none;
+}
+
+/* Boutons */
+.button, input[type=submit], input[type=button], .submit-row input {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: var(--primary-color);
+}
+
+/* Messages */
+.messagelist {
+    margin: 1rem 0;
+}
+
+.messagelist li {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.messagelist li.success {
+    background: var(--success-color);
+    color: white;
+}
+
+.messagelist li.warning {
+    background: var(--warning-color);
+    color: var(--primary-color);
+}
+
+.messagelist li.error {
+    background: var(--danger-color);
+    color: white;
+}
+
+/* Filtres */
+#changelist-filter h2 {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 500;
+}
+
+#changelist-filter li.selected a {
+    color: var(--secondary-color);
+}
+
+/* Pagination */
+.paginator {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 4px;
+}
+
+.paginator a:link, .paginator a:visited {
+    color: var(--secondary-color);
+}
+
+.paginator a:hover {
+    color: var(--primary-color);
+}
+
+/* Actions */
+#changelist-form .actions {
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    #header {
+        padding: 1rem;
+    }
+    
+    #branding h1 {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+} 

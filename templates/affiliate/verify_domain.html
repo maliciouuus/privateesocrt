@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Vérification du domaine" %} - {{ whitelabel.name }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{% trans "Vérification du domaine" %}</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title mb-4">{{ whitelabel.custom_domain }}</h5>
+                    
+                    {% if whitelabel.dns_verified %}
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>
+                        {% trans "Le domaine a été vérifié avec succès !" %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        {% trans "Pour vérifier votre domaine, vous devez configurer les enregistrements DNS suivants :" %}
+                    </div>
+                    
+                    <div class="dns-instructions mt-4">
+                        <h6 class="mb-3">{% trans "1. Enregistrement TXT" %}</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans "Type" %}</th>
+                                        <th>{% trans "Nom" %}</th>
+                                        <th>{% trans "Valeur" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TXT</td>
+                                        <td>{{ dns_instructions.txt_record.name }}</td>
+                                        <td>{{ dns_instructions.txt_record.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h6 class="mb-3 mt-4">{% trans "2. Enregistrement CNAME" %}</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans "Type" %}</th>
+                                        <th>{% trans "Nom" %}</th>
+                                        <th>{% trans "Valeur" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>CNAME</td>
+                                        <td>{{ dns_instructions.cname_record.name }}</td>
+                                        <td>{{ dns_instructions.cname_record.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-4">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            {% trans "Note : La propagation DNS peut prendre jusqu'à 24 heures. Si la vérification échoue, réessayez plus tard." %}
+                        </div>
+                        
+                        <form method="post" class="mt-4">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sync-alt me-2"></i>
+                                {% trans "Vérifier le domaine" %}
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'affiliate:whitelabel_detail' whitelabel.id %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        {% trans "Retour au site" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

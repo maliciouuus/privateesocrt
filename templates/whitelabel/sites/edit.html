@@ -1,0 +1,244 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Edit {{ site.name }} - White Label Site{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .edit-site-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .form-header h1 {
+        color: #fff;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .form-section h2 {
+        color: #fff;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        color: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .color-picker {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .color-picker input[type="color"] {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+
+    .color-picker input[type="text"] {
+        flex: 1;
+    }
+
+    .current-logo {
+        margin-bottom: 1rem;
+    }
+
+    .current-logo img {
+        max-width: 200px;
+        border-radius: 0.5rem;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #7C4DFF 0%, #5E35B1 100%);
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
+    }
+
+    .preview-section {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .preview-section h2 {
+        color: #fff;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .preview-frame {
+        width: 100%;
+        height: 300px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="edit-site-container">
+    <div class="form-header">
+        <h1>Edit White Label Site</h1>
+        <p>Update your site's settings and customization</p>
+    </div>
+
+    <form method="post" action="{% url 'whitelabel:edit_site' site.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'whitelabel:sites' %}">
+        
+        <div class="form-section">
+            <h2>Basic Information</h2>
+            <div class="form-group">
+                <label class="form-label" for="id_name">Site Name</label>
+                <input type="text" name="name" id="id_name" class="form-control" value="{{ site.name }}" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_domain">Domain</label>
+                <input type="text" name="domain" id="id_domain" class="form-control" value="{{ site.domain }}" required>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Branding</h2>
+            <div class="form-group">
+                <label class="form-label" for="id_logo">Logo</label>
+                {% if site.logo %}
+                <div class="current-logo">
+                    <img src="{{ site.logo.url }}" alt="Current logo">
+                </div>
+                {% endif %}
+                <input type="file" name="logo" id="id_logo" class="form-control" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Primary Color</label>
+                <div class="color-picker">
+                    <input type="color" name="primary_color" id="id_primary_color" value="{{ site.primary_color }}">
+                    <input type="text" class="form-control" value="{{ site.primary_color }}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Secondary Color</label>
+                <div class="color-picker">
+                    <input type="color" name="secondary_color" id="id_secondary_color" value="{{ site.secondary_color }}">
+                    <input type="text" class="form-control" value="{{ site.secondary_color }}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_favicon">Favicon</label>
+                {% if site.favicon %}
+                <div class="current-logo">
+                    <img src="{{ site.favicon.url }}" alt="Current favicon" style="max-width:48px;max-height:48px;">
+                </div>
+                {% endif %}
+                <input type="file" name="favicon" id="id_favicon" class="form-control" accept="image/x-icon,image/png,image/svg+xml">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Site Settings</h3>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Update color text inputs when color picker changes
+    const colorPickers = document.querySelectorAll('input[type="color"]');
+    colorPickers.forEach(picker => {
+        const textInput = picker.nextElementSibling;
+        picker.addEventListener('input', function() {
+            textInput.value = this.value;
+        });
+    });
+
+    // Preview functionality
+    const form = document.querySelector('form');
+    const previewFrame = document.querySelector('.preview-frame');
+    
+    form.addEventListener('input', function() {
+        // Update preview based on form changes
+        // This would be implemented based on your preview requirements
+    });
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,34 @@
+@startuml
+
+package "Frontend" {
+    [React]
+    [Redux]
+    [API]
+}
+
+package "Backend" {
+    class User {
+        username
+        email
+        password
+    }
+    
+    class AmbassadorProfile {
+        commission_rate
+        total_earnings
+    }
+    
+    class AffiliateLink {
+        url
+        clicks
+        earnings
+    }
+}
+
+User "1" -- "1" AmbassadorProfile
+User "1" -- "*" AffiliateLink
+
+[React] --> [API]
+[API] --> User
+
+@enduml 

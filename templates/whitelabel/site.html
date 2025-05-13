@@ -1,0 +1,137 @@
+{% extends "escort_site/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ site.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-color: {{ site.primary_color|default:'#ff4081' }};
+        --secondary-color: {{ site.secondary_color|default:'#3f51b5' }};
+        --bs-primary: {{ site.primary_color|default:'#ff4081' }};
+        --bs-secondary: {{ site.secondary_color|default:'#3f51b5' }};
+    }
+    
+    .bg-primary-custom, .bg-primary {
+        background-color: var(--primary-color) !important;
+    }
+    
+    .bg-secondary-custom, .bg-secondary {
+        background-color: var(--secondary-color) !important;
+    }
+    
+    .text-primary-custom, .text-primary {
+        color: var(--primary-color) !important;
+    }
+    
+    .text-secondary-custom, .text-secondary {
+        color: var(--secondary-color) !important;
+    }
+    
+    .btn-primary, .btn-primary-custom {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    
+    .btn-outline-primary {
+        color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    
+    .btn-secondary, .btn-secondary-custom {
+        background-color: var(--secondary-color) !important;
+        border-color: var(--secondary-color) !important;
+        color: white !important;
+    }
+    
+    /* Style pour les cartes d'escortes */
+    .escort-card {
+        transition: transform 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    
+    .escort-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .escort-card img {
+        object-fit: cover;
+        height: 250px;
+        width: 100%;
+        background-color: #f0f0f0;
+    }
+    
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+    
+    /* Image de remplacement pour les escortes */
+    .escort-placeholder {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Section d'en-tête avec le nom du site -->
+<section class="py-5 bg-gradient-primary text-white">
+    <div class="container text-center">
+        <h1>{{ site.name }}</h1>
+        {% if site.slogan %}
+        <p class="lead">{{ site.slogan }}</p>
+        {% endif %}
+        <a href="#escorts" class="btn btn-light mt-3">{% trans "Voir nos escortes" %}</a>
+    </div>
+</section>
+
+<!-- Section principale avec les escortes -->
+<section class="container py-5" id="escorts">
+    <h2 class="text-center mb-5">{% trans "Nos escortes VIP" %}</h2>
+    
+    <div class="row">
+        {% for escort in escorts %}
+        <div class="col-md-3">
+            <div class="card escort-card">
+                <div class="escort-placeholder" style="height: 250px;">
+                    <div>
+                        <i class="fas fa-user mb-3" style="font-size: 3rem;"></i>
+                        <div>{{ escort.name }}</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ escort.name }}, {{ escort.age }}</h5>
+                    <p class="card-text">
+                        <i class="fas fa-map-marker-alt"></i> {{ escort.location }}<br>
+                        <strong>{{ escort.price }}</strong> / {% trans "heure" %}
+                    </p>
+                    {% if site and site.slug %}
+                    <a href="/public/site/{{ site.slug }}/escort/{{ escort.id }}/" class="btn btn-primary btn-sm w-100">{% trans "Voir le profil" %}</a>
+                    {% elif 'indian-girls-3f5a9396' in request.path %}
+                    <a href="/public/site/indian-girls-3f5a9396/escort/{{ escort.id }}/" class="btn btn-primary btn-sm w-100">{% trans "Voir le profil" %}</a>
+                    {% else %}
+                    <a href="#" class="btn btn-primary btn-sm w-100">{% trans "Voir le profil" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %} 

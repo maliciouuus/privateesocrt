@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Détails de l'Affilié - EscortDollars{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Détails de l'Affilié</h1>
+        <div class="btn-group">
+            <a href="{% url 'affiliate_list' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </a>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                <i class="fas fa-edit"></i> Modifier
+            </button>
+        </div>
+    </div>
+
+    <!-- Informations de l'affilié -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-circle fa-5x text-primary"></i>
+                        <h3 class="mt-3">{{ affiliate.username }}</h3>
+                        <p class="text-muted">{{ affiliate.email }}</p>
+                        <span class="badge {% if affiliate.is_active %}bg-success{% else %}bg-danger{% endif %}">
+                            {% if affiliate.is_active %}Actif{% else %}Inactif{% endif %}
+                        </span>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <strong>Date d'inscription:</strong>
+                        <p>{{ affiliate.date_joined|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Dernière connexion:</strong>
+                        <p>{{ affiliate.last_login|date:"d/m/Y H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Gains Totaux</h5>
+                            <h2 class="card-text">{{ stats.total_earnings|floatformat:2 }}€</h2>
+                            <p class="card-text">
+                                <small>{{ stats.pending_earnings|floatformat:2 }}€ en attente</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Parrainages</h5>
+                            <h2 class="card-text">{{ stats.total_referrals }}</h2>
+                            <p class="card-text">
+                                <small>{{ stats.successful_referrals }} réussis</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Historique des commissions -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Historique des Commissions</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Montant</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for commission in commissions %}
+                        <tr>
+                            <td>#{{ commission.id }}</td>
+                            <td>{{ commission.amount|floatformat:2 }}€</td>
+                            <td>{{ commission.created_at|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <span class="badge {% if commission.status == 'paid' %}bg-success{% elif commission.status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {% if commission.status == 'paid' %}Payée{% elif commission.status == 'pending' %}En attente{% else %}Annulée{% endif %}
+                                </span>
+                            </td>
+                            <td>{{ commission.description }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-4">
+                                <div class="text-muted">
+                                    <i class="fas fa-money-bill fa-3x mb-3"></i>
+                                    <p>Aucune commission trouvée</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Historique des parrainages -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Historique des Parrainages</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Parrainé</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Commission</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for referral in referrals %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar me-2">
+                                        <i class="fas fa-user-circle fa-2x text-primary"></i>
+                                    </div>
+                                    <div>
+                                        {{ referral.referred.username }}
+                                        <div class="small text-muted">{{ referral.referred.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ referral.created_at|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <span class="badge {% if referral.status == 'completed' %}bg-success{% elif referral.status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {% if referral.status == 'completed' %}Complété{% elif referral.status == 'pending' %}En attente{% else %}Annulé{% endif %}
+                                </span>
+                            </td>
+                            <td>{{ referral.commission_amount|floatformat:2 }}€</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center py-4">
+                                <div class="text-muted">
+                                    <i class="fas fa-users fa-3x mb-3"></i>
+                                    <p>Aucun parrainage trouvé</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal d'édition -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier l'affilié</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'affiliate_edit' affiliate.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Statut</label>
+                        <select name="status" class="form-select">
+                            <option value="active" {% if affiliate.is_active %}selected{% endif %}>Actif</option>
+                            <option value="inactive" {% if not affiliate.is_active %}selected{% endif %}>Inactif</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

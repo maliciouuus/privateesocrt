@@ -1,0 +1,327 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Notifications - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    :root {
+        --primary-color: #9d4bff;
+        --secondary-color: #2bffc6;
+        --bg-dark: #0e0e18;
+        --bg-light: #1a1a2e;
+        --card-bg: rgba(24, 24, 38, 0.7);
+        --border-color: rgba(157, 75, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.7);
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+    }
+
+    .notification-upgrade {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        margin-bottom: 2rem;
+    }
+
+    .notification-upgrade-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 3rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .notification-upgrade-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1), transparent 70%);
+        pointer-events: none;
+    }
+
+    .notification-upgrade-header i {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    }
+
+    .notification-upgrade-header h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification-upgrade-header p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+
+    .notification-upgrade-body {
+        padding: 3rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .feature-item:hover {
+        transform: translateX(10px);
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        color: white;
+        font-size: 1.5rem;
+        box-shadow: 0 5px 15px rgba(157, 75, 255, 0.2);
+    }
+
+    .feature-item h5 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-item p {
+        color: var(--text-primary) !important;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2.5rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(157, 75, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(157, 75, 255, 0.3);
+    }
+
+    .btn-outline-primary {
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(157, 75, 255, 0.2);
+    }
+
+    .stats-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .alert {
+        background: rgba(40, 167, 69, 0.1);
+        border: 1px solid rgba(40, 167, 69, 0.2);
+        border-radius: 1rem;
+        padding: 1.5rem;
+    }
+
+    .alert-success {
+        color: #2bffc6;
+    }
+
+    .alert h5 {
+        color: #2bffc6;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .alert p {
+        color: var(--text-secondary);
+        margin-bottom: 0;
+    }
+
+    .alert-link {
+        color: #2bffc6;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .alert-link:hover {
+        color: #1a9d7a;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .page-header h2 {
+            font-size: 2rem;
+        }
+
+        .notification-upgrade-header {
+            padding: 2rem 1.5rem;
+        }
+
+        .notification-upgrade-body {
+            padding: 2rem;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .btn-primary, .btn-outline-primary {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="page-header">
+    <h2 class="fw-bold">Notifications Center</h2>
+    <p class="text-muted">Manage how you receive your alerts and important updates</p>
+</div>
+
+<div class="notification-upgrade mb-4">
+    <div class="notification-upgrade-header">
+        <i class="fas fa-rocket" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+        <h3 class="mb-2">We've Upgraded Your Notification Experience!</h3>
+        <p class="mb-0">Get real-time alerts delivered directly to your Telegram account</p>
+    </div>
+    
+    <div class="notification-upgrade-body">
+        <div class="row">
+            <div class="col-md-7">
+                <h4 class="mb-4">Enhanced Notification Delivery with Telegram</h4>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h5>Instant Delivery</h5>
+                        <p class="mb-0" style="color: black;">Receive notifications instantly, no matter where you are</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h5>Mobile Friendly</h5>
+                        <p class="mb-0" style="color: black;">Access your alerts on any device with Telegram installed</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h5>Secure & Private</h5>
+                        <p class="mb-0" style="color: black;">End-to-end encryption keeps your information safe</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div>
+                        <h5>Multi-language Support</h5>
+                        <p class="mb-0" style="color: black;">Receive notifications in your preferred language</p>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="{% url 'dashboard:telegram_settings' %}" class="btn btn-primary">
+                        <i class="fab fa-telegram me-2"></i> Set Up Telegram Notifications
+                    </a>
+                    
+                    {% if user.telegram_chat_id %}
+                    <a href="{% url 'dashboard:test_telegram' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-paper-plane me-2"></i> Send Test Notification
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="col-md-5 d-flex align-items-center justify-content-center">
+                <img src="{% static 'images/telegram-notifications.svg' %}" alt="Telegram Notifications" class="img-fluid" style="max-width: 90%;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2111/2111646.png'; this.style.maxWidth='200px';">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if user.telegram_chat_id %}
+<div class="stats-card mb-4">
+    <div class="alert alert-success d-flex align-items-center">
+        <i class="fas fa-check-circle me-3" style="font-size: 1.5rem;"></i>
+        <div>
+            <h5 class="mb-1">Telegram Notifications Activated</h5>
+            <p class="mb-0">Your notifications are being sent to your Telegram account. Need to make changes? Visit your <a href="{% url 'dashboard:telegram_settings' %}" class="alert-link">Telegram Settings</a>.</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %} 

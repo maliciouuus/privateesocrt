@@ -1,0 +1,263 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}White Label Sites - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .sites-container {
+        padding: 2rem;
+    }
+
+    .sites-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .sites-header h1 {
+        color: #fff;
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .btn-create {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #7C4DFF 0%, #5E35B1 100%);
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-create:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
+    }
+
+    .sites-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .site-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .site-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        border-color: rgba(124, 77, 255, 0.3);
+    }
+
+    .site-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color, #7C4DFF), var(--secondary-color, #FF4D94));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .site-card:hover::before {
+        opacity: 1;
+    }
+
+    .site-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .site-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 0.5rem;
+        object-fit: cover;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .site-favicon {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border-radius: 4px;
+    }
+
+    .site-name {
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .site-domain {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    .site-status {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+    }
+
+    .status-active {
+        background: rgba(76, 175, 80, 0.1);
+        color: #4CAF50;
+    }
+
+    .status-inactive {
+        background: rgba(244, 67, 54, 0.1);
+        color: #F44336;
+    }
+
+    .site-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-action {
+        flex: 1;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-view {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .btn-edit {
+        background: rgba(124, 77, 255, 0.1);
+        color: #7C4DFF;
+    }
+
+    .btn-delete {
+        background: rgba(255, 77, 148, 0.1);
+        color: #FF4D94;
+    }
+
+    .btn-action:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .empty-state h2 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 2rem;
+    }
+
+    .btn-create-large {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #7C4DFF 0%, #5E35B1 100%);
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-create-large:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="sites-container">
+    <div class="sites-header">
+        <h1>White Label Sites</h1>
+        <a href="{% url 'whitelabel:create_site' %}" class="btn-create">Create New Site</a>
+    </div>
+
+    {% if sites %}
+    <div class="sites-grid">
+        {% for site in sites %}
+        <div class="site-card" style="--primary-color: {{ site.primary_color }}; --secondary-color: {{ site.secondary_color }}">
+            {% if site.favicon %}
+            <img src="{{ site.favicon.url }}" alt="Favicon" class="site-favicon">
+            {% endif %}
+            <div class="site-header">
+                {% if site.logo %}
+                <img src="{{ site.logo.url }}" alt="{{ site.name }}" class="site-logo">
+                {% else %}
+                <div class="site-logo"></div>
+                {% endif %}
+                <div>
+                    <h2 class="site-name">{{ site.name }}</h2>
+                    <div class="site-domain">{{ site.domain }}</div>
+                </div>
+            </div>
+            <div class="site-status {% if site.is_active %}status-active{% else %}status-inactive{% endif %}">
+                {{ site.is_active|yesno:"Active,Inactive" }}
+            </div>
+            <div class="site-actions">
+                <a href="http://{{ site.domain }}" class="btn-action btn-view">View</a>
+                <a href="{% url 'whitelabel:edit_site' site.id %}" class="btn-action btn-edit">Edit</a>
+                <a href="{% url 'whitelabel:delete_site' site.pk %}" class="btn-action btn-delete">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h2>No White Label Sites Yet</h2>
+        <p>Create your first white label site to start customizing your brand.</p>
+        <a href="{% url 'whitelabel:create_site' %}" class="btn-create-large">Create Your First Site</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

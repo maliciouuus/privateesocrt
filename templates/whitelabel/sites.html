@@ -1,0 +1,147 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}My White Label Sites - EscortDollars{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid dashboard-content">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
+                <h2 class="mb-3 mb-md-0">My White Label Sites</h2>
+                
+                <div class="d-flex gap-2">
+                    <a href="{% url 'whitelabel:create_site' %}" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i> Create New Site
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Status Filter -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{% url 'whitelabel:sites' %}" class="btn btn-sm {% if status_filter == 'all' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+                            All ({{ total_sites }})
+                        </a>
+                        <a href="{% url 'whitelabel:sites' %}?status=active" class="btn btn-sm {% if status_filter == 'active' %}btn-success{% else %}btn-outline-success{% endif %}">
+                            Active ({{ active_sites }})
+                        </a>
+                        <a href="{% url 'whitelabel:sites' %}?status=pending" class="btn btn-sm {% if status_filter == 'pending' %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                            Pending ({{ pending_sites }})
+                        </a>
+                        <a href="{% url 'whitelabel:sites' %}?status=draft" class="btn btn-sm {% if status_filter == 'draft' %}btn-secondary{% else %}btn-outline-secondary{% endif %}">
+                            Drafts ({{ draft_sites }})
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sites List -->
+    <div class="row mt-4 g-4">
+        {% if sites %}
+            {% for site in sites %}
+            <div class="col-md-6 col-lg-4">
+                <div class="site-card card h-100 rounded-4 overflow-hidden border-0 shadow-sm">
+                    <div class="site-status position-absolute top-0 end-0 m-3 z-1">
+                        {% if site.status == 'active' %}
+                            <span class="badge bg-success">Active</span>
+                        {% elif site.status == 'pending' %}
+                            <span class="badge bg-warning">Pending</span>
+                        {% elif site.status == 'draft' %}
+                            <span class="badge bg-secondary">Draft</span>
+                        {% elif site.status == 'suspended' %}
+                            <span class="badge bg-danger">Suspended</span>
+                        {% endif %}
+                    </div>
+                    <div class="site-preview position-relative">
+                        <img src="{% if site.logo and site.logo.name %}{{ site.logo.url }}{% else %}https://via.placeholder.com/400x200?text=Site+Preview{% endif %}" 
+                             alt="{{ site.name }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+                        <div class="position-absolute bottom-0 start-0 p-3 w-100 bg-gradient-dark text-white">
+                            <h5 class="mb-0">{{ site.name }}</h5>
+                            <p class="mb-0 small opacity-75">{{ site.subdomain }}.escortdollars.com</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ site.description|truncatechars:100 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-muted small">Created on {{ site.created_at|date:"m/d/Y" }}</span>
+                            <div class="plan-badge plan-{{ site.plan }}">{{ site.get_plan_display }}</div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <div class="btn-group w-100" role="group">
+                            <a href="{% url 'whitelabel:site_detail' site_id=site.id %}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> View
+                            </a>
+                            <a href="{% url 'whitelabel:edit_site' site_id=site.id %}" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-edit me-1"></i> Edit
+                            </a>
+                            <a href="{% url 'whitelabel:preview_site' site_id=site.id %}" class="btn btn-sm btn-outline-info">
+                                <i class="fas fa-desktop me-1"></i> Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info text-center py-5">
+                    <i class="fas fa-info-circle fa-3x mb-3"></i>
+                    <h4>No sites found</h4>
+                    <p>You haven't created any white label sites yet.</p>
+                    <a href="{% url 'whitelabel:create_site' %}" class="btn btn-primary mt-3">
+                        <i class="fas fa-plus-circle me-2"></i> Create my first site
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .bg-gradient-dark {
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    }
+    
+    .site-card {
+        transition: all 0.3s ease;
+    }
+    
+    .site-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .plan-badge {
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 30px;
+    }
+    
+    .plan-free {
+        background-color: #e9ecef;
+        color: #495057;
+    }
+    
+    .plan-premium {
+        background-color: #f8f9fa;
+        color: #fd7e14;
+        border: 1px solid #fd7e14;
+    }
+    
+    .plan-enterprise {
+        background-color: #f8f9fa;
+        color: #6f42c1;
+        border: 1px solid #6f42c1;
+    }
+</style>
+{% endblock %} 

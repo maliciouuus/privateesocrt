@@ -1,0 +1,21 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Verification Not Available - EscortDollars{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="page-header">
+        <h1 class="fw-bold">Verification Not Available</h1>
+    </div>
+    
+    <div class="stats-card mb-4 p-5 text-center">
+        <i class="fas fa-ban text-danger mb-4" style="font-size: 4rem;"></i>
+        <h2 class="mb-3">This feature is not available</h2>
+        <p class="lead mb-4">Account verification has been removed from the platform.</p>
+        <a href="{% url 'accounts:profile' %}" class="btn btn-primary">
+            <i class="fas fa-arrow-left me-2"></i> Return to Profile
+        </a>
+    </div>
+</div>
+{% endblock %} 

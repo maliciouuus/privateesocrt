@@ -1,0 +1,261 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Administration des Commissions{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Administration des Commissions</h1>
+    </div>
+
+    {% if messages %}
+    <div class="row">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Month Selector -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Sélectionner un mois</h6>
+        </div>
+        <div class="card-body">
+            <form method="get" class="form-inline">
+                <div class="form-group mr-3">
+                    <label for="month" class="mr-2">Mois:</label>
+                    <select name="month" id="month" class="form-control">
+                        {% for m_num, m_name in available_months %}
+                        <option value="{{ m_num }}" {% if m_num == selected_month %}selected{% endif %}>{{ m_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="year" class="mr-2">Année:</label>
+                    <select name="year" id="year" class="form-control">
+                        {% for y in available_years %}
+                        <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Total Pending Commissions -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total des commissions en attente
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_pending_amount|floatformat:2 }} €</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Commissions by Ambassador -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Commissions en attente par Ambassadeur</h6>
+            {% if pending_commissions %}
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="mark_all_paid">
+                <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir marquer TOUTES les commissions comme payées?')">
+                    <i class="fas fa-check-circle"></i> Marquer toutes comme payées
+                </button>
+            </form>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            {% if commissions_by_ambassador %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Ambassadeur</th>
+                                <th>Email</th>
+                                <th>Nombre de commissions</th>
+                                <th>Montant total</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ambassador, data in commissions_by_ambassador.items %}
+                            <tr>
+                                <td>{{ ambassador.username }}</td>
+                                <td>{{ ambassador.email }}</td>
+                                <td>{{ data.count }}</td>
+                                <td>{{ data.amount|floatformat:2 }} €</td>
+                                <td>
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="mark_paid">
+                                        <input type="hidden" name="ambassador_id" value="{{ ambassador.id }}">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check-circle"></i> Marquer comme payées
+                                        </button>
+                                    </form>
+                                    <div class="mt-1">
+                                        <a href="{% url 'dashboard:user_profile' username=ambassador.username %}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-user"></i> Voir profil
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    Aucune commission en attente pour ce mois.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Detailed Commissions List -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste détaillée des commissions en attente</h6>
+        </div>
+        <div class="card-body">
+            {% if pending_commissions %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="commissionsTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ambassadeur</th>
+                                <th>Client</th>
+                                <th>Montant</th>
+                                <th>Créée le</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for commission in pending_commissions %}
+                            <tr>
+                                <td>{{ commission.id }}</td>
+                                <td>{{ commission.referral.ambassador.username }}</td>
+                                <td>{{ commission.customer_username|default:"N/A" }}</td>
+                                <td>{{ commission.amount|floatformat:2 }} €</td>
+                                <td>{{ commission.created_at|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <span class="badge badge-{% if commission.status == 'approved' %}info{% else %}warning{% endif %}">
+                                        {{ commission.get_status_display|default:commission.status|title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="mark_single_paid">
+                                        <input type="hidden" name="commission_id" value="{{ commission.id }}">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check-circle"></i> Payer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    Aucune commission en attente pour ce mois.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Recently Paid Commissions -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Commissions récemment payées</h6>
+        </div>
+        <div class="card-body">
+            {% if approved_commissions %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="paidCommissionsTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ambassadeur</th>
+                                <th>Client</th>
+                                <th>Montant</th>
+                                <th>Payée le</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for commission in approved_commissions %}
+                            <tr>
+                                <td>{{ commission.id }}</td>
+                                <td>{{ commission.referral.ambassador.username }}</td>
+                                <td>{{ commission.customer_username|default:"N/A" }}</td>
+                                <td>{{ commission.amount|floatformat:2 }} €</td>
+                                <td>{{ commission.paid_at|date:"d/m/Y H:i" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    Aucune commission payée récemment pour ce mois.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#dataTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+        },
+        "order": [[3, "desc"]]
+    });
+    
+    $('#commissionsTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+        },
+        "order": [[4, "desc"]]
+    });
+    
+    $('#paidCommissionsTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+        },
+        "order": [[4, "desc"]]
+    });
+});
+</script>
+{% endblock %} 

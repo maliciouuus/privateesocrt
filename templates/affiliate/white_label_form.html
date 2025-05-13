@@ -1,0 +1,183 @@
+{% extends 'affiliate/base.html' %}
+
+{% block title %}{% if white_label %}Edit{% else %}New{% endif %} White Label Site - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title mb-0">
+                        {% if white_label %}
+                        Edit White Label Site
+                        {% else %}
+                        New White Label Site
+                        {% endif %}
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Site Name</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.name.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.domain.id_for_label }}" class="form-label">Domain</label>
+                            {{ form.domain }}
+                            {% if form.domain.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.domain.errors }}
+                            </div>
+                            {% endif %}
+                            <div class="form-text">
+                                Enter the domain without protocol (e.g., my-site.com)
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.logo.id_for_label }}" class="form-label">Logo</label>
+                            {% if white_label and white_label.logo %}
+                            <div class="mb-2">
+                                <img src="{{ white_label.logo.url }}" alt="Current Logo" class="img-thumbnail" style="max-height: 100px;">
+                            </div>
+                            {% endif %}
+                            {{ form.logo }}
+                            {% if form.logo.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.logo.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.primary_color.id_for_label }}" class="form-label">Primary Color</label>
+                                    {{ form.primary_color }}
+                                    {% if form.primary_color.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.primary_color.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.secondary_color.id_for_label }}" class="form-label">Secondary Color</label>
+                                    {{ form.secondary_color }}
+                                    {% if form.secondary_color.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.secondary_color.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                {{ form.is_active }}
+                                <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                                    Active Site
+                                </label>
+                            </div>
+                            {% if form.is_active.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.is_active.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-info-circle"></i> Preview</h5>
+                            <div class="preview-box p-3" style="background-color: {{ form.primary_color.value|default:'#ffffff' }};">
+                                <div class="text-center">
+                                    {% if white_label and white_label.logo %}
+                                    <img src="{{ white_label.logo.url }}" alt="Logo" class="mb-3" style="max-height: 50px;">
+                                    {% else %}
+                                    <div class="placeholder-logo mb-3">
+                                        <i class="fas fa-globe fa-2x"></i>
+                                    </div>
+                                    {% endif %}
+                                    <h4 style="color: {{ form.secondary_color.value|default:'#000000' }};">{{ form.name.value|default:'Site Name' }}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                            <a href="{% url 'white_label_list' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+<script>
+    // Initialize color pickers
+    $('.color-picker').spectrum({
+        type: "component",
+        showInput: true,
+        showInitial: true,
+        showAlpha: false,
+        allowEmpty: false,
+        showButtons: false,
+        preferredFormat: "hex"
+    });
+
+    // Real-time preview update
+    $('.color-picker').on('change', function() {
+        updatePreview();
+    });
+
+    $('#{{ form.name.id_for_label }}').on('input', function() {
+        updatePreview();
+    });
+
+    function updatePreview() {
+        const primaryColor = $('#{{ form.primary_color.id_for_label }}').val();
+        const secondaryColor = $('#{{ form.secondary_color.id_for_label }}').val();
+        const name = $('#{{ form.name.id_for_label }}').val() || 'Site Name';
+
+        $('.preview-box').css('background-color', primaryColor);
+        $('.preview-box h4').css('color', secondaryColor).text(name);
+    }
+
+    // Form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %} 

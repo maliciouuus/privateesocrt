@@ -1,0 +1,512 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "My Profile" %}{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .profile-header {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-cover {
+        height: 200px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .profile-cover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("{% static 'img/pattern.png' %}") repeat;
+        opacity: 0.1;
+    }
+    
+    .profile-info {
+        padding: 2rem;
+        position: relative;
+        color: white;
+    }
+    
+    .profile-avatar {
+        position: absolute;
+        top: -70px;
+        left: 2rem;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 5px solid white;
+        background-color: #f8f9fa;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+    
+    .profile-avatar:hover {
+        transform: scale(1.05);
+    }
+    
+    .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .profile-avatar .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem;
+        color: var(--primary-color);
+        background: white;
+    }
+    
+    .profile-details {
+        margin-left: 160px;
+    }
+    
+    .profile-name {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-contact {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .profile-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    .profile-contact-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    .profile-stats {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-item {
+        text-align: center;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+    
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .info-card-header {
+        padding: 1.5rem;
+        background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .info-card-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("{% static 'img/pattern.png' %}") repeat;
+        opacity: 0.1;
+    }
+    
+    .info-card-title {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        position: relative;
+    }
+    
+    .info-card-body {
+        padding: 1.5rem;
+    }
+    
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .info-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .info-label {
+        width: 150px;
+        font-weight: 500;
+        color: #6c757d;
+    }
+    
+    .info-value {
+        flex: 1;
+        color: #212529;
+    }
+    
+    .info-value a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .info-value a:hover {
+        color: var(--primary-dark);
+    }
+    
+    .badge-custom {
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+    
+    .badge-verified {
+        background: rgba(25, 135, 84, 0.1);
+        color: #198754;
+    }
+    
+    .badge-pending {
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+    
+    .edit-profile-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .edit-profile-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+        .profile-details {
+            margin-left: 0;
+            margin-top: 100px;
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .profile-contact {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-stats {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .info-item {
+            flex-direction: column;
+        }
+        
+        .info-label {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+    }
+    
+    .wallet-address {
+        font-family: monospace;
+        background: #f8f9fa;
+        padding: 0.5rem;
+        border-radius: 5px;
+        word-break: break-all;
+    }
+    
+    .wallet-type {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+    }
+    
+    .wallet-type.usdt {
+        background: #26a17b;
+        color: white;
+    }
+    
+    .wallet-type.btc {
+        background: #f7931a;
+        color: white;
+    }
+    
+    .wallet-type.eth {
+        background: #627eea;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-cover"></div>
+        <div class="profile-info">
+            <div class="profile-avatar">
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="{{ user.get_full_name }}">
+                {% else %}
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="profile-details">
+                <h1 class="profile-name">{{ user.get_full_name|default:user.username }}</h1>
+                <p class="profile-email">{{ user.email }}</p>
+                <div class="profile-contact">
+                    {% if user.phone_number %}
+                    <div class="profile-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>{{ user.phone_number }}</span>
+                    </div>
+                    {% endif %}
+                    {% if user.telegram_username %}
+                    <div class="profile-contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <span>{{ user.telegram_username }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Personal Information -->
+        <div class="col-md-6">
+            <div class="info-card">
+                <div class="info-card-header">
+                    <h3 class="info-card-title">{% trans "Personal Information" %}</h3>
+                </div>
+                <div class="info-card-body">
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Full Name" %}</div>
+                        <div class="info-value">{{ user.get_full_name|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Email" %}</div>
+                        <div class="info-value">{{ user.email }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Phone" %}</div>
+                        <div class="info-value">{{ user.phone_number|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Telegram" %}</div>
+                        <div class="info-value">{{ user.telegram_username|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Birth Date" %}</div>
+                        <div class="info-value">{{ user.birth_date|date:"d/m/Y"|default:"-" }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Addresses -->
+        <div class="col-md-6">
+            <div class="info-card">
+                <div class="info-card-header">
+                    <h3 class="info-card-title">{% trans "Wallet Addresses" %}</h3>
+                </div>
+                <div class="info-card-body">
+                    <div class="info-item">
+                        <div class="info-label">{% trans "USDT (TRC20)" %}</div>
+                        <div class="info-value">
+                            {% if profile.usdt_trc20_wallet %}
+                                <span class="wallet-type usdt">TRC20</span>
+                                <span class="wallet-address">{{ profile.usdt_trc20_wallet }}</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Bitcoin" %}</div>
+                        <div class="info-value">
+                            {% if profile.btc_wallet %}
+                                <span class="wallet-type btc">BTC</span>
+                                <span class="wallet-address">{{ profile.btc_wallet }}</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Ethereum (ERC20)" %}</div>
+                        <div class="info-value">
+                            {% if profile.eth_erc20_wallet %}
+                                <span class="wallet-type eth">ERC20</span>
+                                <span class="wallet-address">{{ profile.eth_erc20_wallet }}</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Information -->
+        <div class="col-md-6">
+            <div class="info-card">
+                <div class="info-card-header">
+                    <h3 class="info-card-title">{% trans "Company Information" %}</h3>
+                </div>
+                <div class="info-card-body">
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Company Name" %}</div>
+                        <div class="info-value">{{ profile.company_name|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "VAT ID" %}</div>
+                        <div class="info-value">{{ profile.vat_id|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Website" %}</div>
+                        <div class="info-value">
+                            {% if profile.website %}
+                                <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Address Information -->
+        <div class="col-md-6">
+            <div class="info-card">
+                <div class="info-card-header">
+                    <h3 class="info-card-title">{% trans "Address Information" %}</h3>
+                </div>
+                <div class="info-card-body">
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Address" %}</div>
+                        <div class="info-value">{{ profile.address|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "City" %}</div>
+                        <div class="info-value">{{ profile.city|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "ZIP Code" %}</div>
+                        <div class="info-value">{{ profile.zip_code|default:"-" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">{% trans "Country" %}</div>
+                        <div class="info-value">{{ profile.country|default:"-" }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">
+                <i class="fas fa-edit"></i> {% trans "Edit Profile" %}
+            </a>
+            <a href="{% url 'accounts:change_password' %}" class="btn btn-secondary">
+                <i class="fas fa-key"></i> {% trans "Change Password" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation des cartes au chargement
+        const cards = document.querySelectorAll('.info-card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    });
+</script>
+{% endblock %} 

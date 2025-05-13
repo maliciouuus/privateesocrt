@@ -1,0 +1,469 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <div class="logo-container">
+                <img src="/static/images/logo.png" alt="EscortDollars" onerror="this.src='https://placehold.co/200x50?text=EscortDollars'">
+                <div class="logo-glow"></div>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars-staggered"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link home-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
+                        <span class="nav-icon"><i class="fas fa-home"></i></span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle user-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-info">
+                            <span class="user-icon"><i class="fas fa-user-astronaut"></i></span>
+                            <span class="username">{{ user.username }}</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'dashboard:home' %}">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item logout" href="{% url 'account_logout' %}">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link login-btn" href="{% url 'account_login' %}">
+                        <span class="btn-icon"><i class="fas fa-sign-in-alt"></i></span>
+                        <span class="btn-text">Login</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link register-btn" href="{% url 'account_signup' %}">
+                        <span class="btn-icon"><i class="fas fa-user-plus"></i></span>
+                        <span class="btn-text">Register</span>
+                        <span class="register-glow"></span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    :root {
+        --primary-color: #7C4DFF;
+        --primary-dark: #5E35B1;
+        --primary-light: #B39DDB;
+        --primary-rgb: 124, 77, 255;
+        --secondary-color: #FF4D94;
+        --secondary-rgb: 255, 77, 148;
+        --bg-dark: #1a1a24;
+        --bg-darker: #15151e;
+        --bg-light: #25253a;
+        --text-light: #E0E0E0;
+    }
+
+    .navbar {
+        background: linear-gradient(180deg, rgba(26, 26, 36, 0.95) 0%, rgba(21, 21, 30, 0.9) 100%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 4px 30px rgba(var(--primary-rgb), 0.15);
+        padding: 12px 0;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
+        position: relative;
+    }
+    
+    .navbar::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+            90deg, 
+            rgba(var(--primary-rgb), 0) 0%,
+            rgba(var(--primary-rgb), 0.7) 50%,
+            rgba(var(--primary-rgb), 0) 100%
+        );
+    }
+    
+    .navbar.scrolled {
+        padding: 8px 0;
+        background: linear-gradient(180deg, rgba(21, 21, 30, 0.98) 0%, rgba(26, 26, 36, 0.98) 100%);
+    }
+    
+    .logo-container {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .navbar-brand img {
+        height: 40px;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .logo-glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(124, 77, 255, 0.3) 0%, rgba(124, 77, 255, 0) 70%);
+        filter: blur(8px);
+        z-index: 1;
+        opacity: 0.7;
+        animation: pulse 3s infinite alternate;
+    }
+    
+    @keyframes pulse {
+        0% {
+            opacity: 0.5;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+    }
+    
+    .navbar.scrolled .navbar-brand img {
+        height: 35px;
+    }
+    
+    .navbar-toggler {
+        color: var(--primary-color);
+        border: none;
+        background: rgba(var(--primary-rgb), 0.1);
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.2);
+        border: 1px solid rgba(var(--primary-rgb), 0.15);
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.3);
+    }
+    
+    .navbar-toggler:hover {
+        background: rgba(var(--primary-rgb), 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .navbar-toggler i {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
+    }
+    
+    .nav-link {
+        color: var(--text-light);
+        font-weight: 500;
+        padding: 10px 16px;
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        margin: 0 5px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .nav-icon, .user-icon, .btn-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.7);
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        color: var(--primary-light);
+        background: rgba(var(--primary-rgb), 0.08);
+        transform: translateY(-2px);
+    }
+    
+    .nav-link:hover .nav-icon,
+    .nav-link:hover .user-icon,
+    .nav-link:hover .btn-icon {
+        transform: scale(1.1);
+        color: var(--primary-light);
+    }
+    
+    .nav-link.active {
+        color: white;
+        background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.15), rgba(var(--primary-rgb), 0.05));
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(var(--primary-rgb), 0.2);
+    }
+    
+    .nav-link.active .nav-icon {
+        color: var(--primary-color);
+    }
+    
+    .nav-link.active::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 0 4px 4px 0;
+        box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.7);
+    }
+    
+    .home-link {
+        color: var(--text-light) !important;
+    }
+    
+    .home-link:hover {
+        color: var(--primary-light) !important;
+    }
+    
+    /* User dropdown styles */
+    .user-dropdown {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 16px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1), rgba(var(--primary-rgb), 0.05));
+        border: 1px solid rgba(var(--primary-rgb), 0.15);
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .user-dropdown:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.15), rgba(var(--primary-rgb), 0.08));
+    }
+    
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+    
+    .username {
+        font-weight: 600;
+        color: var(--text-light);
+        margin-left: 8px;
+        letter-spacing: 0.3px;
+    }
+    
+    .dropdown-arrow {
+        font-size: 0.8rem;
+        color: var(--primary-color);
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+    
+    .user-dropdown[aria-expanded="true"] .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-menu {
+        background: linear-gradient(135deg, #1e1e2e, #252540);
+        border: 1px solid rgba(var(--primary-rgb), 0.2);
+        border-radius: 14px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 20px rgba(var(--primary-rgb), 0.1);
+        padding: 10px;
+        min-width: 220px;
+        margin-top: 12px;
+        transform-origin: top right;
+        animation: dropdown-animation 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .dropdown-menu::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        right: 20px;
+        width: 12px;
+        height: 12px;
+        background: #252540;
+        transform: rotate(45deg);
+        border-top: 1px solid rgba(var(--primary-rgb), 0.2);
+        border-left: 1px solid rgba(var(--primary-rgb), 0.2);
+    }
+    
+    @keyframes dropdown-animation {
+        from {
+            opacity: 0;
+            transform: scale(0.96) translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+    
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 15px;
+        border-radius: 10px;
+        color: var(--text-light);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        margin: 2px 0;
+    }
+    
+    .dropdown-item:hover, .dropdown-item:focus {
+        color: white;
+        background: rgba(var(--primary-rgb), 0.1);
+        transform: translateX(5px);
+    }
+    
+    .dropdown-item i {
+        width: 20px;
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
+        transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover i {
+        transform: scale(1.1);
+    }
+    
+    .dropdown-divider {
+        border-top: 1px solid rgba(var(--primary-rgb), 0.1);
+        margin: 8px 0;
+    }
+    
+    .dropdown-item.logout {
+        color: var(--secondary-color);
+    }
+    
+    .dropdown-item.logout i {
+        color: var(--secondary-color);
+        text-shadow: 0 0 10px rgba(var(--secondary-rgb), 0.5);
+    }
+    
+    /* Login/Register buttons */
+    .login-btn, .register-btn {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        margin-left: 8px;
+        border-radius: 14px;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .login-btn {
+        background: rgba(var(--primary-rgb), 0.1);
+        border: 1px solid rgba(var(--primary-rgb), 0.2);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .login-btn:hover {
+        background: rgba(var(--primary-rgb), 0.15);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        color: var(--primary-light);
+    }
+    
+    .register-btn {
+        background: linear-gradient(135deg, var(--primary-color), #9328FF);
+        border: none;
+        box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3), 0 0 15px rgba(var(--primary-rgb), 0.1);
+        color: white;
+        position: relative;
+    }
+    
+    .register-btn .register-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+        pointer-events: none;
+    }
+    
+    .register-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.4), 0 0 20px rgba(var(--primary-rgb), 0.2);
+        color: white;
+    }
+    
+    .register-btn:hover .register-glow {
+        transform: translateX(100%);
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 991.98px) {
+        .navbar-collapse {
+            background: linear-gradient(180deg, #1e1e2e 0%, #252540 100%);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 20px rgba(var(--primary-rgb), 0.1);
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid rgba(var(--primary-rgb), 0.15);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .nav-link {
+            padding: 12px 16px;
+            margin: 5px 0;
+        }
+        
+        .login-btn, .register-btn {
+            margin: 8px 0;
+            justify-content: center;
+        }
+        
+        .user-dropdown {
+            justify-content: space-between;
+        }
+    }
+</style>
+
+<script>
+    // Add scrolled class to navbar on scroll
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 30) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+</script> 

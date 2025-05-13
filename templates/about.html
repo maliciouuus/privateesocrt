@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}À propos de nous - EscortDollars{% endblock %}
+
+{% block content %}
+<!-- En-tête de page -->
+<section class="page-header bg-light py-5 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="fw-bold">À propos de nous</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Accueil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">À propos</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre histoire -->
+<section class="about-story py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="{% static 'images/about-team.jpg' %}" alt="L'équipe EscortDollars" class="img-fluid rounded shadow-lg" onerror="this.src='https://placehold.co/600x400?text=Notre+Histoire'">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="mb-4">Notre histoire</h2>
+                <p class="lead">EscortDollars a été fondé en 2023 avec une vision claire : révolutionner le marketing d'affiliation dans l'industrie des services d'escorte.</p>
+                <p>Face à un secteur où les solutions technologiques restaient archaïques, nous avons décidé de créer une plateforme innovante permettant aux acteurs de l'industrie de monétiser leur audience et de développer leur présence en ligne.</p>
+                <p>Notre équipe, composée d'experts en marketing digital et de développeurs expérimentés, s'est efforcée de concevoir des outils puissants et accessibles pour tous les profils d'utilisateurs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre mission -->
+<section class="about-mission py-5 mb-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                <img src="{% static 'images/about-mission.jpg' %}" alt="Notre mission" class="img-fluid rounded shadow-lg" onerror="this.src='https://placehold.co/600x400?text=Notre+Mission'">
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <h2 class="mb-4">Notre mission</h2>
+                <p class="lead">Nous aidons les créateurs de contenu, les influenceurs et les agences à maximiser leurs revenus grâce à des solutions technologiques innovantes.</p>
+                <ul class="list-unstyled">
+                    <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Proposer des outils marketing performants et faciles à utiliser</li>
+                    <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Offrir des commissions compétitives et transparentes</li>
+                    <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Développer des solutions en marque blanche personnalisables</li>
+                    <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Garantir un support technique et commercial réactif</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre équipe -->
+<section class="about-team py-5 mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="mb-3">Notre équipe</h2>
+            <p class="lead">Rencontrez les experts passionnés qui font d'EscortDollars une réalité.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card team-card border-0 shadow-sm h-100">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card-img-top" alt="Thomas Martin">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-1">Thomas Martin</h5>
+                        <p class="text-muted small mb-3">Fondateur & CEO</p>
+                        <p class="card-text">Expert en marketing digital avec plus de 10 ans d'expérience dans l'industrie du divertissement pour adultes.</p>
+                        <div class="social-icons">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card team-card border-0 shadow-sm h-100">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="card-img-top" alt="Julie Dubois">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-1">Julie Dubois</h5>
+                        <p class="text-muted small mb-3">Directrice des Opérations</p>
+                        <p class="card-text">Spécialiste en gestion des équipes et en optimisation des processus d'affaires.</p>
+                        <div class="social-icons">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card team-card border-0 shadow-sm h-100">
+                    <img src="https://randomuser.me/api/portraits/men/67.jpg" class="card-img-top" alt="Marc Lefèvre">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-1">Marc Lefèvre</h5>
+                        <p class="text-muted small mb-3">Directeur Technique</p>
+                        <p class="card-text">Développeur full-stack avec une expertise particulière en solutions d'e-commerce et de paiement sécurisé.</p>
+                        <div class="social-icons">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card team-card border-0 shadow-sm h-100">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="card-img-top" alt="Sophie Bernard">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-1">Sophie Bernard</h5>
+                        <p class="text-muted small mb-3">Resp. Relations Partenaires</p>
+                        <p class="card-text">Responsable de la gestion des comptes ambassadeurs et du développement de notre réseau d'affiliation.</p>
+                        <div class="social-icons">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Avantages / Pourquoi nous choisir -->
+<section class="about-why-us py-5 mb-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="mb-3">Pourquoi nous choisir</h2>
+            <p class="lead">Des avantages qui font la différence pour nos partenaires</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card feature-card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-percentage fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title h4">Commissions généreuses</h3>
+                        <p class="card-text">Nous offrons jusqu'à 50% de commission sur chaque transaction générée par vos utilisateurs référés, avec un système de paiement transparent et régulier.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card feature-card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-code fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title h4">Technologie robuste</h3>
+                        <p class="card-text">Notre plateforme est développée avec les technologies les plus récentes pour garantir stabilité, rapidité et sécurité à tous nos utilisateurs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card feature-card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-headset fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title h4">Support dédié</h3>
+                        <p class="card-text">Une équipe de support disponible 7j/7 pour répondre à toutes vos questions et vous aider dans la gestion de votre activité.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <h2 class="mb-3">Rejoignez notre programme d'affiliation</h2>
+                <p class="lead mb-0">Commencez à générer des revenus dès aujourd'hui avec notre programme d'affiliation performant.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{% url 'accounts:register' %}" class="btn btn-light btn-lg">Inscrivez-vous maintenant</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

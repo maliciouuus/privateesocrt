@@ -1,0 +1,612 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FAQ - Questions Fréquentes - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .page-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('{% static "images/pattern.png" %}');
+        background-size: cover;
+        opacity: 0.1;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(58, 12, 163, 0.1);
+        color: var(--primary-color);
+    }
+    
+    .accordion-button:focus {
+        box-shadow: 0 0 0 0.25rem rgba(58, 12, 163, 0.25);
+    }
+    
+    .category-tab {
+        transition: all 0.3s ease;
+    }
+    
+    .category-tab.active {
+        border-color: var(--primary-color) !important;
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    
+    .category-icon {
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+    
+    .search-faq {
+        position: relative;
+        margin-bottom: 2rem;
+    }
+    
+    .search-faq input {
+        border-radius: 50px;
+        padding-left: 45px;
+        height: 50px;
+    }
+    
+    .search-faq i {
+        position: absolute;
+        left: 20px;
+        top: 17px;
+        color: #aaa;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="faq-page">
+    <!-- FAQ Header Section -->
+    <section class="faq-header text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Questions Fréquentes</h1>
+            <p class="lead text-muted">Tout ce que vous devez savoir sur notre programme d'affiliation</p>
+            <div class="search-box mx-auto mt-4">
+                <div class="input-group">
+                    <input type="text" id="faq-search" class="form-control" placeholder="Rechercher une question...">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Categories & Questions -->
+    <section class="faq-content py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Categories Sidebar -->
+                <div class="col-lg-3 mb-4">
+                    <div class="categories-sidebar">
+                        <h5 class="fw-bold mb-3">Catégories</h5>
+                        <div class="list-group">
+                            <a href="#general" class="list-group-item list-group-item-action active">Général</a>
+                            <a href="#earnings" class="list-group-item list-group-item-action">Commissions & Gains</a>
+                            <a href="#payments" class="list-group-item list-group-item-action">Paiements</a>
+                            <a href="#referrals" class="list-group-item list-group-item-action">Système de Parrainage</a>
+                            <a href="#whitelabel" class="list-group-item list-group-item-action">Solutions White Label</a>
+                            <a href="#technical" class="list-group-item list-group-item-action">Questions Techniques</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Questions & Answers -->
+                <div class="col-lg-9">
+                    <div class="accordion faq-accordion" id="faqAccordion">
+                        <!-- General Questions -->
+                        <div id="general" class="faq-category mb-5">
+                            <h3 class="fw-bold mb-4">Questions Générales</h3>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#question1" aria-expanded="true" aria-controls="question1">
+                                        Qu'est-ce que le programme d'affiliation EscortDollars?
+                                    </button>
+                                </h2>
+                                <div id="question1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>EscortDollars est un programme d'affiliation premium qui vous permet de gagner de l'argent en dirigeant du trafic vers notre plateforme d'escorting. Nous offrons des commissions généreuses sur les inscriptions, abonnements et transactions que vos référés effectuent sur notre réseau de sites.</p>
+                                        <p>Notre programme se distingue par:</p>
+                                        <ul>
+                                            <li>Des commissions parmi les plus élevées du secteur (jusqu'à 50%)</li>
+                                            <li>Un suivi précis des conversions à vie</li>
+                                            <li>Des outils marketing professionnels et personnalisables</li>
+                                            <li>Des solutions white-label pour les partenaires premium</li>
+                                            <li>Une équipe de support dédiée aux affiliés</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question2" aria-expanded="false" aria-controls="question2">
+                                        Comment rejoindre le programme d'affiliation?
+                                    </button>
+                                </h2>
+                                <div id="question2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Rejoindre notre programme d'affiliation est simple et gratuit:</p>
+                                        <ol>
+                                            <li>Créez un compte sur notre plateforme</li>
+                                            <li>Complétez votre profil d'affilié avec vos informations</li>
+                                            <li>Soumettez une brève description de votre stratégie marketing</li>
+                                            <li>Une fois approuvé, accédez à votre tableau de bord et commencez à promouvoir</li>
+                                        </ol>
+                                        <p>Votre compte sera généralement approuvé dans les 24-48 heures. Les grands éditeurs et réseaux peuvent bénéficier d'une approbation accélérée en contactant directement notre équipe.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question3" aria-expanded="false" aria-controls="question3">
+                                        Quels sont les avantages par rapport aux autres programmes?
+                                    </button>
+                                </h2>
+                                <div id="question3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>EscortDollars se distingue des autres programmes d'affiliation par:</p>
+                                        <ul>
+                                            <li><strong>Commissions à vie</strong> - Vous gagnez sur toutes les dépenses futures de vos référés</li>
+                                            <li><strong>Paiements rapides</strong> - Cycles de paiement bi-mensuels avec des seuils bas</li>
+                                            <li><strong>Tracking avancé</strong> - Suivi précis avec cookies de longue durée (90 jours)</li>
+                                            <li><strong>Multi-niveaux</strong> - Gagnez également sur les référés de vos référés</li>
+                                            <li><strong>Support premium</strong> - Gestionnaire de compte dédié pour les affiliés performants</li>
+                                            <li><strong>Matériel marketing</strong> - Bannières, landing pages et contenus exclusifs régulièrement mis à jour</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Earnings Questions -->
+                        <div id="earnings" class="faq-category mb-5">
+                            <h3 class="fw-bold mb-4">Commissions & Gains</h3>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question4" aria-expanded="false" aria-controls="question4">
+                                        Comment fonctionne la structure des commissions?
+                                    </button>
+                                </h2>
+                                <div id="question4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Notre structure de commission est conçue pour récompenser équitablement tous les types d'affiliés:</p>
+                                        <ul>
+                                            <li><strong>Inscriptions d'escortes:</strong> 30€ par inscription validée</li>
+                                            <li><strong>Abonnements premium:</strong> 40% de commission récurrente</li>
+                                            <li><strong>Achats de crédit:</strong> 35% sur chaque transaction</li>
+                                            <li><strong>Placements publicitaires:</strong> 25% sur les achats de publicité</li>
+                                            <li><strong>Services additionnels:</strong> 20-30% selon le service</li>
+                                        </ul>
+                                        <p>Les affiliés Elite (générant plus de 2000€/mois) bénéficient automatiquement d'un bonus de 5% sur toutes les commissions standards.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question5" aria-expanded="false" aria-controls="question5">
+                                        Combien puis-je espérer gagner?
+                                    </button>
+                                </h2>
+                                <div id="question5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Les revenus varient considérablement selon votre stratégie marketing, votre audience et votre engagement:</p>
+                                        <ul>
+                                            <li><strong>Affiliés débutants:</strong> 100€ - 500€ par mois</li>
+                                            <li><strong>Affiliés intermédiaires:</strong> 500€ - 2000€ par mois</li>
+                                            <li><strong>Affiliés avancés:</strong> 2000€ - 5000€ par mois</li>
+                                            <li><strong>Partenaires Premium:</strong> 5000€+ par mois</li>
+                                        </ul>
+                                        <p>Nos meilleurs affiliés génèrent régulièrement plus de 10 000€ mensuels. La clé du succès réside dans la qualité du trafic plutôt que sa quantité. Un trafic ciblé et engagé convertit généralement beaucoup mieux.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payments Questions -->
+                        <div id="payments" class="faq-category mb-5">
+                            <h3 class="fw-bold mb-4">Paiements</h3>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question6" aria-expanded="false" aria-controls="question6">
+                                        Quand et comment suis-je payé?
+                                    </button>
+                                </h2>
+                                <div id="question6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Nous proposons un cycle de paiement flexible avec plusieurs options:</p>
+                                        <ul>
+                                            <li><strong>Fréquence:</strong> Paiements bi-mensuels (le 1er et le 15 de chaque mois)</li>
+                                            <li><strong>Seuil minimum:</strong> 50€ pour les paiements électroniques, 100€ pour les virements bancaires</li>
+                                            <li><strong>Méthodes disponibles:</strong>
+                                                <ul>
+                                                    <li>Virement bancaire (SEPA/International)</li>
+                                                    <li>PayPal</li>
+                                                    <li>Skrill</li>
+                                                    <li>Cryptocurrencies (Bitcoin, Ethereum, USDT)</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <p>Les paiements sont traités automatiquement lorsque votre solde atteint le seuil minimum. Vous pouvez également demander un paiement manuel depuis votre tableau de bord si votre solde dépasse 200€.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question7" aria-expanded="false" aria-controls="question7">
+                                        Quels documents fiscaux fournissez-vous?
+                                    </button>
+                                </h2>
+                                <div id="question7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>En tant que programme d'affiliation professionnel, nous fournissons toute la documentation nécessaire pour vos déclarations fiscales:</p>
+                                        <ul>
+                                            <li>Relevés de commission mensuels détaillés</li>
+                                            <li>Factures pour chaque paiement effectué</li>
+                                            <li>Rapport annuel consolidé (disponible en janvier)</li>
+                                            <li>Formulaire fiscal W-8BEN pour les affiliés non-européens (sur demande)</li>
+                                        </ul>
+                                        <p>Tous les documents fiscaux sont disponibles dans la section "Rapports fiscaux" de votre tableau de bord. Pour les entités commerciales, nous pouvons également fournir des documents personnalisés sur demande.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- More categories follow the same pattern -->
+                        <!-- Referrals Section -->
+                        <div id="referrals" class="faq-category mb-5">
+                            <h3 class="fw-bold mb-4">Système de Parrainage</h3>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question8" aria-expanded="false" aria-controls="question8">
+                                        Comment fonctionne le tracking des référés?
+                                    </button>
+                                </h2>
+                                <div id="question8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Notre système de tracking est conçu pour être précis et équitable:</p>
+                                        <ul>
+                                            <li>Cookies de suivi de 90 jours (parmi les plus longs du secteur)</li>
+                                            <li>Tracking par ID d'affilié et sous-ID pour un suivi précis des campagnes</li>
+                                            <li>Attribution du dernier clic (last-click attribution)</li>
+                                            <li>Tracking multi-appareils lorsque l'utilisateur est connecté</li>
+                                            <li>Protection contre la fraude et vérification des conversions</li>
+                                        </ul>
+                                        <p>Nous utilisons également un système de tracking alternatif (fingerprinting) pour les utilisateurs qui bloquent les cookies, assurant ainsi que vous recevez le crédit pour vos référés même dans ces cas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question9" aria-expanded="false" aria-controls="question9">
+                                        Puis-je promouvoir plusieurs sites du réseau?
+                                    </button>
+                                </h2>
+                                <div id="question9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Absolument! Avec un seul compte d'affilié, vous pouvez promouvoir tous les sites de notre réseau:</p>
+                                        <ul>
+                                            <li>Vous recevez des liens d'affiliation uniques pour chaque site</li>
+                                            <li>Les commissions sont consolidées dans un seul compte</li>
+                                            <li>Vous pouvez suivre les performances par site dans vos rapports</li>
+                                            <li>Des matériels promotionnels spécifiques sont disponibles pour chaque site</li>
+                                        </ul>
+                                        <p>Cette approche vous permet de tester différents sites et de vous concentrer sur ceux qui convertissent le mieux pour votre audience. Nous recommandons généralement de commencer avec 2-3 sites pour optimiser vos efforts marketing.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- White Label Section -->
+                        <div id="whitelabel" class="faq-category mb-5">
+                            <h3 class="fw-bold mb-4">Solutions White Label</h3>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question10" aria-expanded="false" aria-controls="question10">
+                                        Qu'est-ce que la solution White Label?
+                                    </button>
+                                </h2>
+                                <div id="question10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Notre solution White Label vous permet de lancer votre propre site d'escorting sous votre marque, en utilisant notre infrastructure éprouvée:</p>
+                                        <ul>
+                                            <li>Site complet avec votre nom de domaine et votre image de marque</li>
+                                            <li>Accès à notre base de données d'escortes vérifiées</li>
+                                            <li>Système de paiement et de gestion des utilisateurs clé en main</li>
+                                            <li>Panel d'administration complet</li>
+                                            <li>Support technique et maintenance inclus</li>
+                                        </ul>
+                                        <p>C'est la solution idéale pour les webmasters expérimentés qui souhaitent lancer leur propre plateforme sans les coûts élevés de développement et de maintenance d'une solution sur mesure.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question11" aria-expanded="false" aria-controls="question11">
+                                        Combien coûte la solution White Label?
+                                    </button>
+                                </h2>
+                                <div id="question11" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Notre solution White Label propose plusieurs formules tarifaires:</p>
+                                        <ul>
+                                            <li><strong>Standard:</strong> 299€/mois + 15% de commission sur les transactions</li>
+                                            <li><strong>Premium:</strong> 499€/mois + 10% de commission sur les transactions</li>
+                                            <li><strong>Enterprise:</strong> 999€/mois + 5% de commission sur les transactions</li>
+                                        </ul>
+                                        <p>Chaque formule inclut des fonctionnalités différentes, notamment au niveau de la personnalisation, du nombre d'escortes disponibles et des options marketing. Nous proposons également des solutions sur mesure pour les grands partenaires avec des besoins spécifiques.</p>
+                                        <p>Pour les affiliés générant plus de 5000€ par mois, nous offrons des réductions significatives sur ces tarifs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Technical Questions -->
+                        <div id="technical" class="faq-category mb-5">
+                            <h3 class="fw-bold mb-4">Questions Techniques</h3>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question12" aria-expanded="false" aria-controls="question12">
+                                        Quels outils de marketing sont disponibles?
+                                    </button>
+                                </h2>
+                                <div id="question12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Nous fournissons une gamme complète d'outils marketing pour maximiser vos conversions:</p>
+                                        <ul>
+                                            <li><strong>Bannières:</strong> Plus de 500 bannières dans différentes tailles et styles</li>
+                                            <li><strong>Landing pages:</strong> Pages d'atterrissage optimisées pour la conversion</li>
+                                            <li><strong>Widgets:</strong> Liste d'escortes, recherche, et autres widgets intégrables</li>
+                                            <li><strong>API:</strong> Accès programmatique à nos données pour les intégrations avancées</li>
+                                            <li><strong>Feeds:</strong> Flux XML/JSON des profils d'escortes pour une intégration facile</li>
+                                            <li><strong>Contenu:</strong> Articles, guides et autres contenus promotionnels</li>
+                                        </ul>
+                                        <p>Tous ces outils sont accessibles depuis votre tableau de bord affilié. Nous proposons également des outils personnalisés pour les affiliés à haut volume sur demande.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question13" aria-expanded="false" aria-controls="question13">
+                                        Comment installer le pixel de suivi sur mon site?
+                                    </button>
+                                </h2>
+                                <div id="question13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>L'installation de notre pixel de suivi est simple:</p>
+                                        <ol>
+                                            <li>Connectez-vous à votre compte affilié</li>
+                                            <li>Accédez à la section "Outils > Pixel de suivi"</li>
+                                            <li>Copiez le code JavaScript fourni</li>
+                                            <li>Collez ce code juste avant la balise &lt;/body&gt; de votre site</li>
+                                        </ol>
+                                        <p>Le pixel nous permet de fournir des statistiques détaillées sur les visiteurs que vous nous envoyez et de mieux attribuer les conversions, même lorsque les cookies sont bloqués.</p>
+                                        <p>Pour WordPress, nous proposons également un plugin dédié qui simplifie l'installation.</p>
+                                        <pre><code>&lt;!-- EscortDollars Affiliate Pixel --&gt;
+&lt;script&gt;
+  (function(d,t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.src = "https://track.escortdollars.com/pixel.js?id=YOUR_AFFILIATE_ID";
+    s.parentNode.insertBefore(g,s);
+  }(document,'script'));
+&lt;/script&gt;</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Still Have Questions Section -->
+    <section class="more-questions py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Vous avez encore des questions?</h2>
+            <p class="lead mb-4">Notre équipe de support est disponible 7j/7 pour vous aider</p>
+            <div class="buttons">
+                <a href="/contact" class="btn btn-primary btn-lg me-3">Contactez-nous</a>
+                <a href="/affiliate/register" class="btn btn-outline-primary btn-lg">Devenir Affilié</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .faq-header {
+        background: linear-gradient(135deg, var(--bs-primary) 0%, #6610f2 100%);
+        color: white;
+        padding: 5rem 0;
+        margin-bottom: 2rem;
+        border-radius: 0 0 2rem 2rem;
+    }
+    
+    .search-box {
+        max-width: 600px;
+    }
+    
+    .faq-content {
+        min-height: 600px;
+    }
+    
+    .faq-category {
+        padding-top: 30px;
+        margin-top: -30px;
+    }
+    
+    .categories-sidebar .list-group-item {
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s ease;
+    }
+    
+    .categories-sidebar .list-group-item:hover {
+        transform: translateX(5px);
+    }
+    
+    .accordion-item {
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 0.5rem !important;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+    
+    .accordion-button {
+        font-weight: 500;
+        padding: 1.25rem;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        color: var(--bs-primary);
+    }
+    
+    .accordion-body {
+        padding: 1.5rem;
+    }
+    
+    .more-questions {
+        background-color: rgba(var(--bs-primary-rgb), 0.05);
+        border-radius: 2rem 2rem 0 0;
+    }
+    
+    /* Dark mode adjustments */
+    .dark-mode .faq-header {
+        background: linear-gradient(135deg, var(--bs-primary) 0%, #3d0a91 100%);
+    }
+    
+    .dark-mode .accordion-item {
+        background-color: var(--bs-dark);
+        border-color: rgba(255,255,255,0.1);
+    }
+    
+    .dark-mode .accordion-button {
+        background-color: var(--bs-dark);
+        color: white;
+    }
+    
+    .dark-mode .accordion-button:not(.collapsed) {
+        background-color: rgba(var(--bs-primary-rgb), 0.2);
+    }
+    
+    .dark-mode .more-questions {
+        background-color: rgba(255,255,255,0.05);
+    }
+    
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .faq-header {
+            padding: 3rem 0;
+        }
+        
+        .categories-sidebar {
+            margin-bottom: 2rem;
+        }
+        
+        .categories-sidebar .list-group {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        
+        .categories-sidebar .list-group-item {
+            flex: 0 0 auto;
+            margin-right: 0.5rem;
+            white-space: nowrap;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Smooth scrolling for category links
+        document.querySelectorAll('.categories-sidebar a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active state
+                document.querySelectorAll('.categories-sidebar a').forEach(l => {
+                    l.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Smooth scroll
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // FAQ Search functionality
+        const searchInput = document.getElementById('faq-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    const questionText = item.querySelector('.accordion-button').textContent.toLowerCase();
+                    const answerText = item.querySelector('.accordion-body').textContent.toLowerCase();
+                    
+                    if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        
+                        // If it matches, expand it
+                        if (searchTerm.length > 2) {
+                            const collapseElement = item.querySelector('.accordion-collapse');
+                            const bootstrapCollapse = new bootstrap.Collapse(collapseElement, {
+                                show: true
+                            });
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide category headers based on visible items
+                document.querySelectorAll('.faq-category').forEach(category => {
+                    const visibleItems = category.querySelectorAll('.accordion-item[style="display: block"]').length;
+                    if (visibleItems === 0 && searchTerm.length > 0) {
+                        category.querySelector('h3').style.display = 'none';
+                    } else {
+                        category.querySelector('h3').style.display = 'block';
+                    }
+                });
+            });
+        }
+    });
+</script>
+{% endblock %} 

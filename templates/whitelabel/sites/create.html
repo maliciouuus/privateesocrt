@@ -1,0 +1,234 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Create White Label Site - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .create-site-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .form-header h1 {
+        color: #fff;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .form-section h2 {
+        color: #fff;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        color: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .color-picker {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .color-picker input[type="color"] {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+
+    .color-picker input[type="text"] {
+        flex: 1;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #7C4DFF 0%, #5E35B1 100%);
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
+    }
+
+    .preview-section {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .preview-section h2 {
+        color: #fff;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .preview-frame {
+        width: 100%;
+        height: 300px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="create-site-container">
+    <div class="form-header">
+        <h1>Create White Label Site</h1>
+        <p>Customize your own branded affiliate platform</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-section">
+            <h2>Basic Information</h2>
+            <div class="form-group">
+                <label class="form-label" for="id_name">Site Name</label>
+                <input type="text" name="name" id="id_name" class="form-control" placeholder="Enter your site name" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_domain">Domain</label>
+                <input type="text" name="domain" id="id_domain" class="form-control" placeholder="Enter your domain (e.g., mysite.com)" required>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Branding</h2>
+            <div class="form-group">
+                <label class="form-label" for="id_logo">Logo</label>
+                <input type="file" name="logo" id="id_logo" class="form-control" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Primary Color</label>
+                <div class="color-picker">
+                    <input type="color" name="primary_color" id="id_primary_color" value="#7C4DFF">
+                    <input type="text" class="form-control" placeholder="#7C4DFF" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Secondary Color</label>
+                <div class="color-picker">
+                    <input type="color" name="secondary_color" id="id_secondary_color" value="#FF4D94">
+                    <input type="text" class="form-control" placeholder="#FF4D94" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_favicon">Favicon</label>
+                <input type="file" name="favicon" id="id_favicon" class="form-control" accept="image/x-icon,image/png,image/svg+xml">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Site Settings</h3>
+            <div class="form-group">
+                <label class="form-label" for="id_meta_title">Meta Title</label>
+                <input type="text" name="meta_title" id="id_meta_title" class="form-control" placeholder="Enter meta title">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_meta_description">Meta Description</label>
+                <textarea name="meta_description" id="id_meta_description" class="form-control" rows="3" placeholder="Enter meta description"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_meta_keywords">Meta Keywords</label>
+                <input type="text" name="meta_keywords" id="id_meta_keywords" class="form-control" placeholder="Enter meta keywords (comma-separated)">
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Create Site</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Update color text inputs when color picker changes
+    const colorPickers = document.querySelectorAll('input[type="color"]');
+    colorPickers.forEach(picker => {
+        const textInput = picker.nextElementSibling;
+        picker.addEventListener('input', function() {
+            textInput.value = this.value;
+        });
+    });
+
+    // Preview functionality
+    const form = document.querySelector('form');
+    const previewFrame = document.querySelector('.preview-frame');
+    
+    form.addEventListener('input', function() {
+        // Update preview based on form changes
+        // This would be implemented based on your preview requirements
+    });
+});
+</script>
+{% endblock %} 

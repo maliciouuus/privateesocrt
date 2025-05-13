@@ -1,0 +1,236 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Sites White Label - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .white-label-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .white-label-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .site-preview {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .color-preview {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 0.5rem;
+        border: 1px solid #dee2e6;
+    }
+
+    .stats-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+    }
+
+    .stats-badge.clicks {
+        background: rgba(58, 123, 213, 0.1);
+        color: #3a7bd5;
+    }
+
+    .stats-badge.conversions {
+        background: rgba(0, 210, 255, 0.1);
+        color: #00d2ff;
+    }
+
+    .stats-badge.earnings {
+        background: rgba(17, 153, 142, 0.1);
+        color: #11998e;
+    }
+
+    .form-section {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .preview-header {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .preview-content {
+        padding: 1rem;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- En-tête -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Sites White Label</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSiteModal">
+            <i class="fas fa-plus me-2"></i>Ajouter un site
+        </button>
+    </div>
+
+    <!-- Liste des sites -->
+    <div class="row">
+        {% for site in white_label_sites %}
+        <div class="col-md-6 col-lg-4">
+            <div class="white-label-card">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h4 class="mb-1">{{ site.name }}</h4>
+                        <p class="text-muted mb-0">{{ site.domain }}</p>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="editSite({{ site.id }})">
+                                    <i class="fas fa-edit me-2"></i>Modifier
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="deleteSite({{ site.id }})">
+                                    <i class="fas fa-trash me-2"></i>Supprimer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <span class="stats-badge clicks">
+                        <i class="fas fa-mouse-pointer me-1"></i>{{ site.clicks }} clics
+                    </span>
+                    <span class="stats-badge conversions">
+                        <i class="fas fa-exchange-alt me-1"></i>{{ site.conversions }} conversions
+                    </span>
+                    <span class="stats-badge earnings">
+                        <i class="fas fa-euro-sign me-1"></i>{{ site.earnings }}€
+                    </span>
+                </div>
+
+                <div class="site-preview">
+                    <div class="preview-header" style="background: {{ site.primary_color }}">
+                        <h5 class="mb-0 text-white">{{ site.name }}</h5>
+                    </div>
+                    <div class="preview-content">
+                        <p class="mb-2">Couleurs du site :</p>
+                        <div class="mb-3">
+                            <span class="color-preview" style="background: {{ site.primary_color }}"></span>
+                            <span class="color-preview" style="background: {{ site.secondary_color }}"></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-{{ site.status_color }}">{{ site.status }}</span>
+                            <a href="{{ site.domain }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-external-link-alt me-1"></i>Visiter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal d'ajout de site -->
+<div class="modal fade" id="addSiteModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un site white label</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSiteForm" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nom du site</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Domaine</label>
+                            <input type="url" name="domain" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Couleur principale</label>
+                            <input type="color" name="primary_color" class="form-control form-control-color" value="#3a7bd5" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Couleur secondaire</label>
+                            <input type="color" name="secondary_color" class="form-control form-control-color" value="#00d2ff" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Logo</label>
+                            <input type="file" name="logo" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input type="checkbox" name="is_active" class="form-check-input" id="isActive" checked>
+                                <label class="form-check-label" for="isActive">Site actif</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" form="addSiteForm" class="btn btn-primary">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+    // Prévisualisation des couleurs
+    document.querySelectorAll('input[type="color"]').forEach(input => {
+        input.addEventListener('input', function() {
+            const previewHeader = document.querySelector('.preview-header');
+            if (this.name === 'primary_color') {
+                previewHeader.style.background = this.value;
+            }
+        });
+    });
+
+    // Édition d'un site
+    function editSite(siteId) {
+        // Implémentation de l'édition
+    }
+
+    // Suppression d'un site
+    function deleteSite(siteId) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce site ?')) {
+            // Implémentation de la suppression
+        }
+    }
+</script>
+{% endblock %} 

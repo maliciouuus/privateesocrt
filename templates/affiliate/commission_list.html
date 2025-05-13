@@ -1,0 +1,545 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Commission History - EscortDollars{% endblock %}
+
+{% block dashboard_content %}
+<div class="commission-page">
+    <!-- Header Section -->
+    <div class="commission-header">
+        <div class="container">
+            <h1 class="page-title">Commission History</h1>
+            <div class="commission-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">${{ total_earnings|default:"0.00" }}</div>
+                        <div class="stat-label">Total Earnings</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">${{ monthly_earnings|default:"0.00" }}</div>
+                        <div class="stat-label">This Month</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">{{ total_referrals|default:"0" }}</div>
+                        <div class="stat-label">Total Referrals</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="commission-content">
+        <div class="container">
+            <!-- Filters -->
+            <div class="commission-filters">
+                <div class="filter-group">
+                    <label for="date-range">Date Range:</label>
+                    <select id="date-range" class="filter-select">
+                        <option value="7">Last 7 days</option>
+                        <option value="30" selected>Last 30 days</option>
+                        <option value="90">Last 90 days</option>
+                        <option value="all">All time</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="status">Status:</label>
+                    <select id="status" class="filter-select">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search transactions..." class="search-input">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Commission Table -->
+            <div class="commission-table-wrapper">
+                <table class="commission-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Referral</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for commission in commissions %}
+                        <tr>
+                            <td>{{ commission.date|date:"M d, Y" }}</td>
+                            <td>
+                                <span class="transaction-id">{{ commission.transaction_id }}</span>
+                            </td>
+                            <td>
+                                <div class="referral-info">
+                                    <img src="{{ commission.referral.avatar.url|default:'/static/images/default-avatar.png' }}" alt="Referral" class="referral-avatar">
+                                    <span>{{ commission.referral.username }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="commission-type {{ commission.type|lower }}">
+                                    {{ commission.type }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="amount">${{ commission.amount }}</span>
+                            </td>
+                            <td>
+                                <span class="status-badge {{ commission.status|lower }}">
+                                    {{ commission.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Download Receipt">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="no-data">
+                                <div class="empty-state">
+                                    <i class="fas fa-receipt"></i>
+                                    <p>No commission records found</p>
+                                    <small>Your commission history will appear here</small>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            {% if commissions.has_other_pages %}
+            <div class="pagination">
+                {% if commissions.has_previous %}
+                <a href="?page={{ commissions.previous_page_number }}" class="page-link">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                {% endif %}
+
+                {% for num in commissions.paginator.page_range %}
+                    {% if commissions.number == num %}
+                    <span class="page-link active">{{ num }}</span>
+                    {% else %}
+                    <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if commissions.has_next %}
+                <a href="?page={{ commissions.next_page_number }}" class="page-link">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    :root {
+        --primary-color: #9d4bff;
+        --secondary-color: #2bffc6;
+        --bg-dark: #0e0e18;
+        --bg-light: #1a1a2e;
+        --text-light: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --success-color: #2bffc6;
+        --warning-color: #ffd700;
+        --danger-color: #ff3a8c;
+        --border-color: rgba(157, 75, 255, 0.1);
+        --card-bg: rgba(24, 24, 38, 0.7);
+    }
+
+    .commission-page {
+        min-height: 100vh;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+    }
+
+    /* Header Styles */
+    .commission-header {
+        background: linear-gradient(135deg, rgba(157, 75, 255, 0.1) 0%, rgba(43, 255, 198, 0.1) 100%);
+        padding: 3rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .commission-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+
+    .stat-icon i {
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    /* Filters Section */
+    .commission-filters {
+        display: flex;
+        gap: 1rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .filter-group label {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .filter-select {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        color: var(--text-light);
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+
+    .search-box {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .search-input {
+        width: 100%;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem 0.5rem 2.5rem;
+        color: var(--text-light);
+        font-size: 0.9rem;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    /* Table Styles */
+    .commission-table-wrapper {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+
+    .commission-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .commission-table th {
+        background: rgba(157, 75, 255, 0.1);
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .commission-table td {
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .transaction-id {
+        font-family: monospace;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .referral-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .referral-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .commission-type {
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .commission-type.signup {
+        background: rgba(43, 255, 198, 0.1);
+        color: var(--success-color);
+    }
+
+    .commission-type.purchase {
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--warning-color);
+    }
+
+    .amount {
+        font-weight: 700;
+        color: var(--success-color);
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .status-badge.pending {
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--warning-color);
+    }
+
+    .status-badge.approved {
+        background: rgba(43, 255, 198, 0.1);
+        color: var(--success-color);
+    }
+
+    .status-badge.paid {
+        background: rgba(157, 75, 255, 0.1);
+        color: var(--primary-color);
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-icon:hover {
+        background: rgba(157, 75, 255, 0.1);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-muted);
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    .empty-state p {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .empty-state small {
+        font-size: 0.9rem;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+    }
+
+    .page-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .page-link:hover {
+        background: rgba(157, 75, 255, 0.1);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .page-link.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .commission-filters {
+            flex-direction: column;
+        }
+
+        .filter-group {
+            width: 100%;
+        }
+
+        .search-box {
+            width: 100%;
+        }
+
+        .commission-table {
+            display: block;
+            overflow-x: auto;
+        }
+
+        .stat-card {
+            padding: 1rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter functionality
+    const dateRange = document.getElementById('date-range');
+    const status = document.getElementById('status');
+    const searchInput = document.querySelector('.search-input');
+
+    function applyFilters() {
+        const dateValue = dateRange.value;
+        const statusValue = status.value;
+        const searchValue = searchInput.value.toLowerCase();
+
+        // Add your filter logic here
+        console.log('Applying filters:', { dateValue, statusValue, searchValue });
+    }
+
+    dateRange.addEventListener('change', applyFilters);
+    status.addEventListener('change', applyFilters);
+    searchInput.addEventListener('input', applyFilters);
+
+    // Table row hover effect
+    const tableRows = document.querySelectorAll('.commission-table tbody tr');
+    tableRows.forEach(row => {
+        row.addEventListener('mouseenter', () => {
+            row.style.backgroundColor = 'rgba(157, 75, 255, 0.05)';
+        });
+        row.addEventListener('mouseleave', () => {
+            row.style.backgroundColor = '';
+        });
+    });
+});
+</script>
+{% endblock %} 

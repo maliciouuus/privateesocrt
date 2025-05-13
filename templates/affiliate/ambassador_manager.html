@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gestion des Ambassadeurs - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<style>
+    .stats-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+    .stats-card:hover {
+        transform: translateY(-5px);
+    }
+    .ambassador-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8em;
+    }
+    .status-active {
+        background: #e3fcef;
+        color: #00a854;
+    }
+    .status-inactive {
+        background: #fff1f0;
+        color: #f5222d;
+    }
+    .commission-rate {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #1890ff;
+    }
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+    .action-button {
+        padding: 5px 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .btn-activate {
+        background: #52c41a;
+        color: white;
+    }
+    .btn-deactivate {
+        background: #f5222d;
+        color: white;
+    }
+    .btn-edit {
+        background: #1890ff;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Gestion des Ambassadeurs</h1>
+
+    <!-- Statistiques globales -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="stats-card">
+            <h3 class="text-lg font-semibold mb-2">Total Ambassadeurs</h3>
+            <p class="text-3xl font-bold text-blue-600">{{ total_ambassadors }}</p>
+        </div>
+        <div class="stats-card">
+            <h3 class="text-lg font-semibold mb-2">Total Parrainages</h3>
+            <p class="text-3xl font-bold text-green-600">{{ total_referrals }}</p>
+        </div>
+        <div class="stats-card">
+            <h3 class="text-lg font-semibold mb-2">Parrainages Actifs</h3>
+            <p class="text-3xl font-bold text-purple-600">{{ active_referrals }}</p>
+        </div>
+        <div class="stats-card">
+            <h3 class="text-lg font-semibold mb-2">Total Commissions</h3>
+            <p class="text-3xl font-bold text-orange-600">{{ total_commissions|floatformat:2 }}€</p>
+        </div>
+    </div>
+
+    <!-- Liste des ambassadeurs -->
+    <div class="space-y-6">
+        {% for ambassador in ambassadors %}
+        <div class="ambassador-card">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 class="text-xl font-semibold">{{ ambassador.username }}</h3>
+                    <p class="text-gray-600">{{ ambassador.email }}</p>
+                </div>
+                <span class="status-badge {% if ambassador.is_active %}status-active{% else %}status-inactive{% endif %}">
+                    {{ ambassador.is_active|yesno:"Actif,Inactif" }}
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                <div>
+                    <p class="text-sm text-gray-600">Parrainages</p>
+                    <p class="font-semibold">{{ ambassador.total_referrals }}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Parrainages Actifs</p>
+                    <p class="font-semibold">{{ ambassador.active_referrals }}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Commissions en Attente</p>
+                    <p class="font-semibold">{{ ambassador.pending_commissions|default:"0.00" }}€</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Commissions Payées</p>
+                    <p class="font-semibold">{{ ambassador.paid_commissions|default:"0.00" }}€</p>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-between items-center">
+                <div>
+                    <p class="text-sm text-gray-600">Taux de Commission</p>
+                    <p class="commission-rate">{{ ambassador.commission_rate }}%</p>
+                </div>
+                <div class="action-buttons">
+                    <form method="post" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="ambassador_id" value="{{ ambassador.id }}">
+                        {% if ambassador.is_active %}
+                        <button type="submit" name="action" value="deactivate" class="action-button btn-deactivate">
+                            Désactiver
+                        </button>
+                        {% else %}
+                        <button type="submit" name="action" value="activate" class="action-button btn-activate">
+                            Activer
+                        </button>
+                        {% endif %}
+                    </form>
+                    <button onclick="showEditCommissionModal('{{ ambassador.id }}', '{{ ambassador.commission_rate }}')" class="action-button btn-edit">
+                        Modifier Taux
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal pour modifier le taux de commission -->
+<div id="editCommissionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-96">
+        <h3 class="text-xl font-semibold mb-4">Modifier le Taux de Commission</h3>
+        <form method="post" id="editCommissionForm">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update_commission">
+            <input type="hidden" name="ambassador_id" id="modalAmbassadorId">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Nouveau Taux (%)</label>
+                <input type="number" name="commission_rate" id="modalCommissionRate" 
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                       min="5" max="50" step="0.1" required>
+            </div>
+            <div class="flex justify-end gap-4">
+                <button type="button" onclick="hideEditCommissionModal()" 
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" 
+                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                    Enregistrer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function showEditCommissionModal(ambassadorId, currentRate) {
+    document.getElementById('modalAmbassadorId').value = ambassadorId;
+    document.getElementById('modalCommissionRate').value = currentRate;
+    document.getElementById('editCommissionModal').classList.remove('hidden');
+}
+
+function hideEditCommissionModal() {
+    document.getElementById('editCommissionModal').classList.add('hidden');
+}
+
+// Fermer le modal si on clique en dehors
+document.getElementById('editCommissionModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideEditCommissionModal();
+    }
+});
+</script>
+{% endblock %} 

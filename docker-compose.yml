@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - escortdollars-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+
+  nginx:
+    image: nginx:1.23-alpine
+    ports:
+      - "8888:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    depends_on:
+      - web
+    networks:
+      - escortdollars-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  escortdollars-network:
+    driver: bridge
+
+volumes:
+  static_volume:
+  media_volume: 

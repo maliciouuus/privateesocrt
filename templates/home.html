@@ -1,0 +1,2297 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}EscortDollars - Affiliate Platform for Escorts{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <!-- World's Best Banner -->
+    <div class="world-best-banner">
+        <div class="banner-badge">
+            <i class="fas fa-trophy"></i>
+        </div>
+        <div class="banner-text">Top #1 Escort Affiliate Site</div>
+        <div class="banner-decoration"></div>
+    </div>
+    
+    <div class="hero-background">
+        <div class="nebula-effect"></div>
+        <div class="grid-overlay"></div>
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+        <div class="light-beam beam-1"></div>
+        <div class="light-beam beam-2"></div>
+        <div class="noise-overlay"></div>
+        <div class="particles-container" id="particles-js"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span>#1 Affiliate Platform</span>
+        </div>
+        <h1 class="hero-title">
+            <span class="text-glitch" data-text="EscortDollars">EscortDollars</span>
+            <div class="hero-title-decoration"></div>
+        </h1>
+        <p class="hero-subtitle">The most powerful affiliate platform for escorts and ambassadors. Maximize your earnings with our innovative referral system.</p>
+        <div class="cta-buttons">
+            <a href="{% url 'account_signup' %}" class="btn-cyber primary">
+                <span class="btn-cyber-glitch"></span>
+                <span class="btn-cyber-text">Get Started</span>
+                <span class="btn-cyber-edge top"></span>
+                <span class="btn-cyber-edge right"></span>
+                <span class="btn-cyber-edge bottom"></span>
+                <span class="btn-cyber-edge left"></span>
+            </a>
+            <a href="{% url 'about' %}" class="btn-cyber secondary">
+                <span class="btn-cyber-text">Learn More</span>
+                <span class="btn-cyber-edge top"></span>
+                <span class="btn-cyber-edge right"></span>
+                <span class="btn-cyber-edge bottom"></span>
+                <span class="btn-cyber-edge left"></span>
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value counter" data-target="50">0</div>
+                <div class="stat-label">Commission</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value counter" data-target="100">0</div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+        </div>
+        <div class="scroll-arrows">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</section>
+
+<!-- Brands Section -->
+<section class="brands-section">
+    <div class="container">
+        <div class="brand-wrapper">
+            <div class="brand-badge">
+                <div class="brand-logo">
+                    <img src="{% static 'images/bhwlogo-dark-transparent.webp' %}" alt="BlackHat Forum">
+                </div>
+                <h4 class="brand-text">Recommended since 2003</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">PROOF OF SUCCESS</div>
+            <h2 class="section-title">Real Results From Our <span class="text-accent">Top Affiliates</span></h2>
+            <p class="section-subtitle">See what our top performers are achieving with our platform</p>
+            </div>
+        
+        <div class="reviews-grid">
+            <div class="review-item large">
+                <div class="review-card">
+                    <img src="{% static 'images/review1.png' %}" alt="Top Performer Proof">
+                    <div class="card-glow"></div>
+        </div>
+                </div>
+            <div class="review-item">
+                <div class="review-card">
+                    <img src="{% static 'images/review2.png' %}" alt="Review 2">
+                    <div class="card-glow"></div>
+            </div>
+                </div>
+            <div class="review-item">
+                <div class="review-card">
+                    <img src="{% static 'images/review3.png' %}" alt="Review 3">
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+    <div class="section-header">
+            <div class="section-badge">FEATURES</div>
+            <h2 class="section-title">Everything you need to <span class="text-accent">succeed</span></h2>
+            <p class="section-subtitle">Powerful tools to maximize your earnings</p>
+    </div>
+        
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+                <div class="icon-glow"></div>
+            </div>
+                <h3 class="feature-title">Maximized Earnings</h3>
+                <p class="feature-description">Earn up to 50% of the revenue generated by your referrals. Our commission system is the most competitive in the market.</p>
+            <div class="feature-decoration"></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+                <div class="icon-glow"></div>
+            </div>
+                <h3 class="feature-title">Guaranteed Security</h3>
+                <p class="feature-description">Your data and transactions are protected by the latest encryption and security technologies.</p>
+            <div class="feature-decoration"></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-rocket"></i>
+                <div class="icon-glow"></div>
+            </div>
+                <h3 class="feature-title">Rapid Growth</h3>
+                <p class="feature-description">Access powerful marketing tools to effectively grow your referral network.</p>
+            <div class="feature-decoration"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="stats-background">
+        <div class="stats-grid-overlay"></div>
+    </div>
+    <div class="container">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-percentage"></i>
+            </div>
+            <div class="stat-content">
+                    <div class="stat-number counter" data-target="50">0</div>
+                    <div class="stat-label">Maximum Commission</div>
+            </div>
+                <div class="stat-glow"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">24/7</div>
+                    <div class="stat-label">Customer Support</div>
+            </div>
+                <div class="stat-glow"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-content">
+                    <div class="stat-number counter" data-target="100">0</div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+                <div class="stat-glow"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">HOW IT WORKS</div>
+            <h2 class="section-title">The power of affiliate marketing, <span class="text-accent">simplified</span></h2>
+            <p class="section-subtitle">Discover how our platform transforms your online presence into stable income</p>
+        </div>
+
+        <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                <h3 class="step-title">Create your profile</h3>
+                <p class="step-description">Sign up and customize your profile with your best photos and an attractive description.</p>
+                <div class="step-stats">+200%</div>
+                <p class="step-note">average visibility increase</p>
+                <div class="step-glow"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                <h3 class="step-title">Generate links</h3>
+                <p class="step-description">Create unique referral links for each platform and start sharing them.</p>
+                <div class="step-stats">24/7</div>
+                <p class="step-note">real-time conversion tracking</p>
+                <div class="step-glow"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                <h3 class="step-title">Earn revenue</h3>
+                <p class="step-description">Receive commissions on every new registration generated through your links.</p>
+                <div class="step-stats">85%</div>
+                <p class="step-note">affiliate retention rate</p>
+                <div class="step-glow"></div>
+            </div>
+        </div>
+
+        <div class="section-cta">
+            <a href="{% url 'accounts:register' %}" class="btn-cyber primary large">
+                <span class="btn-cyber-glitch"></span>
+                <span class="btn-cyber-text">Start Now</span>
+                <i class="fas fa-arrow-right"></i>
+                <span class="btn-cyber-edge top"></span>
+                <span class="btn-cyber-edge right"></span>
+                <span class="btn-cyber-edge bottom"></span>
+                <span class="btn-cyber-edge left"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-background">
+        <div class="cta-grid-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="cta-card">
+            <h2 class="cta-title">Ready to transform your online presence?</h2>
+            <p class="cta-subtitle">Join thousands of escorts already generating stable income with our platform.</p>
+            <a href="{% url 'accounts:register' %}" class="btn-cyber primary large">
+                <span class="btn-cyber-glitch"></span>
+                <span class="btn-cyber-text">Create my free account</span>
+                <i class="fas fa-arrow-right"></i>
+                <span class="btn-cyber-edge top"></span>
+                <span class="btn-cyber-edge right"></span>
+                <span class="btn-cyber-edge bottom"></span>
+                <span class="btn-cyber-edge left"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Commission Structure -->
+<section class="commission-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">COMMISSIONS</div>
+            <h2 class="section-title">Transparent commission <span class="text-accent">structure</span></h2>
+            <p class="section-subtitle">We offer the most competitive commission rates in the market</p>
+        </div>
+        
+        <div class="commission-grid">
+            <div class="commission-table">
+                <div class="table-header">
+                    <h5 class="table-title">Our commission rates</h5>
+                    </div>
+                <div class="table-content">
+                    <div class="table-row header">
+                        <div class="table-cell">Type</div>
+                        <div class="table-cell">Rate</div>
+                        <div class="table-cell">Details</div>
+                        </div>
+                    <div class="table-row">
+                        <div class="table-cell">White Label</div>
+                        <div class="table-cell"><span class="badge success">30%</span></div>
+                        <div class="table-cell">On all revenue</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell">Ambassadors</div>
+                        <div class="table-cell"><span class="badge success">10%</span></div>
+                        <div class="table-cell">On their commissions</div>
+                </div>
+            </div>
+            </div>
+            
+            <div class="commission-info">
+                <h3 class="info-title">Earn more than with other platforms</h3>
+                <p class="info-text">Our commission structure is designed to maximize your earnings both short and long term:</p>
+                <ul class="check-list">
+                    <li><strong>Lifetime commissions</strong> - You keep earning as long as your referrals stay active</li>
+                    <li><strong>Bi-monthly payments</strong> - Receive your earnings twice a month</li>
+                    <li><strong>Multi-level</strong> - Earn also from your referrals' referrals</li>
+                    <li><strong>Performance bonus</strong> - Up to 10% additional based on your volume</li>
+                </ul>
+                <a href="{% url 'pricing' %}" class="btn-outline">View all details</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+    <div class="container">
+        <div class="cta-flex">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to start your journey to passive income?</h2>
+                <p class="cta-text">Join thousands of affiliates already earning with EscortDollars</p>
+            </div>
+            <div class="cta-action">
+                <a href="{% url 'account_signup' %}" class="btn-cyber primary">
+                    <span class="btn-cyber-text">Create my account</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="btn-cyber-edge top"></span>
+                    <span class="btn-cyber-edge right"></span>
+                    <span class="btn-cyber-edge bottom"></span>
+                    <span class="btn-cyber-edge left"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section" id="faq">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">FAQ</div>
+            <h2 class="section-title">Frequently asked <span class="text-accent">questions</span></h2>
+            <p class="section-subtitle">Everything you need to know to get started</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-accordion">
+                    <!-- Question 1 -->
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <h3>How does the affiliate program work?</h3>
+                        <div class="question-icon">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                                <p>Our affiliate program works in a simple way:</p>
+                                <ol>
+                            <li>Create a free account on EscortDollars</li>
+                            <li>Get your unique affiliate link</li>
+                            <li>Share this link on your platforms (website, social media, emails)</li>
+                            <li>When someone clicks your link and signs up or makes a purchase, you receive a commission</li>
+                            <li>Commissions are paid twice a month via your chosen payment method</li>
+                                </ol>
+                                <p>We use an advanced tracking system that correctly attributes conversions and credits your commissions transparently.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is White Label and how can I create my own site?</h3>
+                        <div class="question-icon">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our White Label solution allows you to create your own escort site with your name, logo, and domain, while using our proven infrastructure:</p>
+                        <ol>
+                            <li>In your dashboard, select "Create White Label"</li>
+                                    <li>Choose a name for your site and upload your logo</li>
+                                    <li>Configure your domain (we provide DNS instructions)</li>
+                            <li>Customize colors and appearance to your preferences</li>
+                                    <li>Publish your site with one click</li>
+                                </ol>
+                        <p>Your White Label site will have access to our complete escort database, and you'll earn commissions on all transactions generated through your platform.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How much can I earn with EscortDollars?</h3>
+                        <div class="question-icon">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                                <p>Your earnings depend on several factors: your traffic, conversion rate, and involvement. Here's what our affiliates earn on average:</p>
+                                <ul>
+                            <li><strong>Beginner affiliates</strong>: $500 - $1,000 per month</li>
+                            <li><strong>Intermediate affiliates</strong>: $1,000 - $3,000 per month</li>
+                            <li><strong>Advanced affiliates</strong>: $3,000 - $10,000 per month</li>
+                            <li><strong>White Label partners</strong>: $5,000 - $20,000 per month</li>
+                                </ul>
+                        <p>Our top affiliates earn over $20,000 per month through our multi-level commission system and their White Label site.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How and when am I paid?</h3>
+                        <div class="question-icon">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                                <p>We offer several payment methods and a flexible schedule:</p>
+                                <ul>
+                            <li><strong>Frequency</strong>: Bi-monthly payments (1st and 15th of each month)</li>
+                                    <li><strong>Methods</strong>: Bank transfer, PayPal, Crypto, Skrill</li>
+                                    <li><strong>Minimum threshold</strong>: $50 (electronic methods) / $100 (bank transfer)</li>
+                                </ul>
+                        <p>You can track your commissions in real-time in your dashboard, and all transactions are recorded transparently. Payments are processed automatically, with no additional delay.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is it legal? What are the restrictions?</h3>
+                        <div class="question-icon">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our affiliate program is completely legal. We operate within the standard affiliate marketing framework, which is an established and recognized business practice.</p>
+                        <p>However, there are some important points to consider:</p>
+                                <ul>
+                                    <li>You must comply with local laws regarding advertising for escort services in your country</li>
+                            <li>Our content is restricted to adults (18+)</li>
+                            <li>Some platforms (like Facebook, Instagram, Google Ads) have restrictions regarding the promotion of escort services. We provide guidance on compliant promotion</li>
+                                </ul>
+                                <p>Our support team can help you with legal questions specific to your market.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="faq-more">
+                <a href="{% url 'faq' %}" class="btn-outline">View all questions</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if activation_url %}
+<div class="container mt-5">
+    <div class="alert alert-info">
+        <h4>Activation Link</h4>
+        <p>Email: {{ activation_email }}</p>
+        <p>Activation link: <a href="{{ activation_url }}">{{ activation_url }}</a></p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --bg-dark: #0e0e18;
+        --bg-darker: #09090f;
+        --bg-light: #1a1a2e;
+        --primary-color: #9d4bff;
+        --primary-dark: #8a3ce0;
+        --secondary-color: #2bffc6;
+        --accent-color: #ff3a8c;
+        --gradient-1: linear-gradient(45deg, var(--primary-color), #4c6fff);
+        --gradient-2: linear-gradient(45deg, var(--secondary-color), #20c6f1);
+        --text-light: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        --glow-shadow: 0 0 20px rgba(157, 75, 255, 0.3);
+        --card-bg: rgba(24, 24, 38, 0.7);
+        --grid-color: rgba(74, 47, 189, 0.2);
+    }
+    
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        height: 100%;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 1rem;
+        overflow: hidden;
+    }
+    
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        background: radial-gradient(circle at center, rgba(34, 25, 60, 0.8) 0%, rgba(9, 9, 15, 1) 70%);
+    }
+    
+    .nebula-effect {
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        top: -25%;
+        left: -25%;
+        background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgogIDxmaWx0ZXIgaWQ9Im5vaXNlIj4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjA1IiBudW1PY3RhdmVzPSI1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiAvPgogICAgPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMC41IDAuMiAwLjcgMCAwIDAgMCAwLjMgMC41IDAiLz4KICA8L2ZpbHRlcj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjE1Ii8+Cjwvc3ZnPg==');
+        opacity: 0.3;
+        mix-blend-mode: screen;
+        animation: nebula-move 60s linear infinite alternate;
+        pointer-events: none;
+    }
+    
+    @keyframes nebula-move {
+        0% {
+            transform: rotate(0) scale(1);
+        }
+        100% {
+            transform: rotate(5deg) scale(1.1);
+        }
+    }
+    
+    .grid-overlay {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+        background-size: 30px 30px;
+        transform: perspective(1000px) rotateX(60deg) translateZ(0);
+        animation: grid-move 25s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+        opacity: 0.15;
+        pointer-events: none;
+    }
+    
+    @keyframes grid-move {
+        0% {
+            transform: perspective(1000px) rotateX(60deg) translateY(0) translateZ(0);
+        }
+        100% {
+            transform: perspective(1000px) rotateX(60deg) translateY(30px) translateZ(0);
+        }
+    }
+    
+    .gradient-sphere {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.7;
+        mix-blend-mode: screen;
+        transform-origin: center center;
+        animation-duration: 20s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        will-change: transform;
+    }
+    
+    .sphere-1 {
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(circle, rgba(157, 75, 255, 0.9) 0%, rgba(74, 47, 189, 0.3) 60%, transparent 80%);
+        top: -10%;
+        left: 15%;
+        animation-name: float-1;
+    }
+    
+    .sphere-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(43, 255, 198, 0.8) 0%, rgba(32, 198, 241, 0.4) 60%, transparent 80%);
+        bottom: 5%;
+        right: 15%;
+        animation-name: float-2;
+        animation-delay: 1s;
+    }
+    
+    .sphere-3 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(255, 58, 140, 0.7) 0%, rgba(76, 111, 255, 0.3) 60%, transparent 80%);
+        top: 50%;
+        left: 50%;
+        animation-name: float-3;
+        animation-delay: 2s;
+    }
+    
+    @keyframes float-1 {
+        0% {
+            transform: translate(0, 0) scale(1);
+        }
+        50% {
+            transform: translate(-40px, 30px) scale(1.05);
+        }
+        100% {
+            transform: translate(40px, -40px) scale(0.95);
+        }
+    }
+    
+    @keyframes float-2 {
+        0% {
+            transform: translate(0, 0) scale(0.95);
+        }
+        50% {
+            transform: translate(50px, -30px) scale(1);
+        }
+        100% {
+            transform: translate(-40px, 40px) scale(1.05);
+        }
+    }
+    
+    @keyframes float-3 {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        50% {
+            transform: translate(-30px, 40px) rotate(5deg) scale(1.1);
+        }
+        100% {
+            transform: translate(40px, -30px) rotate(-5deg) scale(0.95);
+        }
+    }
+    
+    .light-beam {
+        position: absolute;
+        background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transform-origin: bottom center;
+        pointer-events: none;
+    }
+    
+    .beam-1 {
+        width: 1px;
+        height: 100%;
+        left: 30%;
+        top: 0;
+        transform: rotate(-10deg) scaleX(80);
+        opacity: 0.05;
+        filter: blur(5px);
+        animation: beam-pulse 8s ease-in-out infinite alternate;
+    }
+    
+    .beam-2 {
+        width: 1px;
+        height: 100%;
+        right: 25%;
+        top: 0;
+        transform: rotate(15deg) scaleX(60);
+        opacity: 0.03;
+        filter: blur(8px);
+        animation: beam-pulse 12s ease-in-out 2s infinite alternate;
+    }
+    
+    @keyframes beam-pulse {
+        0% {
+            opacity: 0.02;
+            transform: rotate(-10deg) scaleX(80);
+        }
+        50% {
+            opacity: 0.05;
+            transform: rotate(-12deg) scaleX(85);
+        }
+        100% {
+            opacity: 0.03;
+            transform: rotate(-8deg) scaleX(75);
+        }
+    }
+    
+    .noise-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.035;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+    }
+    
+    .particles-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    
+    .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        z-index: 1;
+    }
+    
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(157, 75, 255, 0.1);
+        border: 1px solid rgba(157, 75, 255, 0.2);
+        border-radius: 50px;
+        padding: 0.5rem 1.25rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        margin-right: 8px;
+        display: inline-block;
+        position: relative;
+    }
+    
+    .pulse-dot:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        animation: pulse 1.5s ease-out infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(3);
+            opacity: 0;
+        }
+    }
+    
+    .hero-badge span {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        font-weight: 600;
+        color: var(--text-light);
+    }
+    
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        position: relative;
+    }
+    
+    .text-glitch {
+        position: relative;
+        display: inline-block;
+        color: var(--text-light);
+    }
+    
+    .text-glitch::before,
+    .text-glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+    }
+    
+    .text-glitch::before {
+        color: #ff00ff;
+        z-index: -1;
+        animation: glitch-effect 3s infinite;
+    }
+    
+    .text-glitch::after {
+        color: #00ffff;
+        z-index: -2;
+        animation: glitch-effect 2s infinite reverse;
+    }
+    
+    @keyframes glitch-effect {
+        0% {
+            transform: none;
+            opacity: 0.8;
+        }
+        7% {
+            transform: translate(-2px, -3px);
+            opacity: 0.6;
+        }
+        10% {
+            transform: none;
+            opacity: 0.8;
+        }
+        27% {
+            transform: none;
+            opacity: 0.8;
+        }
+        30% {
+            transform: translate(2px, 3px);
+            opacity: 0.6;
+        }
+        35% {
+            transform: none;
+            opacity: 0.8;
+        }
+        52% {
+            transform: none;
+            opacity: 0.8;
+        }
+        55% {
+            transform: translate(-2px, 3px);
+            opacity: 0.6;
+        }
+        50% {
+            transform: none;
+            opacity: 0.8;
+        }
+        72% {
+            transform: none;
+            opacity: 0.8;
+        }
+        75% {
+            transform: translate(2px, -3px);
+            opacity: 0.6;
+        }
+        80% {
+            transform: none;
+            opacity: 0.8;
+        }
+        100% {
+            transform: none;
+            opacity: 0.8;
+        }
+    }
+    
+    .hero-title-decoration {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 4px;
+        background: var(--gradient-1);
+        border-radius: 2px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 4rem 0;
+        background: var(--gradient-1);
+    }
+
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .gradient-sphere {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        animation: float 8s infinite;
+    }
+
+    .sphere-1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary-color);
+        top: -100px;
+        left: -100px;
+        animation-delay: 0s;
+    }
+
+    .sphere-2 {
+        width: 400px;
+        height: 400px;
+        background: var(--secondary-color);
+        top: 50%;
+        right: -200px;
+        animation-delay: 2s;
+    }
+
+    .sphere-3 {
+        width: 200px;
+        height: 200px;
+        background: var(--primary-light);
+        bottom: -100px;
+        left: 50%;
+        animation-delay: 4s;
+    }
+
+    .noise-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--secondary-color);
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        position: relative;
+    }
+
+    .pulse-dot::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background: var(--secondary-color);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        position: relative;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #fff 0%, var(--text-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+
+    .title-decoration {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--gradient-2);
+        border-radius: 2px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        color: var(--text-muted);
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 4rem;
+    }
+
+    .btn-cyber {
+        position: relative;
+        padding: 0.85rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: all 0.3s;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-cyber.large {
+        padding: 1.2rem 2.8rem;
+        font-size: 1.1rem;
+    }
+    
+    .btn-cyber.primary {
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+    
+    .btn-cyber.secondary {
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid rgba(157, 75, 255, 0.3);
+    }
+    
+    .btn-cyber i {
+        margin-left: 8px;
+    }
+    
+    .btn-cyber-text {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .btn-cyber-edge {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s;
+    }
+    
+    .btn-cyber-edge.top, .btn-cyber-edge.bottom {
+        height: 1px;
+        width: 100%;
+    }
+    
+    .btn-cyber-edge.left, .btn-cyber-edge.right {
+        width: 1px;
+        height: 100%;
+    }
+    
+    .btn-cyber-edge.top {
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+    }
+
+    .btn-cyber-edge.right {
+        top: 0;
+        right: 0;
+        transform: translateY(-100%);
+    }
+    
+    .btn-cyber-edge.bottom {
+        bottom: 0;
+        right: 0;
+        transform: translateX(100%);
+    }
+    
+    .btn-cyber-edge.left {
+        bottom: 0;
+        left: 0;
+        transform: translateY(100%);
+    }
+    
+    .btn-cyber:hover .btn-cyber-edge.top,
+    .btn-cyber:hover .btn-cyber-edge.bottom {
+        transform: translateX(0);
+    }
+    
+    .btn-cyber:hover .btn-cyber-edge.left,
+    .btn-cyber:hover .btn-cyber-edge.right {
+        transform: translateY(0);
+    }
+    
+    .btn-cyber.primary:hover {
+        box-shadow: 0 0 20px rgba(157, 75, 255, 0.5);
+        transform: translateY(-2px);
+    }
+    
+    .btn-cyber.secondary:hover {
+        background-color: rgba(157, 75, 255, 0.1);
+        border-color: rgba(157, 75, 255, 0.5);
+    }
+
+    .hero-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+    }
+
+    .stat-divider {
+        width: 1px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .scroll-mouse {
+        width: 1.5rem;
+        height: 2.5rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 1rem;
+        display: flex;
+        justify-content: center;
+        padding-top: 0.5rem;
+    }
+    
+    .scroll-wheel {
+        width: 0.25rem;
+        height: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 0.125rem;
+        animation: wheel-scroll 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes wheel-scroll {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(0.8rem);
+            opacity: 0;
+        }
+    }
+    
+    .scroll-arrows {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    
+    .scroll-arrows span {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-right: 2px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        transform: rotate(45deg);
+        animation: arrows-scroll 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes arrows-scroll {
+        0% {
+        opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    
+    /* Brands Section */
+    .brands-section {
+        padding: 3rem 0;
+        background-color: var(--bg-darker);
+        position: relative;
+    }
+    
+    .brand-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .brand-badge {
+        display: flex;
+        align-items: center;
+        background: rgba(24, 24, 38, 0.7);
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        box-shadow: var(--box-shadow);
+    }
+    
+    .brand-logo {
+        margin-right: 1rem;
+    }
+    
+    .brand-logo img {
+        max-height: 2.5rem;
+        opacity: 0.9;
+    }
+    
+    .brand-text {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text-light);
+        margin: 0;
+        white-space: nowrap;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .section-badge {
+        display: inline-block;
+        background: rgba(157, 75, 255, 0.1);
+        color: var(--primary-color);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    .text-accent {
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    /* Reviews Section */
+    .reviews-section {
+        padding: 5rem 0;
+        background-color: var(--bg-dark);
+    }
+    
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .review-item.large {
+        grid-column: span 2;
+    }
+    
+    .review-card {
+        position: relative;
+        background-color: var(--card-bg);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: all 0.3s;
+        height: 100%;
+    }
+    
+    .review-card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s;
+    }
+    
+    .card-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent 50%, rgba(157, 75, 255, 0.1) 100%);
+        pointer-events: none;
+    }
+    
+    .review-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glow-shadow);
+    }
+    
+    .review-card:hover img {
+        transform: scale(1.03);
+    }
+
+    /* Features Section */
+    .features-section {
+        padding: 6rem 0;
+        background-color: var(--bg-light);
+        position: relative;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .feature-card {
+        position: relative;
+        background-color: var(--card-bg);
+        border-radius: 0.5rem;
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        padding: 2rem;
+        transition: all 0.3s;
+        overflow: hidden;
+    }
+
+    .feature-icon {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #fff;
+        background: var(--gradient-1);
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .icon-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        border-radius: 50%;
+        filter: blur(15px);
+        opacity: 0.7;
+        z-index: -1;
+    }
+
+    .feature-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+        text-align: center;
+    }
+
+    .feature-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        text-align: center;
+    }
+
+    .feature-decoration {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--gradient-1);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glow-shadow);
+        border-color: rgba(157, 75, 255, 0.3);
+    }
+
+    .feature-card:hover .feature-decoration {
+        transform: scaleX(1);
+    }
+
+    /* Stats Section */
+    .stats-section {
+        padding: 6rem 0;
+        background-color: var(--bg-darker);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stats-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .stats-grid-overlay {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background: linear-gradient(rgba(74, 47, 189, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(74, 47, 189, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(1000px) rotateX(60deg);
+        z-index: 1;
+        opacity: 0.2;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .stat-card {
+        position: relative;
+        background: linear-gradient(135deg, rgba(157, 75, 255, 0.08) 0%, rgba(43, 255, 198, 0.08) 100%);
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s;
+        overflow: hidden;
+    }
+
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        background: rgba(157, 75, 255, 0.1);
+        border-radius: 50%;
+        margin-right: 1.5rem;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glow-shadow);
+        border-color: rgba(157, 75, 255, 0.3);
+    }
+    
+    /* How It Works Section */
+    .how-it-works-section {
+        padding: 6rem 0;
+        background-color: var(--bg-dark);
+        position: relative;
+    }
+    
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .step-card {
+        position: relative;
+        background-color: var(--card-bg);
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 2.5rem 2rem;
+        transition: all 0.3s;
+        overflow: hidden;
+    }
+    
+    .step-number {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 70px;
+        height: 70px;
+        background: var(--gradient-1);
+        color: #fff;
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        z-index: 1;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .step-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+    
+    .step-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-stats {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.3rem;
+    }
+    
+    .step-note {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+    
+    .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glow-shadow);
+        border-color: rgba(157, 75, 255, 0.3);
+    }
+    
+    .section-cta {
+        text-align: center;
+        margin-top: 4rem;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+        padding: 6rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .cta-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+    
+    .cta-grid-overlay {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background: linear-gradient(rgba(74, 47, 189, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(74, 47, 189, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(1000px) rotateX(60deg);
+        z-index: 1;
+        opacity: 0.2;
+    }
+    
+    .cta-card {
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(135deg, rgba(157, 75, 255, 0.08) 0%, rgba(43, 255, 198, 0.08) 100%);
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: var(--box-shadow);
+    }
+    
+    .cta-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .cta-subtitle {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Commission Section */
+    .commission-section {
+        padding: 6rem 0;
+        background-color: var(--bg-light);
+    }
+    
+    .commission-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+    
+    .commission-table {
+        background-color: var(--card-bg);
+        border-radius: 0.5rem;
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        overflow: hidden;
+    }
+    
+    .table-header {
+        background: var(--gradient-1);
+        padding: 1.5rem 2rem;
+    }
+    
+    .table-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+    }
+    
+    .table-content {
+        padding: 1rem;
+    }
+    
+    .table-row {
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .table-row.header {
+        font-weight: 700;
+        color: var(--text-light);
+    }
+    
+    .table-row:last-child {
+        border-bottom: none;
+    }
+    
+    .table-cell {
+        flex: 1;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .badge.success {
+        background-color: rgba(43, 255, 198, 0.1);
+        color: var(--secondary-color);
+        border: 1px solid rgba(43, 255, 198, 0.2);
+    }
+    
+    .commission-info {
+        display: flex;
+            flex-direction: column;
+        justify-content: center;
+    }
+    
+    .info-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--text-light);
+    }
+    
+    .info-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+    }
+    
+    .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem 0;
+    }
+    
+    .check-list li {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+    }
+    
+    .check-list li::before {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        top: 2px;
+        color: var(--secondary-color);
+    }
+    
+    .btn-outline {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: transparent;
+        border: 1px solid rgba(157, 75, 255, 0.3);
+        border-radius: 0.25rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .btn-outline:hover {
+        background-color: rgba(157, 75, 255, 0.1);
+        border-color: rgba(157, 75, 255, 0.5);
+    }
+    
+    /* Final CTA */
+    .final-cta {
+        padding: 4rem 0;
+        background-color: var(--bg-darker);
+    }
+    
+    .cta-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .cta-content {
+        flex: 1;
+    }
+    
+    .cta-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+    
+    .cta-text {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+        padding: 6rem 0;
+        background-color: var(--bg-dark);
+    }
+    
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .faq-accordion {
+        margin-bottom: 3rem;
+    }
+    
+    .faq-item {
+        margin-bottom: 1rem;
+        border: 1px solid rgba(157, 75, 255, 0.1);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background-color: var(--card-bg);
+        transition: all 0.3s;
+    }
+    
+    .faq-item.active {
+        border-color: rgba(157, 75, 255, 0.3);
+        box-shadow: var(--glow-shadow);
+    }
+    
+    .faq-question {
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    
+    .faq-question h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-light);
+        margin: 0;
+    }
+    
+    .question-icon {
+        color: var(--primary-color);
+    }
+    
+    .question-icon .fa-minus {
+        display: none;
+    }
+    
+    .faq-item.active .question-icon .fa-plus {
+        display: none;
+    }
+    
+    .faq-item.active .question-icon .fa-minus {
+        display: inline-block;
+    }
+    
+    .faq-answer {
+        padding: 0 1.5rem 1.5rem;
+        display: none;
+    }
+    
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+    
+    .faq-answer p {
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+    
+    .faq-answer ul, .faq-answer ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+    }
+    
+    .faq-answer li {
+        margin-bottom: 0.5rem;
+    }
+
+    .faq-more {
+        text-align: center;
+    }
+    
+    /* Media Queries */
+    @media (max-width: 991px) {
+        .hero-title {
+            font-size: 3.5rem;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+        }
+        
+        .commission-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-flex {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .cta-action {
+            margin-top: 2rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 3rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+        }
+        
+        .reviews-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .review-item.large {
+            grid-column: auto;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .stat-divider {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+        }
+        
+        .cta-title {
+            font-size: 1.8rem;
+        }
+    }
+    
+    /* World's Best Banner */
+    .world-best-banner {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        padding: 8px 20px;
+        background: linear-gradient(135deg, rgba(157, 75, 255, 0.2), rgba(43, 255, 198, 0.2));
+        border-radius: 50px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(157, 75, 255, 0.3);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+    }
+    
+    .banner-badge {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        border-radius: 50%;
+        margin-right: 10px;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .banner-badge i {
+        color: #fff;
+        font-size: 0.85rem;
+    }
+    
+    .banner-text {
+        font-weight: 700;
+        font-size: 0.9rem;
+        background: linear-gradient(90deg, #fff, #FFD700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    }
+    
+    .banner-decoration {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+            radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 25%);
+        border-radius: 50px;
+        z-index: -1;
+        animation: pulse-gold 3s infinite alternate;
+    }
+    
+    @keyframes pulse-gold {
+        0% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .world-best-banner {
+            top: 20px;
+            width: 90%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        // Animations des compteurs
+        function animateValue(element, start, end, duration) {
+            const startTimestamp = performance.now();
+            
+            const step = function(timestamp) {
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value + (element.dataset.target === '100' ? '%' : '');
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+            
+        window.requestAnimationFrame(step);
+        }
+
+        // Utilisation de l'Intersection Observer pour déclencher les animations quand les éléments sont visibles
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('counter') && entry.target.dataset.target) {
+                        animateValue(entry.target, 0, parseInt(entry.target.dataset.target), 2000);
+                }
+                entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+            }
+        });
+    }, {
+            threshold: 0.2
+        });
+        
+        // Observer les éléments
+        document.querySelectorAll('.counter').forEach(el => observer.observe(el));
+        document.querySelectorAll('.feature-card, .stat-card, .step-card, .review-card').forEach(el => observer.observe(el));
+        
+        // Accordéon FAQ
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Fermer les autres items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggler l'item courant
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Effet parallaxe pour les sphères
+        window.addEventListener('mousemove', function(e) {
+            const spheres = document.querySelectorAll('.gradient-sphere');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            spheres.forEach((sphere, index) => {
+                const factor = (index + 1) * 15;
+                const offsetX = (mouseX - 0.5) * factor;
+                const offsetY = (mouseY - 0.5) * factor;
+                
+                // Applique une transformation légère en fonction de la position de la souris
+                sphere.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+            });
+        });
+        
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Chargement de la librairie particles.js
+        // Crée un script pour charger particles.js
+        const particlesScript = document.createElement('script');
+        particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+        particlesScript.onload = function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 0.5,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#9d4bff",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.3
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        };
+        document.body.appendChild(particlesScript);
+        
+        // Animation de la bannière "Meilleur site"
+        const banner = document.querySelector('.world-best-banner');
+        setTimeout(() => {
+            banner.style.transform = 'translateX(-50%) scale(1.05)';
+            setTimeout(() => {
+                banner.style.transform = 'translateX(-50%) scale(1)';
+            }, 200);
+        }, 1000);
+});
+</script>
+{% endblock %} 

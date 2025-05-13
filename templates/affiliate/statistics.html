@@ -1,0 +1,1010 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Statistics - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    /* Design futuriste avec LED violettes sur fond gris foncé */
+    body {
+        background-color: #1a1a24;
+        color: #e0e0e0;
+    }
+    
+    .content {
+        background-color: #1a1a24;
+        padding: 2rem;
+    }
+    
+    .page-header h2 {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(124, 77, 255, 0.4);
+    }
+    
+    .page-header p {
+        color: #a0a0a0;
+    }
+    
+    /* Cartes futuristes avec bords lumineux */
+    .stats-card {
+        background: linear-gradient(145deg, rgba(26, 26, 36, 0.7), rgba(35, 35, 45, 0.7));
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(124, 77, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #7C4DFF, #D500F9, #7C4DFF);
+        background-size: 200% 200%;
+        animation: glow 2s infinite;
+        z-index: 1;
+    }
+    
+    @keyframes glow {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(124, 77, 255, 0.2);
+    }
+    
+    .stats-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+    
+    .stats-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        background: linear-gradient(to right, #7C4DFF, #D500F9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 1rem;
+        box-shadow: 0 0 15px rgba(124, 77, 255, 0.6);
+        position: relative;
+        z-index: 2;
+    }
+
+    .stats-icon::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        background: linear-gradient(to right, #7C4DFF, #D500F9);
+        filter: blur(8px);
+        opacity: 0.4;
+        z-index: -1;
+    }
+    
+    .stats-value-lg {
+        font-size: 2.75rem;
+        font-weight: 700;
+        margin-bottom: 0;
+        line-height: 1;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(124, 77, 255, 0.7);
+        background: linear-gradient(to right, #ffffff, #d9c2ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .stats-trend {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        margin-left: 0.75rem;
+        backdrop-filter: blur(5px);
+    }
+    
+    .stats-trend-up {
+        color: #4CAF50;
+        background-color: rgba(76, 175, 80, 0.1);
+        border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+    
+    .stats-trend-down {
+        color: #F44336;
+        background-color: rgba(244, 67, 54, 0.1);
+        border: 1px solid rgba(244, 67, 54, 0.2);
+    }
+    
+    .stats-trend i {
+        margin-right: 0.25rem;
+    }
+
+    .chart-container {
+        height: 300px;
+        position: relative;
+        margin-top: 1rem;
+        border-radius: 10px;
+        background: rgba(20, 20, 30, 0.4);
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .table-affiliates {
+        color: #e0e0e0;
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+    
+    .table-affiliates thead th {
+        border: none;
+        background: transparent;
+        color: #a0a0a0;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        padding: 0.75rem 1rem;
+    }
+    
+    .table-affiliates tbody tr {
+        background: linear-gradient(145deg, rgba(30, 30, 40, 0.7), rgba(40, 40, 50, 0.7));
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .table-affiliates tbody tr:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(124, 77, 255, 0.15);
+    }
+    
+    .table-affiliates td {
+        border: none;
+        padding: 1rem;
+        vertical-align: middle;
+    }
+    
+    .table-affiliates td:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    
+    .table-affiliates td:last-child {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+    
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 0.75rem;
+        border: 2px solid rgba(124, 77, 255, 0.5);
+        box-shadow: 0 0 10px rgba(124, 77, 255, 0.3);
+    }
+    
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .filter-bar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: rgba(30, 30, 40, 0.5);
+        border-radius: 12px;
+        border: 1px solid rgba(124, 77, 255, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .date-filter {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .date-filter-item {
+        padding: 0.5rem 1.25rem;
+        border-radius: 30px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: rgba(40, 40, 50, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        color: #a0a0a0;
+    }
+    
+    .date-filter-item:hover {
+        background: rgba(124, 77, 255, 0.1);
+        color: #ffffff;
+        border-color: rgba(124, 77, 255, 0.3);
+    }
+    
+    .date-filter-item.active {
+        background: linear-gradient(to right, #7C4DFF, #D500F9);
+        color: white;
+        box-shadow: 0 0 15px rgba(124, 77, 255, 0.5);
+        border: none;
+        position: relative;
+    }
+    
+    .date-filter-item.active::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background: linear-gradient(to right, #7C4DFF, #D500F9);
+        filter: blur(10px);
+        opacity: 0.4;
+        z-index: -1;
+        left: 0;
+        top: 0;
+    }
+    
+    .commission-details {
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+        margin-top: 1rem;
+        background: rgba(20, 20, 30, 0.4);
+        border-radius: 10px;
+        padding: 1rem;
+    }
+    
+    .commission-value {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .commission-paid {
+        color: #4CAF50;
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+    
+    .commission-pending {
+        color: #FFC107;
+        text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    }
+    
+    /* Boutons futuristes */
+    .btn-group .btn {
+        border-radius: 8px;
+        font-weight: 500;
+        padding: 0.5rem 1.25rem;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #7C4DFF, #D500F9);
+        border: none;
+        box-shadow: 0 0 15px rgba(124, 77, 255, 0.4);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(124, 77, 255, 0.6);
+    }
+    
+    .btn-outline-primary {
+        background: rgba(30, 30, 40, 0.5);
+        border: 1px solid rgba(124, 77, 255, 0.3);
+        color: #a0a0a0;
+    }
+    
+    .btn-outline-primary:hover {
+        background: rgba(124, 77, 255, 0.1);
+        border-color: rgba(124, 77, 255, 0.5);
+        color: #ffffff;
+    }
+    
+    /* Badge futuriste */
+    .badge {
+        padding: 0.5em 0.8em;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        border-radius: 6px;
+    }
+    
+    .bg-info {
+        background: linear-gradient(45deg, #00BCD4, #03A9F4);
+        box-shadow: 0 0 10px rgba(3, 169, 244, 0.4);
+    }
+    
+    /* État vide stylisé */
+    .empty-state {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(30, 30, 40, 0.3);
+        border-radius: 12px;
+        border: 1px dashed rgba(124, 77, 255, 0.2);
+    }
+    
+    .empty-state i {
+        color: rgba(124, 77, 255, 0.5);
+        margin-bottom: 1rem;
+    }
+    
+    /* Effet glitch pour les titres */
+    h4.fw-bold {
+        position: relative;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(124, 77, 255, 0.5);
+        animation: textGlow 2s infinite alternate;
+    }
+    
+    @keyframes textGlow {
+        0% {
+            text-shadow: 0 0 5px rgba(124, 77, 255, 0.5);
+        }
+        100% {
+            text-shadow: 0 0 15px rgba(124, 77, 255, 0.8);
+        }
+    }
+    
+    /* Indicateur de notification lumineux */
+    .notification-indicator {
+        width: 12px;
+        height: 12px;
+        background: #4CAF50;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 8px;
+        position: relative;
+    }
+    
+    .notification-indicator::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #4CAF50;
+        filter: blur(4px);
+        opacity: 0.7;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.5);
+            opacity: 0.3;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+    }
+    
+    /* Grille de fond cyberpunk */
+    .content::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            linear-gradient(rgba(124, 77, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124, 77, 255, 0.05) 1px, transparent 1px);
+        background-size: 30px 30px;
+        pointer-events: none;
+        z-index: -1;
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="page-header">
+    <div>
+        <h2 class="fw-bold">Statistics</h2>
+        <p class="text-muted">Detailed analysis of your affiliate performance</p>
+    </div>
+            </div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+    <div class="date-filter me-auto">
+        <div class="date-filter-item active" data-period="7">7 days</div>
+        <div class="date-filter-item" data-period="30">30 days</div>
+        <div class="date-filter-item" data-period="90">90 days</div>
+        <div class="date-filter-item" data-period="365">1 year</div>
+        <div class="date-filter-item" data-period="all">All time</div>
+            </div>
+        </div>
+
+<!-- Key Metrics -->
+<div class="row g-4 mb-4">
+    <div class="col-md-6 col-lg-4">
+        <div class="stats-card h-100">
+            <div class="stats-header">
+                <div class="stats-icon">
+                    <i class="fas fa-users"></i>
+            </div>
+                <div>
+                    <h4 class="mb-0">Ambassadors</h4>
+        </div>
+            </div>
+            <div class="stats-value-lg" id="ambassador-count">0</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        <div class="stats-card h-100">
+            <div class="stats-header">
+                <div class="stats-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0">Escorts</h4>
+                </div>
+            </div>
+            <div class="stats-value-lg" id="escort-count">0</div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-4">
+        <div class="stats-card h-100">
+            <div class="stats-header">
+                <div class="stats-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0">Commissions</h4>
+        </div>
+            </div>
+            <div class="stats-value-lg" id="commission-amount">$0</div>
+            <div class="commission-details">
+                <div class="commission-value commission-paid">
+                    <i class="fas fa-check-circle"></i> Paid: <span id="paid-commission-amount">$0</span>
+                </div>
+                <div class="commission-value commission-pending">
+                    <i class="fas fa-clock"></i> Pending: <span id="pending-commission-amount">$0</span>
+            </div>
+            </div>
+        </div>
+    </div>
+                </div>
+
+<!-- Chart and Metrics -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-12">
+        <div class="stats-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0 fw-bold">Affiliate Growth</h4>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-sm btn-primary active">Ambassadors</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary">Escorts</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary">All</button>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="affiliatesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ambassadors Section -->
+<div class="stats-card mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0 fw-bold">Affiliated Ambassadors</h4>
+        <a href="#" class="btn btn-sm btn-outline-primary">View all</a>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-affiliates">
+            <thead>
+                <tr>
+                    <th>Ambassador</th>
+                    <th>Registration Date</th>
+                    <th>Referred Users</th>
+                </tr>
+            </thead>
+            <tbody id="ambassador-list">
+                <!-- Ambassador data will be loaded here -->
+                {% if ambassador_list and ambassador_list|length > 0 %}
+                    {% for ambassador in ambassador_list %}
+                    <tr>
+                        <td>
+                            <div class="fw-bold">{{ ambassador.get_full_name|default:ambassador.username }}</div>
+                            <div class="small text-muted">{{ ambassador.referral_code }}</div>
+                        </td>
+                        <td>{{ ambassador.date_joined|date:"m/d/Y" }}</td>
+                        <td>{{ ambassador.referred_count }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <div id="ambassador-empty-state" class="alert alert-info {% if ambassador_list and ambassador_list|length > 0 %}d-none{% endif %}">
+            <i class="fas fa-info-circle me-2"></i> You don't have any affiliated ambassadors yet. Share your affiliate link to recruit ambassadors!
+        </div>
+    </div>
+</div>
+
+<!-- Escorts/Clients Section -->
+<div class="stats-card">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0 fw-bold">Affiliated Escorts and Clients</h4>
+        <a href="#" class="btn btn-sm btn-outline-primary">View all</a>
+            </div>
+    
+    <div class="table-responsive">
+        <table class="table table-affiliates">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Type</th>
+                    <th>Registration Date</th>
+                </tr>
+            </thead>
+            <tbody id="escort-list">
+                <!-- Escort data will be loaded here -->
+                {% if escort_list %}
+                    {% for escort in escort_list %}
+                    <tr>
+                        <td>
+                            <div class="fw-bold">{{ escort.username }}</div>
+                            <div class="small text-muted">{{ escort.referral_code|default:"ESC" }}</div>
+                        </td>
+                        <td><span class="badge bg-info">Escort</span></td>
+                        <td>{{ escort.date_joined|date:"m/d/Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <div id="escort-empty-state" class="{% if escort_list %}d-none{% endif %}">
+            <div class="text-center py-4">
+                <div class="empty-state">
+                    <i class="fas fa-users text-muted mb-3" style="font-size: 2.5rem;"></i>
+                    <p class="mb-1 fw-bold">No affiliated escorts yet</p>
+                    <p class="text-muted small">Share your affiliate link to attract escorts.</p>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        // API endpoint for stats - Corrected URL
+        const statsApiUrl = '/api/stats/';
+        const ambassadorsApiUrl = '/api/ambassadors/';
+        const escortsApiUrl = '/api/escorts/';
+        
+        // Configuration des couleurs futuristes pour le graphique
+        Chart.defaults.color = '#a0a0a0';
+        Chart.defaults.borderColor = 'rgba(124, 77, 255, 0.1)';
+        
+        // Fetch stats data from API
+        async function fetchStats(period = '7') {
+            try {
+                const response = await fetch(`${statsApiUrl}?period=${period}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch stats data');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+                return null;
+            }
+        }
+        
+        // Fetch ambassadors data
+        async function fetchAmbassadors() {
+            try {
+                const response = await fetch(ambassadorsApiUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch ambassadors data');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching ambassadors:', error);
+                return [];
+            }
+        }
+        
+        // Fetch escorts data
+        async function fetchEscorts() {
+            try {
+                const response = await fetch(escortsApiUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch escorts data');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching escorts:', error);
+                return [];
+            }
+        }
+        
+        // Initialize and update chart with API data
+        let affiliatesChart;
+        
+        // Update stats UI with API data
+        async function updateStats(period = '7') {
+            const stats = await fetchStats(period);
+            
+            if (!stats) {
+                return;
+            }
+            
+            // Update summary stats with animation
+            animateCounter('ambassador-count', stats.ambassador_count || 0);
+            animateCounter('escort-count', stats.escort_count || 0);
+            
+            // Update commissions
+            const totalCommission = parseFloat(stats.total_commission_amount || 0);
+            const paidCommission = parseFloat(stats.paid_commission_amount || 0);
+            const pendingCommission = parseFloat(stats.pending_commission_amount || 0);
+            
+            animateCounter('commission-amount', totalCommission, '$');
+            animateCounter('paid-commission-amount', paidCommission, '$');
+            animateCounter('pending-commission-amount', pendingCommission, '$');
+            
+            // Create or update the chart
+            const chartData = {
+                labels: stats.dates || [],
+                ambassadors: stats.ambassador_data || [],
+                escorts: stats.escort_data || [],
+                total: stats.total_affiliate_data || []
+            };
+            
+            updateChart(chartData, selectedUserType);
+        }
+        
+        // Fonction pour animer les compteurs
+        function animateCounter(elementId, targetValue, prefix = '') {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const startValue = parseInt(element.textContent.replace(/[^0-9.-]+/g, '') || 0);
+            const duration = 1500;
+            const frameDuration = 16;
+            const totalFrames = Math.round(duration / frameDuration);
+            const step = (targetValue - startValue) / totalFrames;
+            
+            let currentFrame = 0;
+            let currentValue = startValue;
+            
+            const animate = () => {
+                currentFrame++;
+                currentValue += step;
+                
+                if (currentFrame === totalFrames) {
+                    currentValue = targetValue;
+                }
+                
+                element.textContent = `${prefix}${currentValue.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                })}`;
+                
+                if (currentFrame < totalFrames) {
+                    requestAnimationFrame(animate);
+                }
+            };
+            
+            animate();
+        }
+        
+        // Update ambassadors list
+        async function updateAmbassadorsList() {
+            const ambassadors = await fetchAmbassadors();
+            const tbody = document.getElementById('ambassador-list');
+            const emptyState = document.getElementById('ambassador-empty-state');
+            
+            // Clear existing rows
+            tbody.innerHTML = '';
+            
+            if (ambassadors && ambassadors.length > 0) {
+                // Hide empty state
+                emptyState.classList.add('d-none');
+                
+                // Add ambassador rows
+                ambassadors.forEach(ambassador => {
+                    const row = document.createElement('tr');
+                    
+                    const nameCell = document.createElement('td');
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'fw-bold';
+                    nameDiv.textContent = ambassador.full_name || ambassador.username;
+                    
+                    const codeDiv = document.createElement('div');
+                    codeDiv.className = 'small text-muted';
+                    codeDiv.textContent = ambassador.referral_code;
+                    
+                    nameCell.appendChild(nameDiv);
+                    nameCell.appendChild(codeDiv);
+                    
+                    const dateCell = document.createElement('td');
+                    // Format date as MM/DD/YYYY
+                    const date = new Date(ambassador.date_joined);
+                    dateCell.textContent = date.toLocaleDateString('en-US');
+                    
+                    const countCell = document.createElement('td');
+                    countCell.textContent = ambassador.referred_count || 0;
+                    
+                    row.appendChild(nameCell);
+                    row.appendChild(dateCell);
+                    row.appendChild(countCell);
+                    
+                    tbody.appendChild(row);
+                });
+            } else {
+                // Show empty state
+                emptyState.classList.remove('d-none');
+            }
+        }
+        
+        // Update escorts list
+        async function updateEscortsList() {
+            const escorts = await fetchEscorts();
+            const tbody = document.getElementById('escort-list');
+            const emptyState = document.getElementById('escort-empty-state');
+            
+            // Clear existing rows
+            tbody.innerHTML = '';
+            
+            if (escorts && escorts.length > 0) {
+                // Hide empty state
+                emptyState.classList.add('d-none');
+                
+                // Add escort rows
+                escorts.forEach(escort => {
+                    const row = document.createElement('tr');
+                    
+                    const nameCell = document.createElement('td');
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'fw-bold';
+                    nameDiv.textContent = escort.username;
+                    
+                    const codeDiv = document.createElement('div');
+                    codeDiv.className = 'small text-muted';
+                    codeDiv.textContent = escort.referral_code || 'ESC';
+                    
+                    nameCell.appendChild(nameDiv);
+                    nameCell.appendChild(codeDiv);
+                    
+                    const typeCell = document.createElement('td');
+                    const typeSpan = document.createElement('span');
+                    typeSpan.className = 'badge bg-info';
+                    typeSpan.textContent = 'Escort';
+                    typeCell.appendChild(typeSpan);
+                    
+                    const dateCell = document.createElement('td');
+                    // Format date as MM/DD/YYYY
+                    const date = new Date(escort.date_joined);
+                    dateCell.textContent = date.toLocaleDateString('en-US');
+                    
+                    row.appendChild(nameCell);
+                    row.appendChild(typeCell);
+                    row.appendChild(dateCell);
+                    
+                    tbody.appendChild(row);
+                });
+            } else {
+                // Show empty state
+                emptyState.classList.remove('d-none');
+            }
+        }
+        
+        // Initialize and create chart
+        function createChart() {
+            const ctx = document.getElementById('affiliatesChart').getContext('2d');
+            
+            // Création d'un dégradé futuriste pour le fond du graphique
+            const gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+            gradientFill.addColorStop(0, 'rgba(124, 77, 255, 0.3)');
+            gradientFill.addColorStop(0.5, 'rgba(213, 0, 249, 0.15)');
+            gradientFill.addColorStop(1, 'rgba(124, 77, 255, 0.0)');
+            
+            // Création d'un dégradé pour la ligne
+            const gradientStroke = ctx.createLinearGradient(0, 0, 800, 0);
+            gradientStroke.addColorStop(0, '#7C4DFF');
+            gradientStroke.addColorStop(0.5, '#D500F9');
+            gradientStroke.addColorStop(1, '#7C4DFF');
+            
+            affiliatesChart = new Chart(ctx, {
+                type: 'line',
+        data: {
+                    labels: [],
+            datasets: [{
+                        label: 'Ambassadors',
+                        data: [],
+                        borderColor: gradientStroke,
+                        backgroundColor: gradientFill,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#FFFFFF',
+                        pointBorderColor: '#7C4DFF',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                            backgroundColor: 'rgba(20, 20, 30, 0.9)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                            borderColor: 'rgba(124, 77, 255, 0.5)',
+                            borderWidth: 1,
+                            padding: 10,
+                            cornerRadius: 8,
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + ' affiliates';
+                                }
+                            }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                                display: false,
+                                color: 'rgba(124, 77, 255, 0.1)'
+                    },
+                    ticks: {
+                                color: '#a0a0a0'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                                color: 'rgba(124, 77, 255, 0.1)',
+                                lineWidth: 1,
+                                drawBorder: false
+                    },
+                    ticks: {
+                                precision: 0,
+                                color: '#a0a0a0'
+                    }
+                }
+            }
+        }
+    });
+
+            return affiliatesChart;
+        }
+        
+        // Update chart with new data
+        function updateChart(chartData, userType = 'ambassadors') {
+            if (!affiliatesChart) {
+                affiliatesChart = createChart();
+            }
+            
+            affiliatesChart.data.labels = chartData.labels;
+            
+            if (userType === 'ambassadors') {
+                affiliatesChart.data.datasets[0].data = chartData.ambassadors;
+                affiliatesChart.data.datasets[0].label = 'Ambassadors';
+            } else if (userType === 'escorts') {
+                affiliatesChart.data.datasets[0].data = chartData.escorts;
+                affiliatesChart.data.datasets[0].label = 'Escorts';
+            } else {
+                affiliatesChart.data.datasets[0].data = chartData.total;
+                affiliatesChart.data.datasets[0].label = 'All';
+            }
+            
+            affiliatesChart.update();
+        }
+        
+        // Selected filters
+        let selectedPeriod = '7';
+        let selectedUserType = 'ambassadors';
+        
+        // Initialize data
+        updateStats(selectedPeriod);
+        updateAmbassadorsList();
+        updateEscortsList();
+        
+        // Event handlers for filters
+        document.querySelectorAll('.btn-group .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.btn-group .btn').forEach(b => {
+                    b.classList.remove('active', 'btn-primary');
+                    b.classList.add('btn-outline-primary');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active', 'btn-primary');
+                this.classList.remove('btn-outline-primary');
+                
+                // Update selected user type
+                if (this.textContent.trim() === 'Ambassadors') {
+                    selectedUserType = 'ambassadors';
+                } else if (this.textContent.trim() === 'Escorts') {
+                    selectedUserType = 'escorts';
+                } else {
+                    selectedUserType = 'all';
+                }
+                
+                // Fetch and update chart data
+                updateStats(selectedPeriod);
+            });
+        });
+        
+        // Event handlers for date filters
+        document.querySelectorAll('.date-filter-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all items
+                document.querySelectorAll('.date-filter-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+            this.classList.add('active');
+                
+                // Get selected period
+                selectedPeriod = this.getAttribute('data-period');
+                
+                // Fetch and update data
+                updateStats(selectedPeriod);
+        });
+    });
+});
+</script>
+{% endblock %} 

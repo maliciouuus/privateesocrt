@@ -1,0 +1,117 @@
+@startuml
+
+package "Frontend" {
+    [React Application]
+    [React Components]
+    [Redux Store]
+    [API Client]
+}
+
+package "Backend" {
+    package "Accounts" {
+        class User {
+            username: String
+            email: String
+            password: String
+            is_active: Boolean
+            date_joined: DateTime
+            is_ambassador: Boolean
+            is_white_label: Boolean
+        }
+        
+        class AmbassadorProfile {
+            user: User
+            commission_rate: Decimal
+            total_earnings: Decimal
+            payment_method: String
+            payment_details: JSON
+        }
+        
+        class WhiteLabelProfile {
+            user: User
+            site_name: String
+            domain: String
+            logo: Image
+            custom_colors: JSON
+            commission_rate: Decimal
+        }
+    }
+    
+    package "Affiliate" {
+        class AffiliateLink {
+            user: User
+            campaign: String
+            url: String
+            clicks: Integer
+            conversions: Integer
+            earnings: Decimal
+        }
+        
+        class Commission {
+            user: User
+            amount: Decimal
+            source: String
+            status: String
+            date: DateTime
+        }
+    }
+    
+    package "API" {
+        class UserAPI {
+            register()
+            login()
+            profile()
+            update_profile()
+        }
+        
+        class AffiliateAPI {
+            create_link()
+            get_stats()
+            get_commissions()
+        }
+        
+        class WhiteLabelAPI {
+            create_site()
+            update_settings()
+            get_analytics()
+        }
+    }
+}
+
+User "1" -- "1" AmbassadorProfile
+User "1" -- "1" WhiteLabelProfile
+User "1" -- "*" AffiliateLink
+User "1" -- "*" Commission
+
+[React Application] --> [API Client]
+[API Client] --> UserAPI
+[API Client] --> AffiliateAPI
+[API Client] --> WhiteLabelAPI
+
+UserAPI --> User
+AffiliateAPI --> AffiliateLink
+AffiliateAPI --> Commission
+WhiteLabelAPI --> WhiteLabelProfile
+
+note right of [React Application]
+  React Frontend Application
+  - Modern UI/UX
+  - Responsive Design
+  - Real-time Updates
+end note
+
+note right of User
+  Core User Model
+  - Authentication
+  - Role Management
+  - Profile Data
+end note
+
+note right of AffiliateLink
+  Affiliate Marketing
+  - Link Tracking
+  - Conversion Analytics
+  - Commission Calculation
+end note
+
+@enduml 

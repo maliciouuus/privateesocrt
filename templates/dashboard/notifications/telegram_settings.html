@@ -1,0 +1,202 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% load i18n %}
+
+{% block title %}Telegram Notification Settings{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    /* Mettre tous les textes en blanc */
+    .container, .card, .card-header, .card-body, .form-label, .form-text, .text-muted, h4, h5, p, li, label, code {
+        color: #fff !important;
+    }
+    
+    /* S'assurer que les cartes et les fonds restent lisibles avec texte blanc */
+    .card, .card-header, .setup-step {
+        background-color: rgba(33, 37, 41, 0.8) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Alert styles */
+    .alert-warning {
+        background-color: rgba(255, 193, 7, 0.2) !important;
+        border-color: rgba(255, 193, 7, 0.3) !important;
+    }
+    
+    .telegram-logo {
+        max-width: 80px;
+        margin-right: 1rem;
+    }
+    
+    .setup-step {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 10px;
+    }
+    
+    .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+        color: white;
+        font-weight: bold;
+        margin-right: 0.75rem;
+    }
+    
+    .telegram-bot-link {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 15px;
+        background-color: #0088cc;
+        color: white !important;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    
+    .telegram-bot-link:hover {
+        background-color: #006699;
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">Telegram Notification Settings</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-4">
+                        Configure your preferences to receive notifications through Telegram. This will allow you to be informed of important events regarding your ambassador account.
+                    </p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_telegram_chat_id" class="form-label">Telegram Chat ID</label>
+                            {{ form.telegram_chat_id }}
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i> Enter your Telegram Chat ID (numbers only)
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            {{ form.enable_telegram }}
+                            <label for="id_enable_telegram" class="form-check-label">Enable Telegram Notifications</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_telegram_language" class="form-label">Notification Language</label>
+                            {{ form.telegram_language }}
+                            <div class="form-text">
+                                <i class="fas fa-globe me-1"></i> Choose the language in which you want to receive your Telegram notifications
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Save Settings
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4 class="mb-3">Test Your Configuration</h4>
+                {% if user.telegram_chat_id %}
+                <form method="post" action="{% url 'dashboard:test_telegram' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fab fa-telegram me-1"></i> Send Test Notification
+                    </button>
+                </form>
+                <div class="mt-2 text-muted small">
+                    <i class="fas fa-info-circle me-1"></i> This will send a test notification to your configured Telegram chat.
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i> You must first configure your Telegram Chat ID to test notifications.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">How to Get Your Telegram ID</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Follow these steps to get your Telegram Chat ID:</strong></p>
+                    <ol class="mb-3">
+                        <li class="mb-2">Open Telegram on your device</li>
+                        <li class="mb-2">Search for <code>@userinfobot</code> in the search bar</li>
+                        <li class="mb-2">Start a conversation with this bot by clicking "Start"</li>
+                        <li class="mb-2">The bot will automatically send you a message with your ID</li>
+                        <li class="mb-2">Copy the number that appears after "Id:" (example: 123456789)</li>
+                        <li class="mb-4"><strong>Important:</strong> After getting your ID, you must send a message to our bot <code>@EscortDollarsBot</code> to activate your notifications</li>
+                    </ol>
+                    
+                    <div class="d-flex flex-column gap-2">
+                        <a href="https://t.me/userinfobot" target="_blank" class="telegram-bot-link">
+                            <i class="fab fa-telegram"></i> Open @userinfobot
+                        </a>
+                        <a href="https://t.me/EscortDollarsBot" target="_blank" class="telegram-bot-link">
+                            <i class="fab fa-telegram"></i> Open @EscortDollarsBot
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Benefits of Telegram Notifications</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li class="mb-2">Instant reception of important notifications</li>
+                        <li class="mb-2">Real-time tracking of your affiliate activity</li>
+                        <li class="mb-2">Alerts for new sign-ups via your link</li>
+                        <li class="mb-2">Commission earned notifications</li>
+                        <li>Direct and secure communication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle telegram_chat_id field based on checkbox state
+        const enableTelegramCheckbox = document.getElementById('{{ form.enable_telegram.id_for_label }}');
+        const telegramChatIdField = document.getElementById('{{ form.telegram_chat_id.id_for_label }}');
+        
+        function updateTelegramChatIdState() {
+            telegramChatIdField.disabled = !enableTelegramCheckbox.checked;
+            if (!enableTelegramCheckbox.checked) {
+                telegramChatIdField.parentElement.classList.add('opacity-50');
+            } else {
+                telegramChatIdField.parentElement.classList.remove('opacity-50');
+            }
+        }
+        
+        // Initialization
+        updateTelegramChatIdState();
+        
+        // Change event
+        enableTelegramCheckbox.addEventListener('change', updateTelegramChatIdState);
+    });
+</script>
+{% endblock %} 

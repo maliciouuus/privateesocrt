@@ -1,0 +1,306 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Payment Methods - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    :root {
+        --primary-color: #9d4bff;
+        --secondary-color: #2bffc6;
+        --telegram-color: #0088cc;
+        --bitcoin-color: #f7931a;
+        --ethereum-color: #627eea;
+        --tether-color: #26a17b;
+        --bg-dark: #0e0e18;
+        --bg-light: #1a1a2e;
+        --card-bg: rgba(24, 24, 38, 0.7);
+        --border-color: rgba(157, 75, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.7);
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .stats-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        color: var(--text-primary);
+    }
+
+    .telegram-card {
+        background: linear-gradient(135deg, rgba(0, 136, 204, 0.1), rgba(0, 136, 204, 0.05));
+        border: 1px solid rgba(0, 136, 204, 0.2);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        color: var(--text-primary);
+    }
+
+    .telegram-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at top right, rgba(0, 136, 204, 0.1), transparent 70%);
+        pointer-events: none;
+    }
+
+    .telegram-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .telegram-logo {
+        font-size: 4.5rem;
+        color: var(--telegram-color);
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(0 5px 15px rgba(0, 136, 204, 0.3));
+    }
+    
+    .telegram-button {
+        background: linear-gradient(135deg, var(--telegram-color), #0077b5);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 136, 204, 0.2);
+    }
+    
+    .telegram-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .telegram-button i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .info-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.25rem;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: var(--text-primary);
+    }
+
+    .info-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .payment-method-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(0 5px 15px rgba(157, 75, 255, 0.2));
+    }
+
+    .crypto-info {
+        margin-top: 1rem;
+    }
+
+    .crypto-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .crypto-info p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 1.1rem;
+    }
+
+    h4 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--primary-color);
+    }
+
+    h5 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 1.1rem;
+    }
+
+    .text-muted {
+        color: var(--text-secondary) !important;
+    }
+
+    @media (max-width: 768px) {
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .stats-card {
+            padding: 1.5rem;
+        }
+
+        .telegram-card {
+            padding: 1.5rem;
+        }
+
+        .info-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="page-header">
+        <h1 class="h3 mb-3">Cryptocurrency Payment Methods</h1>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="stats-card">
+                <h4 class="mb-4">Why Cryptocurrency is Our Exclusive Solution</h4>
+                
+                <p class="mb-4">In our specific industry, we have chosen cryptocurrencies as the sole payment method for our ambassadors. This strategic decision allows us to effectively overcome the following challenges:</p>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card">
+                            <div class="text-center">
+                                <i class="fas fa-globe payment-method-icon"></i>
+                                <h5>Geographic Restrictions</h5>
+                            </div>
+                            <p class="mb-0">Cryptocurrencies allow us to bypass banking restrictions and geographic limitations, ensuring you receive your payments regardless of your location.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card">
+                            <div class="text-center">
+                                <i class="fas fa-tachometer-alt payment-method-icon"></i>
+                                <h5>Speed & Efficiency</h5>
+                            </div>
+                            <p class="mb-0">Crypto transactions are processed quickly, typically within minutes or hours, unlike traditional banking systems which can take several days.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card">
+                            <div class="text-center">
+                                <i class="fas fa-shield-alt payment-method-icon"></i>
+                                <h5>Maximum Privacy</h5>
+                            </div>
+                            <p class="mb-0">Cryptocurrencies offer a higher level of privacy than traditional methods, protecting your identity and financial information.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="mb-3">Our Solution: Cryptocurrency Payments</h4>
+                <p>To ensure the security, speed, and privacy of your transactions, we exclusively offer cryptocurrency payments. This method ensures reliable and unrestricted transfers, regardless of your location.</p>
+                
+                <div class="row mt-4">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="telegram-card text-center">
+                            <i class="fab fa-telegram telegram-logo"></i>
+                            
+                            <h4 class="mb-3">Contact an Affiliate Manager</h4>
+                            <p class="mb-4">To set up your cryptocurrency payment method, please contact one of our affiliate managers through our official Telegram bot. They will help you choose the cryptocurrency that best suits your needs.</p>
+                            
+                            <a href="https://t.me/escortdollarsmanager_bot" target="_blank" class="telegram-button">
+                                <i class="fab fa-telegram-plane"></i> Open Telegram Bot
+                            </a>
+                            
+                            <p class="text-muted mt-3">
+                                <small>Our affiliate managers are available to assist you and will respond quickly to your request.</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h5>Accepted Cryptocurrencies</h5>
+                    <p>We accept the following cryptocurrencies for payments:</p>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="info-card">
+                                <div class="text-center">
+                                    <i class="fab fa-bitcoin payment-method-icon" style="color: var(--bitcoin-color);"></i>
+                                    <h5>Bitcoin (BTC)</h5>
+                                </div>
+                                <p class="mb-0">The original and most widely accepted cryptocurrency. Perfect for significant transactions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="info-card">
+                                <div class="text-center">
+                                    <i class="fab fa-ethereum payment-method-icon" style="color: var(--ethereum-color);"></i>
+                                    <h5>Ethereum (ETH)</h5>
+                                </div>
+                                <p class="mb-0">Offers fast transactions with moderate fees and excellent security.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="info-card">
+                                <div class="text-center">
+                                    <i class="fas fa-dollar-sign payment-method-icon" style="color: var(--tether-color);"></i>
+                                    <h5>Tether (USDT)</h5>
+                                </div>
+                                <p class="mb-0">A US dollar-pegged stablecoin, offering stability and predictability for your earnings.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

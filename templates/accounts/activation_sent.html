@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Your Email - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<style>
+    .activation-container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding-top: 2rem;
+    }
+    
+    .activation-card {
+        background: linear-gradient(145deg, var(--dark-lighter) 0%, var(--dark) 100%);
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2.5rem;
+    }
+    
+    .email-icon {
+        background: linear-gradient(135deg, var(--primary) 0%, #9328FF 100%);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.4);
+    }
+    
+    .email-icon i {
+        font-size: 2.5rem;
+        color: white;
+    }
+    
+    .activation-title {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .steps-container {
+        margin-top: 2rem;
+    }
+    
+    .step {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-number {
+        background-color: var(--primary);
+        color: white;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    .verification-alert {
+        margin-top: 2rem;
+        border-left: 4px solid var(--primary);
+        background-color: rgba(var(--primary-rgb), 0.1);
+        padding: 1rem;
+        border-radius: 4px;
+    }
+    
+    .action-buttons {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5 activation-container">
+    <div class="activation-card">
+        <div class="email-icon pulse-animation">
+            <i class="fas fa-envelope"></i>
+        </div>
+        
+        <h2 class="activation-title">Check Your Inbox</h2>
+        
+        <div class="text-center mb-4">
+            <p class="lead">We've sent a confirmation email to the address you provided.</p>
+            <p>To activate your account and start earning commissions, please follow the instructions in the email.</p>
+        </div>
+        
+        <div class="steps-container">
+            <h4 class="mb-3">Next Steps:</h4>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <h5 class="mb-1">Check Your Inbox</h5>
+                    <p class="mb-0">Look for our email in your inbox and spam folder.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <h5 class="mb-1">Click the Confirmation Link</h5>
+                    <p class="mb-0">Open the email and click on the confirmation link to activate your account.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <h5 class="mb-1">Log In to Your Account</h5>
+                    <p class="mb-0">Once your account is activated, you can log in and start using EscortDollars.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="verification-alert">
+            <h5 class="mb-2"><i class="fas fa-info-circle me-2"></i>Important Note</h5>
+            <p class="mb-0">The activation link is valid for 3 days. If you don't receive the email within a few minutes, please check your spam folder or try signing up again.</p>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{% url 'accounts:login' %}" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt me-2"></i>Go to Login Page
+            </a>
+            <a href="{% url 'home' %}" class="btn btn-outline-light">
+                <i class="fas fa-home me-2"></i>Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

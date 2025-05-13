@@ -1,0 +1,387 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Promotional Tools - EscortDollars{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .nav-pills .nav-link {
+        color: #495057;
+        background-color: transparent;
+        border-radius: 10px;
+        padding: 12px 20px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-pills .nav-link:hover {
+        background-color: rgba(var(--primary-rgb), 0.1);
+        color: var(--primary-color);
+    }
+    
+    .nav-pills .nav-link.active {
+        background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+        color: white;
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+    }
+    
+    .tab-pane {
+        padding: 1.5rem;
+    }
+    
+    .promo-category {
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .promo-category:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .promo-header {
+        padding: 1.5rem;
+        background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+        color: white;
+    }
+    
+    .copy-input-group .form-control {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        font-family: monospace;
+    }
+    
+    .copy-btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .banner-preview {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+    
+    .banner-preview:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .banner-preview img {
+        width: auto;
+        height: auto;
+        display: block;
+        max-width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="page-header">
+    <div>
+        <h2 class="fw-bold">Promotional Tools</h2>
+        <p class="text-muted">Tools to help you promote and grow your affiliate business</p>
+    </div>
+</div>
+
+<!-- Content Tabs -->
+<ul class="nav nav-pills mb-4" id="promoTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="ambassador-tab" data-bs-toggle="tab" data-bs-target="#ambassador" type="button" role="tab" aria-controls="ambassador" aria-selected="true">
+            <i class="fas fa-users me-2"></i> Ambassador Program
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="escort-tab" data-bs-toggle="tab" data-bs-target="#escort" type="button" role="tab" aria-controls="escort" aria-selected="false">
+            <i class="fas fa-heart me-2"></i> Escort Platform
+        </button>
+    </li>
+</ul>
+
+<div class="tab-content" id="promoTabsContent">
+    <!-- Ambassador Program Tab -->
+    <div class="tab-pane fade show active" id="ambassador" role="tabpanel" aria-labelledby="ambassador-tab">
+        <div class="stats-card mb-4">
+            <h4 class="fw-bold mb-3">Ambassador Program Promotion</h4>
+            <p>Invite others to become ambassadors and earn additional commissions from their earnings.</p>
+            
+            <div class="alert alert-info">
+                <div class="d-flex">
+                    <div class="me-3">
+                        <i class="fas fa-info-circle fa-2x text-info"></i>
+                    </div>
+                    <div>
+                        <h5 class="alert-heading">Multi-level Commission Structure</h5>
+                        <p class="mb-0">When you refer new ambassadors, you'll earn {{ request.user.account_profile.ambassador_commission_rate|default:10 }}% of their commissions, creating a passive income stream as your ambassador network grows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Ambassador Affiliate Links -->
+            <div class="col-lg-6">
+                <div class="promo-category h-100">
+                    <div class="promo-header">
+                        <h5 class="mb-0"><i class="fas fa-link me-2"></i> Ambassador Affiliate Links</h5>
+                    </div>
+                    <div class="p-4">
+                        <p>Share these links to invite others to become ambassadors on our platform.</p>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Standard Link</label>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value="https://escortdollars.com/?ref={{ request.user.referral_code }}" id="ambassador-link" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#ambassador-link">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ambassador Banners -->
+            <div class="col-lg-6">
+                <div class="promo-category h-100">
+                    <div class="promo-header">
+                        <h5 class="mb-0"><i class="fas fa-image me-2"></i> Ambassador Banners</h5>
+                    </div>
+                    <div class="p-4">
+                        <p>Use these banners to promote the ambassador program on your website or blog.</p>
+                        
+                        <!-- 300x70 Banner -->
+                        <div class="mb-4">
+                            <label class="form-label">Banner 300x70</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner2/300X70.png' %}" alt="Ambassador banner 300x70">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://escortdollars.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner2/300X70.png" alt="Become an Ambassador"></a>' id="ambassador-banner-300x70" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#ambassador-banner-300x70">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Banner 300x250</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banners/ambassador-300x250.jpg' %}" alt="Ambassador banner 300x250">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://escortdollars.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banners/ambassador-300x250.jpg" alt="Become an Ambassador"></a>' id="ambassador-banner-1" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#ambassador-banner-1">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Banner 728x90</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banners/ambassador-728x90.jpg' %}" alt="Ambassador banner 728x90">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://escortdollars.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banners/ambassador-728x90.jpg" alt="Become an Ambassador"></a>' id="ambassador-banner-2" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#ambassador-banner-2">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Escort Platform Tab -->
+    <div class="tab-pane fade" id="escort" role="tabpanel" aria-labelledby="escort-tab">
+        <div class="stats-card mb-4">
+            <h4 class="fw-bold mb-3">Escort Platform Promotion</h4>
+            <p>Promote our escort platform to potential clients and earn commissions on their payments.</p>
+            
+            <div class="alert alert-info">
+                <div class="d-flex">
+                    <div class="me-3">
+                        <i class="fas fa-info-circle fa-2x text-info"></i>
+                    </div>
+                    <div>
+                        <h5 class="alert-heading">Client Referral Program</h5>
+                        <p class="mb-0">When you refer clients to our platform, you'll earn {{ request.user.account_profile.escort_commission_rate|default:30 }}% commission on their subscription payments for the lifetime of their account.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Client Affiliate Links -->
+            <div class="col-lg-6">
+                <div class="promo-category h-100">
+                    <div class="promo-header">
+                        <h5 class="mb-0"><i class="fas fa-link me-2"></i> Client Affiliate Links</h5>
+                    </div>
+                    <div class="p-4">
+                        <p>Share these links to bring new clients to our escort platform.</p>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Main Website Link</label>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value="https://fucknroses.com/?ref={{ request.user.referral_code }}" id="client-link" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#client-link">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Client Banners -->
+            <div class="col-lg-6">
+                <div class="promo-category h-100">
+                    <div class="promo-header">
+                        <h5 class="mb-0"><i class="fas fa-image me-2"></i> Client Platform Banners</h5>
+                    </div>
+                    <div class="p-4">
+                        <p>Use these banners to promote the escort platform on your website or blog.</p>
+                        
+                        <!-- 120x200 Banner -->
+                        <div class="mb-4">
+                            <label class="form-label">Banner 120x200</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner/120X200.jpg' %}" alt="Banner 120x200">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://fucknroses.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner/120X200.jpg" alt="Premium Escort Service"></a>' id="escort-banner-120x200" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#escort-banner-120x200">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 120x60 Banner -->
+                        <div class="mb-4">
+                            <label class="form-label">Banner 120x60</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner/120X60.jpg' %}" alt="Banner 120x60">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://fucknroses.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner/120X60.jpg" alt="Premium Escort Service"></a>' id="escort-banner-120x60" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#escort-banner-120x60">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 240x60 Banner -->
+                        <div class="mb-4">
+                            <label class="form-label">Banner 240x60</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner/240X60.jpg' %}" alt="Banner 240x60">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://fucknroses.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner/240X60.jpg" alt="Premium Escort Service"></a>' id="escort-banner-240x60" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#escort-banner-240x60">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 300x100 Banner -->
+                        <div class="mb-4">
+                            <label class="form-label">Banner 300x100</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner/300X100.jpg' %}" alt="Banner 300x100">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://fucknroses.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner/300X100.jpg" alt="Premium Escort Service"></a>' id="escort-banner-300x100" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#escort-banner-300x100">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 468x60 Banner -->
+                        <div class="mb-4">
+                            <label class="form-label">Banner 468x60</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner/468X60.jpg' %}" alt="Banner 468x60">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://fucknroses.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner/468X60.jpg" alt="Premium Escort Service"></a>' id="escort-banner-468x60" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#escort-banner-468x60">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 728x90 Banner -->
+                        <div>
+                            <label class="form-label">Banner 728x90</label>
+                            <div class="banner-preview">
+                                <img src="{% static 'images/banner/728X90.jpg' %}" alt="Banner 728x90">
+                            </div>
+                            <div class="input-group copy-input-group">
+                                <input type="text" class="form-control" value='<a href="https://fucknroses.com/?ref={{ request.user.referral_code }}"><img src="https://escortdollars.com/static/images/banner/728X90.jpg" alt="Premium Escort Service"></a>' id="escort-banner-728x90" readonly>
+                                <button class="btn btn-primary copy-btn" data-clipboard-target="#escort-banner-728x90">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize clipboard.js
+        var clipboard = new ClipboardJS('.copy-btn');
+        
+        clipboard.on('success', function(e) {
+            // Change button text temporarily
+            var originalHtml = e.trigger.innerHTML;
+            e.trigger.innerHTML = '<i class="fas fa-check"></i>';
+            
+            setTimeout(function() {
+                e.trigger.innerHTML = originalHtml;
+            }, 2000);
+            
+            e.clearSelection();
+        });
+        
+        // Initialize tabs if not already handled by Bootstrap
+        var tabTriggerList = [].slice.call(document.querySelectorAll('#promoTabs button'));
+        tabTriggerList.forEach(function(tabTriggerEl) {
+            tabTriggerEl.addEventListener('click', function(event) {
+                event.preventDefault();
+                
+                // Remove active class from all tabs and tab panes
+                tabTriggerList.forEach(function(tab) {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-selected', 'false');
+                    document.querySelector(tab.getAttribute('data-bs-target')).classList.remove('show', 'active');
+                });
+                
+                // Add active class to clicked tab and its associated pane
+                tabTriggerEl.classList.add('active');
+                tabTriggerEl.setAttribute('aria-selected', 'true');
+                document.querySelector(tabTriggerEl.getAttribute('data-bs-target')).classList.add('show', 'active');
+            });
+        });
+    });
+</script>
+{% endblock %} 

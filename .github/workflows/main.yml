@@ -64,7 +64,8 @@ jobs:
       run: |
         chmod +x run_integration_tests.py
         ./run_integration_tests.py
-        python -m pytest --cov=apps
+        # Exécuter pytest en excluant test_supabase_full.py qui contient sys.exit(1)
+        python -m pytest --cov=apps --ignore=test_supabase_full.py
 
   build:
     name: Build et push Docker image
@@ -91,7 +92,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ secrets.DOCKERHUB_USERNAME }}/privateescort
+        images: purityoff/escortdollars
         tags: |
           type=ref,event=branch
           type=ref,event=pr

@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Inscription Ambassadeur - EscortDollars{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-color: #7C4DFF;
+        --primary-dark: #5E35B1;
+        --primary-light: #B39DDB;
+        --primary-rgb: 124, 77, 255;
+        --secondary-color: #FF4D94;
+        --secondary-rgb: 255, 77, 148;
+        --text-light: #E0E0E0;
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(var(--secondary-rgb), 0.15) 0%, transparent 50%);
+        z-index: 0;
+    }
+
+    .signup-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .signup-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 1.5rem;
+        padding: 3rem;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .signup-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 255, 255, 0.03),
+            transparent
+        );
+        transform: rotate(45deg);
+        animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+        0% {
+            transform: translateX(-100%) rotate(45deg);
+        }
+        100% {
+            transform: translateX(100%) rotate(45deg);
+        }
+    }
+
+    .signup-header {
+        margin-bottom: 2rem;
+    }
+
+    .signup-logo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-logo {
+        margin-bottom: 2rem;
+    }
+
+    .login-logo img {
+        height: 60px;
+        width: auto;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+
+    .signup-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+
+    .form-label {
+        display: block;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 0.75rem;
+        color: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.4);
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-signup {
+        width: 100%;
+        padding: 1rem;
+        background: #fff;
+        color: var(--primary-color);
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-signup::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transition: 0.5s;
+    }
+
+    .btn-signup:hover::before {
+        left: 100%;
+    }
+
+    .btn-signup:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .signup-footer {
+        margin-top: 2rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .signup-footer a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.3s ease;
+    }
+
+    .signup-footer a:hover {
+        opacity: 0.8;
+    }
+
+    .alert {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .alert-danger {
+        background: rgba(255, 59, 48, 0.1);
+        border-color: rgba(255, 59, 48, 0.2);
+    }
+
+    .ambassador-badge {
+        display: inline-block;
+        background: rgba(255, 215, 0, 0.2);
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        color: #FFD700;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .benefits-list {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        text-align: left;
+    }
+
+    .benefits-list ul {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+
+    .benefits-list li {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="signup-card">
+        <div class="signup-header">
+            <div class="login-logo">
+                <img src="{% static 'images/logo.png' %}" alt="EscortDollars">
+            </div>
+            <div class="ambassador-badge">Programme Ambassadeur</div>
+            <h1 class="signup-subtitle">Rejoignez notre programme d'affiliation et gagnez jusqu'à 30% de commission</h1>
+            
+            <div class="benefits-list">
+                <ul>
+                    <li>Commissions sur tous les paiements de vos filleuls</li>
+                    <li>Commissions à vie sur chaque utilisateur parrainé</li>
+                    <li>Tableau de bord détaillé pour suivre vos gains</li>
+                    <li>Paiements rapides et sécurisés</li>
+                </ul>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" action="{% url 'accounts:register_ambassador' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username" class="form-label">Nom d'utilisateur</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Choisissez un nom d'utilisateur" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Votre adresse email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password1" class="form-label">Mot de passe</label>
+                <input type="password" name="password1" id="password1" class="form-control" placeholder="Créez un mot de passe sécurisé" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password2" class="form-label">Confirmez le mot de passe</label>
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="Répétez votre mot de passe" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="referral_code" class="form-label">Code de parrainage (optionnel)</label>
+                <input type="text" name="referral_code" id="referral_code" class="form-control" placeholder="Code de parrainage" value="{{ referral_code|default:'' }}">
+            </div>
+            
+            <button type="submit" class="btn-signup">Créer mon compte ambassadeur</button>
+        </form>
+        
+        <div class="signup-footer">
+            Vous avez déjà un compte? <a href="{% url 'accounts:login' %}">Connectez-vous</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

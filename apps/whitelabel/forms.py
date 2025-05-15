@@ -11,9 +11,6 @@ class WhiteLabelForm(forms.ModelForm):
             "logo",
             "primary_color",
             "secondary_color",
-            "meta_title",
-            "meta_description",
-            "meta_keywords",
         ]
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Site Name"}),
@@ -21,19 +18,6 @@ class WhiteLabelForm(forms.ModelForm):
             "logo": forms.FileInput(attrs={"class": "form-control"}),
             "primary_color": forms.TextInput(attrs={"type": "color", "class": "form-control"}),
             "secondary_color": forms.TextInput(attrs={"type": "color", "class": "form-control"}),
-            "meta_title": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Meta Title"}
-            ),
-            "meta_description": forms.Textarea(
-                attrs={
-                    "class": "form-control",
-                    "rows": 2,
-                    "placeholder": "Meta Description",
-                }
-            ),
-            "meta_keywords": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Meta Keywords"}
-            ),
         }
 
     def clean_domain(self):

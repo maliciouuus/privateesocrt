@@ -3,11 +3,9 @@ from ..models import (
     ReferralClick,
     Referral,
     Commission,
-    Transaction,
-    Payout,
     CommissionRate,
+    Payout,
     WhiteLabel,
-    Banner,
 )
 
 
@@ -39,22 +37,6 @@ class CommissionSerializer(serializers.ModelSerializer):
             "paid_at",
         ]
         read_only_fields = ["created_at", "paid_at"]
-
-
-class TransactionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Transaction
-        fields = [
-            "id",
-            "escort",
-            "amount",
-            "status",
-            "payment_method",
-            "payment_id",
-            "created_at",
-            "updated_at",
-        ]
-        read_only_fields = ["created_at", "updated_at"]
 
 
 class PayoutSerializer(serializers.ModelSerializer):
@@ -99,16 +81,17 @@ class WhiteLabelSerializer(serializers.ModelSerializer):
         read_only_fields = ["created_at", "updated_at"]
 
 
-class BannerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Banner
-        fields = [
-            "id",
-            "title",
-            "white_label",
-            "image",
-            "link",
-            "is_active",
-            "created_at",
-        ]
-        read_only_fields = ["created_at"]
+# Cette classe est obsolète car le modèle Banner a été supprimé
+# class BannerSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Banner
+#         fields = [
+#             "id",
+#             "title",
+#             "white_label",
+#             "image",
+#             "link",
+#             "is_active",
+#             "created_at",
+#         ]
+#         read_only_fields = ["created_at"]

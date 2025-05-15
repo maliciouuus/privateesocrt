@@ -19,7 +19,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             request,
             "Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.",
         )
-        return reverse("account_login")
+        return reverse("accounts:login")
 
     def get_login_redirect_url(self, request):
         return reverse("dashboard:simple_dashboard")

@@ -3,9 +3,10 @@ EscortDollars Backend
 
 .. toctree::
    :maxdepth: 2
-   :caption: Sommaire
+   :caption: Contents:
 
    models
+   api
 
 
 Documentation technique du backend Django pour la gestion d'affiliation white label.

@@ -3,7 +3,8 @@ import hmac
 import hashlib
 from decimal import Decimal
 from django.conf import settings
-from ..models import Transaction
+# Transaction model has been removed
+# from ..models import Transaction
 import logging
 
 logger = logging.getLogger(__name__)
@@ -134,8 +135,10 @@ class CryptoPaymentService:
                 return float(rate)
         return None
 
-    def check_payment_status(self, transaction: Transaction) -> str:
-        """Vérifie le statut d'un paiement"""
+    # This method has been disabled as Transaction model was removed
+    """
+    def check_payment_status(self, transaction):
+        # Vérifie le statut d'un paiement
         params = {
             "cmd": "get_tx_info",
             "version": "1",
@@ -165,6 +168,7 @@ class CryptoPaymentService:
             transaction.save()
 
         return status
+    """
 
     def create_payout_coinpayments(self, amount, currency, address):
         """

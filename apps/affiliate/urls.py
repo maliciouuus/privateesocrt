@@ -12,11 +12,6 @@ urlpatterns = [
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     path("links/", views.affiliate_links, name="links"),
     path("marketing-materials/", views.marketing_materials, name="marketing_materials"),
-    path(
-        "marketing-materials/download/<int:material_id>/",
-        views.download_marketing_material,
-        name="download_marketing_material",
-    ),
     path("banners/", views.banners, name="banners"),
     path("statistics/", views.statistics, name="statistics"),
     path("reports/", views.reports, name="reports"),

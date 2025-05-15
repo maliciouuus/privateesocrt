@@ -291,7 +291,8 @@
             <div class="login-logo">
                 <img src="{% static 'images/logo.png' %}" alt="EscortDollars Logo">
             </div>
-            <p class="signup-subtitle">Join the most powerful affiliate platform for escorts and ambassadors.</p>
+            <h1 class="signup-logo">Join Us Today</h1>
+            <p class="signup-subtitle">Create your account in less than 2 minutes</p>
         </div>
 
         {% if form.errors %}
@@ -307,29 +308,50 @@
         </div>
         {% endif %}
 
-        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% if messages %}
+        <div class="alert {% if 'error' in message.tags %}alert-danger{% else %}alert-success{% endif %}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form class="signup" id="signup_form" method="post" action="{% url 'accounts:signup' %}">
             {% csrf_token %}
             
             <div class="form-group">
                 <label class="form-label" for="id_email">Email</label>
                 <input type="email" name="email" placeholder="Enter your email" autocomplete="email" required id="id_email" class="form-control">
             </div>
-
+            
             <div class="form-group">
-                <label class="form-label" for="id_username">Username</label>
-                <input type="text" name="username" placeholder="Choose a username" autocomplete="username" minlength="1" maxlength="150" required id="id_username" class="form-control">
+                <label class="form-label" for="id_first_name">First Name</label>
+                <input type="text" name="first_name" placeholder="Enter your first name" required id="id_first_name" class="form-control">
             </div>
-
+            
+            <div class="form-group">
+                <label class="form-label" for="id_last_name">Last Name</label>
+                <input type="text" name="last_name" placeholder="Enter your last name" required id="id_last_name" class="form-control">
+            </div>
+            
             <div class="form-group">
                 <label class="form-label" for="id_password1">Password</label>
-                <input type="password" name="password1" placeholder="Create a password" autocomplete="new-password" required id="id_password1" class="form-control">
+                <input type="password" name="password1" placeholder="Create a strong password" autocomplete="new-password" required id="id_password1" class="form-control">
             </div>
-
+            
             <div class="form-group">
                 <label class="form-label" for="id_password2">Confirm Password</label>
                 <input type="password" name="password2" placeholder="Confirm your password" autocomplete="new-password" required id="id_password2" class="form-control">
             </div>
-
+            
+            {% if referral_code %}
+            <div class="form-group">
+                <label class="form-label" for="id_referral_code">Referral Code</label>
+                <input type="text" name="referral_code" value="{{ referral_code }}" readonly id="id_referral_code" class="form-control">
+                <small style="color: rgba(255,255,255,0.7); display: block; margin-top: 5px;">You were referred by a partner</small>
+            </div>
+            {% endif %}
+            
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
@@ -338,7 +360,8 @@
         </form>
 
         <div class="signup-footer">
-            <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
+            <p>Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a></p>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">By signing up, you agree to our <a href="{% url 'terms' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a></p>
         </div>
     </div>
 </div>

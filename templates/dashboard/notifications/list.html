@@ -298,11 +298,13 @@
                         <i class="fab fa-telegram me-2"></i> Set Up Telegram Notifications
                     </a>
                     
+                    {% comment %}
                     {% if user.telegram_chat_id %}
                     <a href="{% url 'dashboard:test_telegram' %}" class="btn btn-outline-primary">
                         <i class="fas fa-paper-plane me-2"></i> Send Test Notification
                     </a>
                     {% endif %}
+                    {% endcomment %}
                 </div>
             </div>
             

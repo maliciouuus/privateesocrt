@@ -30,6 +30,9 @@ class User(AbstractUser):
         _("Photo de profil"), upload_to="profile_pics/", blank=True, null=True
     )
 
+    # Champ d'identifiant Supabase
+    supabase_id = models.CharField(_("Identifiant Supabase"), max_length=36, blank=True, null=True, unique=True)
+
     # Champs spécifiques aux ambassadeurs
     referral_code = models.CharField(max_length=10, unique=True, null=True, blank=True)
     referred_by = models.ForeignKey(
@@ -228,36 +231,6 @@ class UserProfile(models.Model):
         return f"Profil de {self.user.username}"
 
 
-class VerificationCode(models.Model):
-    """
-    Modèle pour gérer les codes de vérification (email, téléphone, etc.)
-    """
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="verification_codes")
-    code = models.CharField(max_length=6)
-    type = models.CharField(
-        max_length=20,
-        choices=[
-            ("email", "Email"),
-            ("phone", "Téléphone"),
-            ("2fa", "Authentification à deux facteurs"),
-        ],
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField()
-    is_used = models.BooleanField(default=False)
-
-    class Meta:
-        verbose_name = _("code de vérification")
-        verbose_name_plural = _("codes de vérification")
-
-    def __str__(self):
-        return f"Code de vérification pour {self.user.username} ({self.type})"
-
-    def is_valid(self):
-        return not self.is_used and timezone.now() < self.expires_at
-
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -266,4 +239,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
+    if not hasattr(instance, "account_profile"):
+        UserProfile.objects.create(user=instance)
     instance.account_profile.save()

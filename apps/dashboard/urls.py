@@ -32,11 +32,12 @@ urlpatterns = [
     # Notifications
     path("notifications/", views.notifications, name="notifications"),
     path("notifications/telegram/", views.telegram_settings, name="telegram_settings"),
-    path(
-        "notifications/telegram/test/",
-        views.test_telegram_notification,
-        name="test_telegram",
-    ),
+    # Test des notifications Telegram (à commenter en production)
+    # path(
+    #     "test-telegram/",
+    #     views.test_telegram_notification,
+    #     name="test_telegram",
+    # ),
     path(
         "notifications/update-language/",
         views.update_notification_language,

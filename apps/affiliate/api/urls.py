@@ -10,10 +10,9 @@ router.register(r"referral-clicks", views.ReferralClickViewSet, basename="referr
 router.register(r"referrals", views.ReferralViewSet, basename="referral")
 router.register(r"commissions", views.CommissionViewSet, basename="commission")
 router.register(r"commission-rates", views.CommissionRateViewSet, basename="commission-rate")
-router.register(r"transactions", views.TransactionViewSet, basename="transaction")
 router.register(r"payouts", views.PayoutViewSet, basename="payout")
 router.register(r"white-labels", views.WhiteLabelViewSet, basename="white-label")
-router.register(r"banners", views.BannerViewSet, basename="banner")
+# router.register(r"banners", views.BannerViewSet, basename="banner")
 router.register(r"stats", views.StatsViewSet, basename="stats")
 
 schema_view = get_schema_view(
@@ -35,4 +34,9 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+    
+    # Nouveaux endpoints publics
+    path("external/referral/", views.ExternalReferralAPI.as_view(), name="external-referral"),
+    path("public/whitelabels/", views.PublicWhiteLabelAPI.as_view(), name="public-whitelabels"),
+    path("signup/referral/", views.ReferralSignupAPI.as_view(), name="signup-referral"),
 ]

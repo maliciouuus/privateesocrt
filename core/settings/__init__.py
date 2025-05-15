@@ -14,6 +14,9 @@ DB_HOST = os.getenv("host")
 DB_PORT = os.getenv("port")
 DB_NAME = os.getenv("dbname")
 
+# Chargement explicite des autres variables d'environnement
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+
 # Debug: Print les variables DB
 print("SETTINGS/__INIT__.PY: Variables de connexion chargées!")
 print(f"BD DB_HOST={DB_HOST}, DB_USER={DB_USER}, DB_NAME={DB_NAME}")

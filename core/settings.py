@@ -117,19 +117,26 @@ WSGI_APPLICATION = "escortdollars.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": DB_NAME,
-        "USER": DB_USER,
-        "PASSWORD": DB_PASSWORD,
-        "HOST": DB_HOST,
-        "PORT": DB_PORT,
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+# Désactiver temporairement la connexion à Supabase
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get("DB_NAME", "postgres"),
+#         "USER": os.environ.get("DB_USER", "postgres"),
+#         "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+#         "HOST": os.environ.get("DB_HOST", "localhost"),
+#         "PORT": os.environ.get("DB_PORT", "5432"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -188,8 +195,9 @@ LOGOUT_REDIRECT_URL = "/"
 
 # Django Allauth Config
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+    'apps.accounts.backends.SupabaseAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 SITE_ID = 1

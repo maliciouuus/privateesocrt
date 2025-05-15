@@ -39,7 +39,7 @@
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item logout" href="{% url 'account_logout' %}">
+                            <a class="dropdown-item logout" href="{% url 'accounts:logout' %}">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -48,13 +48,13 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link login-btn" href="{% url 'account_login' %}">
+                    <a class="nav-link login-btn" href="{% url 'accounts:login' %}">
                         <span class="btn-icon"><i class="fas fa-sign-in-alt"></i></span>
                         <span class="btn-text">Login</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link register-btn" href="{% url 'account_signup' %}">
+                    <a class="nav-link register-btn" href="{% url 'accounts:signup' %}">
                         <span class="btn-icon"><i class="fas fa-user-plus"></i></span>
                         <span class="btn-text">Register</span>
                         <span class="register-glow"></span>

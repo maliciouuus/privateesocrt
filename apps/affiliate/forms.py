@@ -2,7 +2,6 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import (
     Commission,
-    Transaction,
     Payout,
     CommissionRate,
     WhiteLabel,
@@ -23,28 +22,6 @@ class CommissionForm(forms.ModelForm):
                     ("paid", _("Payé")),
                 ]
             )
-        }
-
-
-class TransactionForm(forms.ModelForm):
-    class Meta:
-        model = Transaction
-        fields = ["amount", "status", "payment_method"]
-        widgets = {
-            "status": forms.Select(
-                choices=[
-                    ("pending", _("En attente")),
-                    ("completed", _("Complété")),
-                    ("failed", _("Échoué")),
-                ]
-            ),
-            "payment_method": forms.Select(
-                choices=[
-                    ("btc", _("Bitcoin")),
-                    ("eth", _("Ethereum")),
-                    ("usdt", _("Tether")),
-                ]
-            ),
         }
 
 
@@ -146,10 +123,6 @@ class WhiteLabelForm(forms.ModelForm):
             "secondary_color",
             "logo",
             "favicon",
-            "meta_title",
-            "meta_description",
-            "custom_css",
-            "custom_js",
             "is_active",
         ]
         widgets = {
@@ -162,10 +135,6 @@ class WhiteLabelForm(forms.ModelForm):
             "secondary_color": forms.TextInput(
                 attrs={"class": "form-control color-picker", "type": "color"}
             ),
-            "meta_title": forms.TextInput(attrs={"class": "form-control"}),
-            "meta_description": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
-            "custom_css": forms.Textarea(attrs={"class": "form-control code-editor", "rows": 5}),
-            "custom_js": forms.Textarea(attrs={"class": "form-control code-editor", "rows": 5}),
             "is_active": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
 
@@ -189,14 +158,6 @@ class WhiteLabelForm(forms.ModelForm):
         self.fields["favicon"].help_text = _(
             "Favicon (icône de votre site dans les onglets du navigateur)"
         )
-        self.fields["meta_title"].help_text = _(
-            "Titre pour le référencement SEO (max 60 caractères)"
-        )
-        self.fields["meta_description"].help_text = _(
-            "Description pour le référencement SEO (max 160 caractères)"
-        )
-        self.fields["custom_css"].help_text = _("CSS personnalisé pour votre site")
-        self.fields["custom_js"].help_text = _("JavaScript personnalisé pour votre site")
         self.fields["is_active"].help_text = _("Activer ou désactiver le site")
 
     def clean_domain(self):

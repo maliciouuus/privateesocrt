@@ -1,0 +1,1 @@
+# Ce fichier est nécessaire pour que le module templatetags soit un package Python valide 

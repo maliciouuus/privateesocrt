@@ -4,10 +4,8 @@ from .models import (
     Referral,
     Commission,
     CommissionRate,
-    Transaction,
     Payout,
     WhiteLabel,
-    Banner,
 )
 from apps.accounts.models import User
 
@@ -68,23 +66,6 @@ class CommissionRateSerializer(serializers.ModelSerializer):
         fields = ["id", "ambassador", "target_type", "rate", "created_at", "updated_at"]
 
 
-class TransactionSerializer(serializers.ModelSerializer):
-    escort = UserSerializer(read_only=True)
-
-    class Meta:
-        model = Transaction
-        fields = [
-            "id",
-            "escort",
-            "amount",
-            "status",
-            "payment_method",
-            "payment_id",
-            "created_at",
-            "updated_at",
-        ]
-
-
 class PayoutSerializer(serializers.ModelSerializer):
     ambassador = UserSerializer(read_only=True)
     commissions = CommissionSerializer(many=True, read_only=True)
@@ -123,21 +104,22 @@ class WhiteLabelSerializer(serializers.ModelSerializer):
         ]
 
 
-class BannerSerializer(serializers.ModelSerializer):
-    white_label = WhiteLabelSerializer(read_only=True)
-
-    class Meta:
-        model = Banner
-        fields = [
-            "id",
-            "white_label",
-            "title",
-            "image",
-            "link",
-            "is_active",
-            "created_at",
-            "updated_at",
-        ]
+# Le sérialiseur Banner est temporairement désactivé car le modèle Banner a été supprimé
+# class BannerSerializer(serializers.ModelSerializer):
+#     white_label = WhiteLabelSerializer(read_only=True)
+# 
+#     class Meta:
+#         model = Banner
+#         fields = [
+#             "id",
+#             "white_label",
+#             "title",
+#             "image",
+#             "link",
+#             "is_active",
+#             "created_at",
+#             "updated_at",
+#         ]
 
 
 # Sérialiseurs pour les statistiques

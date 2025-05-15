@@ -791,144 +791,89 @@ def telegram_settings(request):
     Vue pour configurer les notifications Telegram
     """
     from .forms import TelegramSettingsForm
+    
+    # Variable pour indiquer si un message de test a été envoyé
+    test_sent = False
+    test_error = None
+    
+    # Initialiser le formulaire pour s'assurer qu'il est toujours défini
+    form = TelegramSettingsForm(request.user)
 
     if request.method == "POST":
-        form = TelegramSettingsForm(request.user, request.POST)
-        if form.is_valid():
-            telegram_chat_id = form.cleaned_data.get("telegram_chat_id", "")
-            enable_telegram = form.cleaned_data.get("enable_telegram", False)
-            telegram_language = form.cleaned_data.get("telegram_language", "fr")
-
-            # Mettre à jour l'utilisateur directement
-            if enable_telegram:
-                request.user.telegram_chat_id = telegram_chat_id
+        # Vérifier si c'est une requête pour envoyer un message test
+        if "send_test" in request.POST:
+            if request.user.telegram_chat_id:
+                try:
+                    # Utiliser TelegramNotifier pour envoyer un message test
+                    from .telegram_bot import TelegramNotifier
+                    
+                    notifier = TelegramNotifier()
+                    
+                    # Messages de test selon la langue préférée de l'utilisateur
+                    test_messages = {
+                        "en": "🎉 EscortDollars notification test: Your Telegram configuration is working correctly!",
+                        "fr": "🎉 Test de notification EscortDollars: Votre configuration Telegram fonctionne correctement!",
+                        "es": "🎉 Prueba de notificación de EscortDollars: ¡Su configuración de Telegram funciona correctamente!",
+                        "de": "🎉 EscortDollars-Benachrichtigungstest: Ihre Telegram-Konfiguration funktioniert korrekt!",
+                        "ru": "🎉 Тест уведомлений EscortDollars: Ваша конфигурация Telegram работает правильно!",
+                        "zh": "🎉 EscortDollars通知测试：您的Telegram配置工作正常！",
+                    }
+                    
+                    # Déterminer la langue préférée de l'utilisateur
+                    user_language = request.user.telegram_language or "fr"
+                    test_message = test_messages.get(user_language, test_messages["en"])
+                    
+                    sent = notifier.send_message(request.user.telegram_chat_id, test_message)
+                    
+                    if sent:
+                        messages.success(request, "Message de test envoyé avec succès!")
+                        test_sent = True
+                    else:
+                        messages.error(request, "Impossible d'envoyer le message. Vérifiez votre configuration Telegram.")
+                        test_error = "Échec de l'envoi"
+                except Exception as e:
+                    messages.error(request, f"Erreur lors de l'envoi du message: {str(e)}")
+                    test_error = str(e)
             else:
-                request.user.telegram_chat_id = None  # Désactiver les notifications Telegram
-
-            # Toujours mettre à jour la langue
-            request.user.telegram_language = telegram_language
-
-            request.user.save(update_fields=["telegram_chat_id", "telegram_language"])
-
-            messages.success(request, "Votre configuration Telegram a été mise à jour avec succès.")
-
-            # Si c'est la première configuration, proposer un test
-            if enable_telegram and telegram_chat_id:
-                messages.info(
-                    request,
-                    "Vous pouvez maintenant tester l'envoi de notifications Telegram.",
-                )
-    else:
-        form = TelegramSettingsForm(request.user)
-
-    return render(request, "dashboard/notifications/telegram_settings.html", {"form": form})
-
-
-@login_required
-def test_telegram_notification(request):
-    """
-    Vue pour tester l'envoi d'une notification Telegram
-    """
-    if request.method == "POST":
-        from .telegram_bot import TelegramNotifier
-        from .models import Notification
-
-        # Vérifier si l'utilisateur a configuré son ID Telegram
-        if not request.user.telegram_chat_id:
-            messages.error(request, "Vous devez d'abord configurer votre ID de chat Telegram.")
-            return redirect("dashboard:telegram_settings")
-
-        # Créer une notification de test
-        test_notification = Notification.objects.create(
-            user=request.user,
-            title=(
-                "Notification test"
-                if request.user.telegram_language == "en"
-                else (
-                    "Test de notification Telegram"
-                    if request.user.telegram_language == "fr"
-                    else (
-                        "Prueba de notificación"
-                        if request.user.telegram_language == "es"
-                        else (
-                            "Benachrichtigungstest"
-                            if request.user.telegram_language == "de"
-                            else (
-                                "Тестовое уведомление"
-                                if request.user.telegram_language == "ru"
-                                else (
-                                    "测试通知"
-                                    if request.user.telegram_language == "zh"
-                                    else (
-                                        "Test di notifica"
-                                        if request.user.telegram_language == "it"
-                                        else (
-                                            "اختبار الإشعار"
-                                            if request.user.telegram_language == "ar"
-                                            else "Test de notification Telegram"
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            ),
-            message=(
-                "This is a test notification sent via Telegram. If you receive this message, the configuration was successful!"
-                if request.user.telegram_language == "en"
-                else (
-                    "Ceci est un test d'envoi de notification via Telegram. Si vous recevez ce message, la configuration est réussie!"
-                    if request.user.telegram_language == "fr"
-                    else (
-                        "Esta es una prueba de envío de notificación a través de Telegram. Si recibe este mensaje, ¡la configuración fue exitosa!"
-                        if request.user.telegram_language == "es"
-                        else (
-                            "Dies ist ein Test zum Senden von Benachrichtigungen über Telegram. Wenn Sie diese Nachricht erhalten, war die Konfiguration erfolgreich!"
-                            if request.user.telegram_language == "de"
-                            else (
-                                "Это тестовое уведомление, отправленное через Telegram. Если вы получили это сообщение, настройка прошла успешно!"
-                                if request.user.telegram_language == "ru"
-                                else (
-                                    "这是通过Telegram发送的测试通知。如果您收到此消息，则表示配置成功！"
-                                    if request.user.telegram_language == "zh"
-                                    else (
-                                        "Questo è un test di invio di notifiche tramite Telegram. Se ricevi questo messaggio, la configurazione è riuscita!"
-                                        if request.user.telegram_language == "it"
-                                        else (
-                                            "هذا اختبار إرسال الإشعارات عبر تلجرام. إذا تلقيت هذه الرسالة، فقد نجح التكوين!"
-                                            if request.user.telegram_language == "ar"
-                                            else "Ceci est un test d'envoi de notification via Telegram. Si vous recevez ce message, la configuration est réussie!"
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            ),
-            notification_type="info",
-            is_read=False,
-        )
-        test_notification.save()
-
-        # Envoyer la notification via Telegram en utilisant la langue préférée
-        notifier = TelegramNotifier()
-        message = notifier.format_notification(test_notification, request.user.telegram_language)
-        success = notifier.send_message(chat_id=request.user.telegram_chat_id, message=message)
-
-        if success:
-            messages.success(
-                request,
-                "La notification de test a été envoyée avec succès. Vérifiez votre compte Telegram.",
-            )
+                messages.error(request, "Vous devez d'abord configurer votre Chat ID Telegram.")
         else:
-            messages.error(
-                request,
-                "L'envoi de la notification de test a échoué. Vérifiez votre configuration Telegram.",
-            )
+            # Traitement normal du formulaire de configuration
+            form = TelegramSettingsForm(request.user, request.POST)
+            if form.is_valid():
+                telegram_chat_id = form.cleaned_data.get("telegram_chat_id", "")
+                enable_telegram = form.cleaned_data.get("enable_telegram", False)
+                telegram_language = form.cleaned_data.get("telegram_language", "fr")
 
-    return redirect("dashboard:telegram_settings")
+                # Mettre à jour l'utilisateur directement
+                if enable_telegram:
+                    request.user.telegram_chat_id = telegram_chat_id
+                else:
+                    request.user.telegram_chat_id = None  # Désactiver les notifications Telegram
+
+                # Toujours mettre à jour la langue
+                request.user.telegram_language = telegram_language
+
+                request.user.save(update_fields=["telegram_chat_id", "telegram_language"])
+
+                messages.success(request, "Votre configuration Telegram a été mise à jour avec succès.")
+
+                # Si c'est la première configuration, proposer un test
+                if enable_telegram and telegram_chat_id:
+                    messages.info(
+                        request,
+                        "Vous pouvez maintenant tester l'envoi de notifications Telegram.",
+                    )
+            return redirect("dashboard:telegram_settings")  # Rediriger pour éviter la résoumission du formulaire
+
+    return render(
+        request, 
+        "dashboard/notifications/telegram_settings.html", 
+        {
+            "form": form,
+            "test_sent": test_sent,
+            "test_error": test_error
+        }
+    )
 
 
 # Vue temporaire pour déboguer le problème d'affiliation

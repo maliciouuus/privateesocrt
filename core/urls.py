@@ -51,9 +51,9 @@ sitemaps = {
 urlpatterns = [
     # Admin
     path("admin/", admin.site.urls),
-    # Authentification et gestion des comptes
-    path("accounts/", include("allauth.urls")),  # Allauth URLs sous /accounts/
-    path("accounts/", include("apps.accounts.urls")),  # Nos vues personnalisées
+    # Authentification
+    path("accounts/", include("apps.accounts.urls", namespace="accounts")),
+    # path("accounts/", include("allauth.urls")),  # Allauth URLs sous /accounts/
     # Affiliation et gestion des liens
     path("affiliate/", include("apps.affiliate.urls")),
     # Whitelabel
@@ -93,8 +93,6 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-    path("luxury/", views.home_luxury, name="home_luxury"),
-    path("ultra-luxury/", views.home_ultra_luxury, name="home_ultra_luxury"),
     path("api/", include("apps.affiliate.api.urls")),
 ]
 

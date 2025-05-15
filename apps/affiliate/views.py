@@ -24,14 +24,11 @@ from .models import (
     ReferralClick,
     Referral,
     Commission,
-    Transaction,
-    Payout,
     CommissionRate,
+    Payout,
     WhiteLabel,
-    AffiliateLevel,
-    Badge,
     PaymentMethod,
-    MarketingMaterial,
+    AffiliateProfile,
     Notification,
 )
 from apps.accounts.models import User
@@ -144,32 +141,6 @@ def affiliate_links(request):
     }
 
     return render(request, "affiliate/links.html", context)
-
-
-# Matériels marketing
-@login_required
-def marketing_materials(request):
-    """Vue pour afficher les matériels marketing disponibles."""
-    materials = MarketingMaterial.objects.filter(is_active=True).order_by("-created_at")
-    return render(request, "affiliate/marketing_materials.html", {"materials": materials})
-
-
-@login_required
-def download_marketing_material(request, material_id):
-    """Vue pour télécharger un matériel marketing."""
-    try:
-        material = MarketingMaterial.objects.get(id=material_id, is_active=True)
-        # Incrémenter le compteur de téléchargements
-        material.download_count += 1
-        material.save()
-
-        # Retourner le fichier
-        response = FileResponse(material.file, as_attachment=True)
-        response["Content-Disposition"] = f'attachment; filename="{material.file.name}"'
-        return response
-    except MarketingMaterial.DoesNotExist:
-        messages.error(request, "Le matériel marketing demandé n'existe pas.")
-        return redirect("affiliate:marketing_materials")
 
 
 # Bannières promotionnelles
@@ -1548,111 +1519,47 @@ class PayoutView(LoginRequiredMixin, View):
         return redirect("payouts")
 
 
-class AmbassadorManagerView(LoginRequiredMixin, View):
-    template_name = "affiliate/ambassador_manager.html"
-
-    def get(self, request):
-        # Vérifier si l'utilisateur est un admin
-        if not request.user.is_staff:
-            messages.error(request, "Accès non autorisé")
-            return redirect("home")
-
-        # Récupérer tous les ambassadeurs
-        ambassadors = User.objects.filter(user_type="ambassador").annotate(
-            total_referrals=Count("referrals_made"),
-            total_commissions=Sum("commissions__amount"),
-            active_referrals=Count("referrals_made", filter=Q(referrals_made__is_active=True)),
-            pending_commissions=Sum("commissions__amount", filter=Q(commissions__status="pending")),
-            paid_commissions=Sum("commissions__amount", filter=Q(commissions__status="paid")),
-        )
-
-        # Statistiques globales
-        total_ambassadors = ambassadors.count()
-        total_referrals = sum(amb.total_referrals for amb in ambassadors)
-        total_commissions = sum(amb.total_commissions or 0 for amb in ambassadors)
-        active_referrals = sum(amb.active_referrals for amb in ambassadors)
-
-        context = {
-            "ambassadors": ambassadors,
-            "total_ambassadors": total_ambassadors,
-            "total_referrals": total_referrals,
-            "total_commissions": total_commissions,
-            "active_referrals": active_referrals,
-        }
-        return render(request, self.template_name, context)
-
-    def post(self, request):
-        # Vérifier si l'utilisateur est un admin
-        if not request.user.is_staff:
-            messages.error(request, "Accès non autorisé")
-            return redirect("home")
-
-        action = request.POST.get("action")
-        ambassador_id = request.POST.get("ambassador_id")
-
-        try:
-            ambassador = User.objects.get(id=ambassador_id, user_type="ambassador")
-        except User.DoesNotExist:
-            messages.error(request, "Ambassadeur non trouvé")
-            return redirect("ambassador_manager")
-
-        if action == "activate":
-            ambassador.is_active = True
-            ambassador.save()
-            messages.success(request, f"L'ambassadeur {ambassador.username} a été activé")
-        elif action == "deactivate":
-            ambassador.is_active = False
-            ambassador.save()
-            messages.success(request, f"L'ambassadeur {ambassador.username} a été désactivé")
-        elif action == "update_commission":
-            new_rate = request.POST.get("commission_rate")
-            if new_rate and 5 <= float(new_rate) <= 50:
-                ambassador.commission_rate = float(new_rate)
-                ambassador.save()
-                messages.success(
-                    request,
-                    f"Le taux de commission de {ambassador.username} a été mis à jour",
-                )
-            else:
-                messages.error(request, "Le taux de commission doit être entre 5% et 50%")
-
-        return redirect("ambassador_manager")
-
-
 class AffiliateLevelsView(LoginRequiredMixin, View):
     template_name = "affiliate/levels.html"
 
     def get(self, request):
         # Récupérer le profil de l'affilié
         profile = request.user.affiliate_profile
-
-        # Récupérer tous les niveaux
-        levels = AffiliateLevel.objects.all().order_by("min_earnings")
-
-        # Calculer la progression pour chaque niveau
-        level_progress = {}
-        for level in levels:
-            level_progress[level.id] = level.calculate_progress(profile)
-
-        # Récupérer les badges
-        badges = Badge.objects.all()
-
-        # Récupérer les statistiques de l'utilisateur
+        
+        # Statistiques simplifiées sans niveaux
         stats = {
             "total_earnings": profile.total_earnings,
             "total_referrals": profile.total_referrals,
             "conversion_rate": profile.conversion_rate,
             "points": profile.points,
-            "badges_earned": profile.badges.count(),
+            "badges_earned": 0,
         }
-
+        
+        # Déterminer le niveau actuel et suivant en fonction des gains
+        current_level = "bronze"  # Niveau par défaut
+        next_level = "silver"
+        
+        if profile.total_earnings >= 10000:
+            current_level = "diamond"
+            next_level = None
+        elif profile.total_earnings >= 5000:
+            current_level = "platinum"
+            next_level = "diamond"
+        elif profile.total_earnings >= 1000:
+            current_level = "gold"
+            next_level = "platinum"
+        elif profile.total_earnings >= 500:
+            current_level = "silver"
+            next_level = "gold"
+        
         context = {
             "profile": profile,
-            "levels": levels,
-            "level_progress": level_progress,
-            "badges": badges,
+            "current_level": current_level,
+            "next_level": next_level,
             "stats": stats,
+            "badges": [],
         }
+        
         return render(request, self.template_name, context)
 
 
@@ -2044,3 +1951,14 @@ def banner_page(request):
     }
 
     return render(request, "affiliate/banners.html", context)
+
+
+# Matériels marketing - version simplifiée
+@login_required
+def marketing_materials(request):
+    """Vue simplifié pour les matériaux marketing (après suppression du modèle)"""
+    context = {
+        "message": "Le système de matériaux marketing est en cours de maintenance. Veuillez revenir plus tard."
+    }
+    
+    return render(request, "affiliate/marketing_materials.html", context)

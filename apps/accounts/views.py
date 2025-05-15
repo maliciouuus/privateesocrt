@@ -1,12 +1,14 @@
 import uuid
+import datetime
 import logging
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, update_session_auth_hash
+import json
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, update_session_auth_hash, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.utils.encoding import force_str
@@ -14,6 +16,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils import timezone
+import sys
 
 from .models import User, UserProfile
 from .forms import (
@@ -23,6 +26,51 @@ from apps.affiliate.utils import AffiliateService
 
 # Create your views here.
 
+
+def login_view(request):
+    """Vue de connexion simplifiée utilisant les modèles Django"""
+    # Logger pour aider au débogage
+    logger = logging.getLogger(__name__)
+    
+    if request.user.is_authenticated:
+        logger.info(f"Utilisateur {request.user.username} déjà authentifié, redirection dashboard")
+        return redirect("dashboard:home")
+        
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        
+        logger.info(f"Tentative de connexion pour l'utilisateur: {username}")
+        
+        # Authentifier l'utilisateur directement avec username/password
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            logger.info(f"Authentification réussie pour {username}, type={user.user_type}")
+            login(request, user)
+            messages.success(request, "Connexion réussie!")
+            
+            # Vérifier le type d'utilisateur
+            if user.is_superuser:
+                logger.info(f"Utilisateur {username} est admin, redirection dashboard admin")
+                redirect_url = "dashboard:admin"
+            else:
+                logger.info(f"Utilisateur {username} est {user.user_type}, redirection dashboard")
+                redirect_url = "dashboard:home"
+                
+            # Rediriger directement vers le tableau de bord après la connexion réussie
+            return redirect(redirect_url)
+        else:
+            logger.error(f"Échec d'authentification pour {username}")
+            messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
+    
+    return render(request, "account/login.html")
+
+def logout_view(request):
+    """Vue de déconnexion standard utilisant les modèles Django"""
+    logout(request)
+    messages.success(request, "Vous avez été déconnecté avec succès.")
+    return redirect('home')
 
 # Vue pour notre inscription personnalisée (escort ou membre)
 def custom_signup_view(request, site_slug=None):
@@ -356,7 +404,12 @@ def signup_redirect(request):
 
 def register_ambassador_view(request):
     """Vue d'inscription pour ambassadeur."""
+    # Ajouter des logs de débogage
+    print("======= DÉBUT DE REGISTER_AMBASSADOR_VIEW =======", file=sys.stderr)
+    print(f"Method: {request.method}", file=sys.stderr)
+    
     if request.user.is_authenticated:
+        print("Utilisateur déjà authentifié, redirection vers dashboard:home", file=sys.stderr)
         return redirect("dashboard:home")
 
     # Définir le logger pour cette fonction
@@ -369,6 +422,7 @@ def register_ambassador_view(request):
     url_ref_code = request.GET.get("ref")
     if url_ref_code:
         referral_code = url_ref_code
+        print(f"Code de référence détecté dans l'URL: {referral_code}", file=sys.stderr)
         logger.info(f"🔍 Code de référence détecté dans l'URL: {referral_code}")
 
     # Récupérer depuis le cookie
@@ -377,12 +431,14 @@ def register_ambassador_view(request):
     )
     if cookie_ref_code and not referral_code:
         referral_code = cookie_ref_code
+        print(f"Code de référence récupéré depuis le cookie: {referral_code}", file=sys.stderr)
         logger.info(f"🔍 Code de référence récupéré depuis le cookie: {referral_code}")
 
     # Récupérer depuis le middleware
     middleware_code = getattr(request, "affiliate_code", None)
     if middleware_code and not referral_code:
         referral_code = middleware_code
+        print(f"Code de référence récupéré depuis le middleware: {referral_code}", file=sys.stderr)
         logger.info(f"🔍 Code de référence récupéré depuis le middleware: {referral_code}")
 
     # 2. AMÉLIORATION: Vérification préliminaire de la validité du code
@@ -390,18 +446,24 @@ def register_ambassador_view(request):
     if referral_code:
         try:
             ambassador = User.objects.get(referral_code=referral_code)
+            print(f"Code de référence valide, appartient à: {ambassador.username}", file=sys.stderr)
             logger.info(f"✅ Code de référence valide, appartient à: {ambassador.username}")
         except User.DoesNotExist:
+            print(f"Code de référence invalide ou inexistant: {referral_code}", file=sys.stderr)
             logger.warning(f"⚠️ Code de référence invalide ou inexistant: {referral_code}")
             referral_code = None
 
+    print(f"Vue d'inscription - Code de référence final: {referral_code}", file=sys.stderr)
     logger.info(f"📋 Vue d'inscription - Code de référence final: {referral_code}")
 
     if request.method == "POST":
+        print("Traitement d'une requête POST", file=sys.stderr)
         username = request.POST.get("username")
         email = request.POST.get("email")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
+        
+        print(f"Données du formulaire - Username: {username}, Email: {email}", file=sys.stderr)
 
         # 3. AMÉLIORATION: Conservation prioritaire du code de formulaire
         form_ref_code = request.POST.get("referral_code")
@@ -562,7 +624,17 @@ def register_ambassador_view(request):
 
         return redirect("accounts:activation_sent")
 
-    return render(request, "accounts/register_ambassador.html", {"referral_code": referral_code})
+    # Avant de rendre le template
+    print("Rendu du template accounts/register_ambassador.html", file=sys.stderr)
+    try:
+        return render(
+            request,
+            "accounts/register_ambassador.html",
+            {"referral_code": referral_code},
+        )
+    except Exception as e:
+        print(f"ERREUR lors du rendu du template: {str(e)}", file=sys.stderr)
+        raise
 
 
 def activate_account(request, uidb64, token):
@@ -837,7 +909,7 @@ def redirect_signup(request):
 
     # Récupérer tous les paramètres d'URL et les conserver dans la redirection
     params = request.GET.copy()
-    redirect_url = reverse("account_signup")
+    redirect_url = reverse("accounts:signup")
 
     # Ajouter les paramètres d'URL s'il y en a
     if params:

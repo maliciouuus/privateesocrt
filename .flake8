@@ -1,0 +1,6 @@
+[flake8]
+max-line-length = 100
+exclude = .git,__pycache__,docs/,migrations/,venv/,env/,build/,dist/
+ignore = E203, W503, E231, C901, E501, F541, F403, F405, F811
+max-complexity = 15
+select = C,E,F,W,B,B950 

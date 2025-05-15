@@ -1,0 +1,59 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Django related
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.vscode/
+*.sublime-workspace
+.DS_Store
+
+# Backup files
+*.bak
+*~
+
+# Logs
+logs/
+*.log
+
+# Project specific
+backup_migrations_models/
+Dockerfile.save
+to_delete/ 
